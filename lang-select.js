@@ -1,3 +1,10 @@
+// url limpa: /works.html -> /works, /index.html -> /
+try {
+  var p = location.pathname;
+  var clean = p.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+  if (clean !== p) history.replaceState(null, "", clean + location.search + location.hash);
+} catch (e) {}
+
 (function () {
   var sel = document.querySelector("select.lang-select");
   if (!sel) return;
