@@ -2992,7 +2992,7 @@ section > .wrap,.sec > .wrap,.sh > .wrap,.hero > .wrap,.metrics > .wrap,section 
         </div>
       </div>
     </div>
-    <a href="#/get-started" class="btn nav-cta">Let’s talk <i data-ic="arrowUR"></i></a>
+    <a href="#/support" class="btn nav-cta">Let’s talk <i data-ic="arrowUR"></i></a>
     <button class="menu-btn" aria-label="Menu"><i data-ic="menu"></i></button>
   </nav>
 </header>
@@ -3308,7 +3308,7 @@ section > .wrap,.sec > .wrap,.sh > .wrap,.hero > .wrap,.metrics > .wrap,section 
         <a href="#/privacy-policy">Privacy policy</a><a href="#/terms-conditions">Terms &amp; conditions</a>
       </div>
       <div class="f-col f-next">
-        <a href="#/get-started" class="link"><span class="u">Let’s talk fulfillment</span> <i data-ic="arrowUR"></i></a>
+        <a href="#/support" class="link"><span class="u">Let’s talk fulfillment</span> <i data-ic="arrowUR"></i></a>
         <h5>Partners</h5>
         <a href="#/partners">Nuwa Partner</a><a href="#/partners/paking-duck">Paking Duck</a><a href="#/partners/instant-commerce">Instant Commerce</a>
       </div>
@@ -3923,7 +3923,7 @@ PAGES['/benefits'] = {
   title: 'Benefits', html: () => subHero({
     eb: 'The benefits of Nuwa', l: ['Global scale.', 'Healthier margins.', 'More cash to grow.'], em: 2,
     p: 'Ship directly from China, close to where your products are made. Fewer stops between your factory and your customer means less waiting, fewer costs, and more room for your brand.',
-    actions: btn('Let’s talk fulfillment', H('/get-started'), 'btn-hero') + `<a href="#b1" class="btn btn-line">Explore the benefits ${A('arrowD')}</a>`,
+    actions: btn('Let’s talk fulfillment', H('/support'), 'btn-hero') + `<a href="#b1" class="btn btn-line">Explore the benefits ${A('arrowD')}</a>`,
     visual: panel('FACTORY TO CUSTOMER, TWO WAYS', `<div class="rl-tabs"><i class="rl-pill"></i><button class="on" data-r="1">With Nuwa</button><button data-r="0">Traditional route</button></div><div class="rl"><div class="rl-big"><strong data-rl="n">1</strong><span data-rl="u">stops</span><small data-rl="s">≈60 days of planning ahead.</small></div><ul class="rl-list" data-rl="list"></ul></div>`, 'Simplified from Nuwa’s published route comparison. Stops and timing vary by product and destination.', '')
   })
     + sec(`<div class="split"><div class="will-reveal">${eyebrow('01 / Cash flow')}<h2 class="h2" style="margin-top:18px">Stock that sells.<br><em>Not stock that waits.</em></h2><p class="lead" style="margin-top:18px;font-size:15px">With fulfillment close to production, your products are ready for sale within days, instead of spending weeks at sea and in a local warehouse. Faster turnover and lower carrying costs leave more cash in the business.</p>${checklist(['Pay for stock closer to the moment it sells', 'Reorder according to demand, not forecasts made months ahead', 'Put freed-up cash back into product and growth'])}<div style="margin-top:26px">${link('Estimate your savings', H('/savings'))}</div></div>
@@ -3942,7 +3942,7 @@ PAGES['/benefits'] = {
       ['Will my customers see where the parcel comes from?', 'Branded packaging and delivery details keep your brand in front. Options like a hidden China origin can be agreed for your setup.'],
       ['How fast do customers receive their orders?', 'Nuwa advertises worldwide delivery in 3–10 days. Timing depends on destination and service.'],
       ['What about returns?', 'Returns run through partners in 16+ local locations, with inspection and restocking or disposal agreed per brand.']])
-    + closing({ theme: 'green', t1: 'Ready to transform', t2: 'your supply chain?', p: 'Share your products, volumes, and markets. See what these benefits could look like for your brand.', b: 'Let’s talk fulfillment', href: H('/get-started') }),
+    + closing({ theme: 'green', t1: 'Ready to transform', t2: 'your supply chain?', p: 'Share your products, volumes, and markets. See what these benefits could look like for your brand.', b: 'Let’s talk fulfillment', href: H('/support') }),
   init(root) {
     const v = $('.sh-visual', root), list = $('[data-rl=list]', v), tabs = $('.rl-tabs', v), rl = $('.rl', v), nEl = $('[data-rl=n]', v);
     let seq = 0, timer = 0, cur = 1;
@@ -4324,7 +4324,7 @@ const POSTS = [['Jul 14, 2026', 'EU Customs Duty Changes 2026: The Complete Guid
   ['Feb 14, 2024', 'Speeding up your lead time', 'The agility of inventory management and lead times can determine success.', 'INVENTORY', 'linear-gradient(140deg,#ceced0,#868688)'],
   ['Jan 7, 2024', 'The next logistics revolution', 'Direct fulfillment from China is reshaping global logistics.', 'INSIGHT', 'linear-gradient(140deg,#1c1c1e,#575759)']];
 PAGES['/blog'] = {
-  title: 'Blog', html: () => subHero({ eb: 'Blog', l: ['Blogs.'], em: 9, p: 'See the latest insights & articles by our team.', actions: btn('Let’s talk fulfillment', H('/get-started'), 'btn-hero') })
+  title: 'Blog', html: () => subHero({ eb: 'Blog', l: ['Blogs.'], em: 9, p: 'See the latest insights & articles by our team.', actions: btn('Let’s talk fulfillment', H('/support'), 'btn-hero') })
     + sec(`<div class="posts">${POSTS.map((p, i) => `<a href="${H('/blog/' + SLUGS[i])}" class="post will-reveal ${i === 0 ? 'feat' : dl(i)}"><div class="thumb"><span style="background:${p[4]}"></span><em>${p[3]}</em></div><div class="pb"><time>${p[0]}</time><h4>${p[1]}</h4><p>${p[2]}</p><span class="link"><span class="u">Read more</span> ${A('arrowUR')}</span></div></a>`).join('')}</div>`, 'tight') + finalCTA()
 };
 
@@ -4358,7 +4358,7 @@ const partnerPage = (o) => ({
     theme: 'purple', eb: `Nuwa partners / ${o.kind}`, l: o.l, p: o.p, actions: btn(o.cta, H('/get-started'), 'btn-hero'),
     visual: panel('MEET YOUR PARTNER', `<div style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:16px;background:${o.color};display:grid;place-items:center;color:#fff">${A(o.ic)}</span><div><b style="font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:-.03em">${o.name}</b><div style="font-size:12px;color:var(--text-2)">${o.badge}</div></div></div><div class="pd-flow" style="margin-top:34px"><span>${A(o.ic)}</span><span class="c">${A('layers')}</span><span>${A('home')}</span></div><p style="font-size:12px;color:var(--text-2);margin-top:16px;text-align:center">${o.name} × Nuwa → your customers</p>`, '', '')
   }) + sec(head({ eb: `${o.name} × Nuwa`, t1: o.t1, t2: o.t2, lead: o.lead }) + `<div class="steps3">${o.items.map((s, i) => `<div class="step3 will-reveal ${dl(i)}"><span class="n">0${i + 1}</span><h4>${s[0]}</h4><p>${s[1]}</p></div>`).join('')}</div>`)
-    + sec(`<div class="apply will-reveal"><div><h2>Let’s connect the dots.</h2><p>Tell us about your brand. We’ll help you explore the partnership.</p></div><div style="display:flex;gap:12px;flex-wrap:wrap;justify-self:end">${btn('Let’s talk', H('/get-started'))}<a href="${H('/partners')}" class="btn btn-line" style="color:#fff;border-color:rgba(255,255,255,.3)">Explore Nuwa Partner</a></div></div>`, 'tight')
+    + sec(`<div class="apply will-reveal"><div><h2>Let’s connect the dots.</h2><p>Tell us about your brand. We’ll help you explore the partnership.</p></div><div style="display:flex;gap:12px;flex-wrap:wrap;justify-self:end">${btn('Let’s talk', H('/support'))}<a href="${H('/partners')}" class="btn btn-line" style="color:#fff;border-color:rgba(255,255,255,.3)">Explore Nuwa Partner</a></div></div>`, 'tight')
 });
 PAGES['/partners/paking-duck'] = partnerPage({ name: 'Paking Duck', kind: 'Custom packaging', l: ['Your brand.', 'Down to the packaging.'], p: 'Custom packaging and poly mailers, with factory pricing for Nuwa brands. Bring your brand into the details your customers hold in their hands.', cta: 'Talk packaging with us', ic: 'package', color: '#7c7c7e', badge: 'Factory pricing for Nuwa brands', t1: 'Make the delivery', t2: 'feel like you.', lead: 'Paking Duck is a DTC packaging factory co-owned by Nuwa. Explore packaging for your products with a team connected to your fulfillment operations.', items: [['Custom packaging', 'Give your products a home that feels like your brand.'], ['Poly mailers', 'Carry your brand through to the doorstep.'], ['Factory pricing', 'Access packaging at factory pricing through Nuwa.']] });
 PAGES['/partners/instant-commerce'] = partnerPage({ name: 'Instant Commerce', kind: 'Shopify storefronts', l: ['Build faster.', 'Expand faster.'], p: 'Instant helps Shopify brands build faster and expand faster. Nuwa brands get access to Instant with extra benefits.', cta: 'Talk to us about Instant', ic: 'zap', color: '#111', badge: 'Discount & benefits for Nuwa brands', t1: 'A faster storefront,', t2: 'connected to your operation.', lead: 'Pair a store that ships new pages quickly with fulfillment that reaches 100+ markets.', items: [['Build faster', 'Create and update storefront pages without waiting on development cycles.'], ['Expand faster', 'Launch in new markets with a store that keeps up with your operation.'], ['Extra benefits', 'Nuwa brands get access to Instant with a discount and added benefits.']] });
@@ -4409,7 +4409,7 @@ const ARTICLES = [
 POSTS.forEach((p, i) => {
   PAGES['/blog/' + SLUGS[i]] = {
     title: p[1].split(':')[0], html: () => subHero({ eb: `Blog · ${p[3]}`, l: [p[1]], em: 9, p: p[2], actions: `<a href="${H('/blog')}" class="btn btn-line">${A('chevL')} All articles</a>`, note: p[0] })
-      + sec(`<div class="legal"><nav>${ARTICLES[i].map((s, j) => `<a href="#ar-${j}">${s[0]}</a>`).join('')}</nav><article><div class="post-hero" style="height:260px;border-radius:22px;background:${p[4]};margin-bottom:40px"></div>${ARTICLES[i].map((s, j) => `<h2 id="ar-${j}">${s[0]}</h2><p>${s[1]}</p>`).join('')}<div class="hl-box" style="margin-top:44px"><h4>Questions about your setup?</h4><p>Talk to the Nuwa team about routes, duties, and delivery times for your products.</p>${link('Let’s talk fulfillment', H('/get-started'))}</div></article></div>`, 'tight')
+      + sec(`<div class="legal"><nav>${ARTICLES[i].map((s, j) => `<a href="#ar-${j}">${s[0]}</a>`).join('')}</nav><article><div class="post-hero" style="height:260px;border-radius:22px;background:${p[4]};margin-bottom:40px"></div>${ARTICLES[i].map((s, j) => `<h2 id="ar-${j}">${s[0]}</h2><p>${s[1]}</p>`).join('')}<div class="hl-box" style="margin-top:44px"><h4>Questions about your setup?</h4><p>Talk to the Nuwa team about routes, duties, and delivery times for your products.</p>${link('Let’s talk fulfillment', H('/support'))}</div></article></div>`, 'tight')
       + sec(`<div class="head-row">${head({ eb: 'Keep reading', t1: 'More from', t2: 'the blog.' })}${link('All articles', H('/blog'))}</div><div class="posts">${POSTS.map((q, j) => [q, j]).filter(([, j]) => j !== i).slice(0, 3).map(([q, j], k) => `<a href="${H('/blog/' + SLUGS[j])}" class="post will-reveal ${dl(k)}"><div class="thumb"><span style="background:${q[4]}"></span><em>${q[3]}</em></div><div class="pb"><time>${q[0]}</time><h4>${q[1]}</h4><span class="link"><span class="u">Read more</span> ${A('arrowUR')}</span></div></a>`).join('')}</div>`)
   };
 });
@@ -4531,7 +4531,7 @@ route();
     ['Why Nuwa', [['Benefits', '/benefits'], ['Savings calculator', '/savings'], ['Brand stories', '/case-studies']]],
     ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Support', '/support'], ['Changelog', '/changelog'], ['Blog', '/blog'], ['Careers', '/jobs'], ['Partners', '/partners']]]];
   const p = document.createElement('div'); p.className = 'm-panel'; p.setAttribute('role', 'dialog');
-  p.innerHTML = groups.map(g => `<h6>${g[0]}</h6>` + g[1].map(l => `<a href="#${l[1]}">${l[0]}</a>`).join('')).join('') + `<a href="#/get-started" class="btn btn-primary">Let’s talk ${svg('arrowUR')}</a>`;
+  p.innerHTML = groups.map(g => `<h6>${g[0]}</h6>` + g[1].map(l => `<a href="#${l[1]}">${l[0]}</a>`).join('')).join('') + `<a href="#/support" class="btn btn-primary">Let’s talk ${svg('arrowUR')}</a>`;
   document.body.appendChild(p);
   const set = on => { if (on) { const t = document.querySelector('.nav').getBoundingClientRect().bottom + 8; p.style.top = t + 'px'; p.style.maxHeight = `calc(100vh - ${t + 16}px)`; } p.classList.toggle('on', on); mb.setAttribute('aria-expanded', String(on)); mb.innerHTML = svg(on ? 'chevD' : 'menu'); };
   mb.addEventListener('click', () => set(!p.classList.contains('on')));
