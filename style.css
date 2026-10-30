@@ -330,7 +330,7 @@ a:hover {
   outline: none;
   transition: background .25s;
 }
-.ls-menu li:hover, .ls-menu li:focus-visible { background: #f7f7f7; }
+.ls-menu li:hover, .ls-menu li:focus-visible { background: #f0f0f2; }
 .ls-check { width: 14px; height: 14px; opacity: 0; color: #111; }
 .ls-menu li[aria-selected="true"] { font-weight: 500; }
 .ls-menu li[aria-selected="true"] .ls-check { opacity: 1; }
@@ -341,3 +341,17 @@ a:hover {
   .ls-menu { min-width: 240px; }
 }
 @media (prefers-reduced-motion: reduce) { .ls-menu, }
+
+/* hover em botao claro (nav e seletor de idioma) */
+.links a,
+.ls-btn {
+  padding: .35em .7em;
+  margin: -.35em -.7em;
+  border-radius: 8px;
+  transition: background .3s cubic-bezier(.16,1,.3,1);
+}
+.links a:hover,
+.ls-btn:hover,
+.ls.open .ls-btn {
+  background: #f0f0f2;
+}
