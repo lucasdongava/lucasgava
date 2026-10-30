@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucas Gava</title>
+<script>
+  // GitHub Pages: /nuwa/support nao existe como arquivo -> abre o app da Nuwa, que resolve a rota
+  (function () {
+    var p = location.pathname;
+    if (p.indexOf("/nuwa/") === 0) {
+      var rest = p.slice(5);
+      location.replace("/nuwa/?p=" + rest + location.hash);
+    } else {
+      location.replace("/");
+    }
+  })();
+</script>
+</head>
+<body></body>
+</html>

@@ -4478,17 +4478,32 @@ const pagesEl = document.getElementById('pages'), home = document.getElementById
 const rendered = {};
 const BASE_TITLE = 'Nuwa — China Fulfillment for DTC Brands';
 let currentPath = null;
+/* URL limpa: /nuwa/support (sem #). Fora de /nuwa (ex.: arquivo local) cai no modo com #. */
+const BASE = (location.pathname.match(/^(.*\/nuwa)(?:\/|$)/) || [, null])[1];
+const cleanUrl = path => BASE !== null ? BASE + (path === '/' ? '/' : path) : '#' + path;
+function curLoc() {
+  if (location.hash.startsWith('#/')) return location.hash.slice(1).replace(/\/+$/, '') || '/'; // link antigo com #
+  if (BASE === null) return null;
+  const p = location.pathname.slice(BASE.length).replace(/\/?index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '');
+  return p || '/';
+}
 function navigate(path) {
   path = path.replace(/\/+$/, '') || '/';
-  try { if (location.hash !== '#' + path) history.pushState({ path }, '', '#' + path); } catch (err) { /* ambiente sem histórico (sandbox) */ }
+  try { if (curLoc() !== path) history.pushState({ path }, '', cleanUrl(path)); } catch (err) { /* ambiente sem histórico (sandbox) */ }
   route(path);
 }
 function route(forced) {
-  const h = forced !== undefined ? '#' + forced : location.hash;
   let path;
-  if (h.startsWith('#/')) path = h.slice(1).replace(/\/+$/, '') || '/';
-  else if (!document.querySelector('.page.active') || h === '' || h === '#') path = '/';
-  else return; // âncora interna (#id) — não troca de página
+  if (forced !== undefined) path = forced.replace(/\/+$/, '') || '/';
+  else {
+    path = curLoc();
+    if (path === null) {
+      if (!document.querySelector('.page.active') || location.hash === '' || location.hash === '#') path = '/';
+      else return; // âncora interna (#id) — não troca de página
+    } else if (BASE !== null && location.hash.startsWith('#/')) {
+      try { history.replaceState({ path }, '', cleanUrl(path)); } catch (err) { /* sandbox */ }
+    }
+  }
   if (forced === undefined && path === currentPath) return;
   const def = PAGES[path];
   if (path !== '/' && !def) path = '/404';
@@ -4523,6 +4538,8 @@ addEventListener('hashchange', () => route());
 addEventListener('popstate', () => route());
 stripEyebrows(home); stripEyebrows(document.querySelector('.site-footer'));
 home.classList.remove('active');
+/* vindo do 404.html do GitHub Pages: /nuwa/?p=/support -> /nuwa/support */
+try { const q = new URLSearchParams(location.search).get('p'); if (q && BASE !== null) history.replaceState(null, '', BASE + q); } catch (err) { /* sandbox */ }
 route();
 /* ---------- menu mobile ---------- */
 (function mobileMenu() {
