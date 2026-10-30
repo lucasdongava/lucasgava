@@ -249,11 +249,11 @@ a:hover {
   transition: background .3s cubic-bezier(.16,1,.3,1);
 }
 .links a,
-.ls-btn { background: #f3f3f5; }
+.ls-btn { background: #ebebee; }
 .links a:hover,
 .ls-btn:hover,
 .ls.open .ls-btn {
-  background: #e8e8eb;
+  background: #dedee2;
 }
 
 /* ajuste geral de espacamento */
