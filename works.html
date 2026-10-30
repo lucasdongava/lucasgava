@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucas Gava</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+</head>
+
+<body>
+  <div class="container-conteudo">
+    <h1>Works</h1>
+
+    <ul class="works">
+      <li><a class="proj" href="https://thothdev.com/" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 400 240" fill="currentColor" aria-hidden="true" style="width:26px;height:auto"><path d="M0 0H400V222C392 150 310 16 232 16H224A12 12 0 0 0 212 28C212 170 260 240 400 240H0C140 240 188 170 188 28A12 12 0 0 0 176 16H168C90 16 8 150 0 222Z"/></svg></span><span class="name">Thoth</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a class="proj" href="nuwa/"><span class="ico"><svg viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M6.5 3h6l-4.6 20h-6z"/><path d="M15.5 3h6l-4.6 20h-6z"/></svg></span><span class="name">Nuwa</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+    </ul>
+
+    <nav class="links">
+      <a href="index.html" data-i18n="nav_home">home</a>
+      <a href="about.html" data-i18n="nav_about">about</a>
+      <a href="works.html" data-i18n="nav_works">works</a>
+      <a href="contact.html" data-i18n="nav_contact">contact</a>
+      <div class="lang-select-wrapper">
+        <select class="lang-select" id="lang-switcher">
+          <option value="pt">português</option>
+          <option value="en">english</option>
+          <option value="es">español</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    const translations = {
+      pt: {
+        nav_home: "home",
+        nav_about: "sobre",
+        nav_works: "trabalhos",
+        nav_contact: "contato"
+      },
+      en: {
+        nav_home: "home",
+        nav_about: "about",
+        nav_works: "works",
+        nav_contact: "contact"
+      },
+      es: {
+        nav_home: "inicio",
+        nav_about: "sobre mí",
+        nav_works: "trabajos",
+        nav_contact: "contacto"
+      },
+      zh: {
+        nav_home: "主页",
+        nav_about: "关于",
+        nav_works: "作品",
+        nav_contact: "联系"
+      }
+    };
+
+    const langSwitcher = document.getElementById("lang-switcher");
+    const elements = document.querySelectorAll("[data-i18n]");
+
+    const savedLang = localStorage.getItem("lang") || "pt";
+    langSwitcher.value = savedLang;
+    applyLanguage(savedLang);
+
+    langSwitcher.addEventListener("change", () => {
+      const lang = langSwitcher.value;
+      localStorage.setItem("lang", lang);
+      applyLanguage(lang);
+    });
+
+    function applyLanguage(lang) {
+      elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.innerHTML = translations[lang][key];
+      });
+    }
+  </script>
+</body>
+
+</html>

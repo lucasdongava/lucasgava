@@ -2,6 +2,7 @@ const translations = {
   pt: {
     home: "home",
     about: "sobre",
+    works: "trabalhos",
     thoughts: "pensamentos",
     contact: "contato",
     nav_cv: "cv",
@@ -21,6 +22,7 @@ const translations = {
   en: {
     home: "home",
     about: "about",
+    works: "works",
     thoughts: "thoughts",
     contact: "contact",
     nav_cv: "cv",
@@ -40,6 +42,7 @@ const translations = {
   es: {
     home: "inicio",
     about: "sobre mí",
+    works: "trabajos",
     thoughts: "pensamientos",
     contact: "contacto",
     nav_cv: "cv",
@@ -59,6 +62,7 @@ const translations = {
   zh: {
     home: "主页",
     about: "关于",
+    works: "作品",
     thoughts: "想法",
     contact: "联系",
     nav_cv: "简历",
