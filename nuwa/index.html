@@ -2803,6 +2803,28 @@ em{font-style:normal}
 .engine{display:flex;flex-direction:column}
 .engine .engine-cols{margin-top:auto}
 .engine.eng-measure,.engine.eng-measure *{transition:none!important;animation:none!important}
+/* engine no mobile: sem altura reservada, sem espaco em branco, hub sem encostar nos cards */
+@media (max-width:700px){
+  .engine{min-height:0!important}
+  .engine .engine-cols{margin-top:18px}
+  .engine:not(.off) .engine-msg{margin-top:0;border-width:0}
+  .diagram{grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);gap:10px 6px;padding:14px 8px}
+  .node{padding:8px 7px;gap:6px;font-size:10px}
+  .node svg{width:12px;height:12px}
+  .node .swap{height:30px;line-height:13px}
+  .hub::before{inset:-3px}
+  .engine.off .hub{width:50px;height:50px}
+  .hub-off{font-size:5px}
+  .engine-msg{align-items:flex-start}
+  .engine-msg svg{margin-top:2px}
+  .engine-cols{gap:18px}
+  .engine-foot{font-size:8px;line-height:1.5}
+}
+
+/* rodape enxuto: so marca, copyright e frase */
+.f-grid{display:block}
+.f-bottom{margin-top:36px}
+@media (max-width:700px){.f-bottom{flex-direction:column;align-items:flex-start;gap:8px;margin-top:28px}}
 
 /* savings: transições dos botões */
 .seg{position:relative;isolation:isolate}
@@ -3297,21 +3319,6 @@ section > .wrap,.sec > .wrap,.sh > .wrap,.hero > .wrap,.metrics > .wrap,section 
     <div class="f-grid">
       <div class="f-brand">
         <a href="#/" class="brand"><svg class="brand-mark" viewBox="0 0 26 26"><path class="m1" d="M6.5 3h6l-4.6 20h-6z"/><path d="M15.5 3h6l-4.6 20h-6z"/></svg>Nuwa</a>
-      </div>
-      <div class="f-col">
-        <h5>Explore</h5>
-        <a href="#/">Home</a><a href="#/fulfillment">Fulfillment</a><a href="#/about">About Nuwa</a><a href="#/benefits">Benefits</a><a href="#/platform">Platform</a><a href="#/sourcing">Sourcing</a><a href="#/savings">Savings calculator</a><a href="#/case-studies">Brand stories</a><a href="#/postflows">Postflows</a>
-      </div>
-      <div class="f-col">
-        <h5>Let’s connect</h5>
-        <a href="#/get-started">Get started <i data-ic="arrowUR"></i></a><a href="#/support">Support</a><a href="#/faq">FAQs</a><a href="#/changelog">Changelog</a><a href="#/blog">Blog</a><a href="#/jobs">Careers</a><a href="https://www.linkedin.com/company/nuwahq/" target="_blank" rel="noopener">LinkedIn <i data-ic="arrowUR"></i></a>
-        <h5>Legal</h5>
-        <a href="#/privacy-policy">Privacy policy</a><a href="#/terms-conditions">Terms &amp; conditions</a>
-      </div>
-      <div class="f-col f-next">
-        <a href="#/support" class="link"><span class="u">Let’s talk fulfillment</span> <i data-ic="arrowUR"></i></a>
-        <h5>Partners</h5>
-        <a href="#/partners">Nuwa Partner</a><a href="#/partners/paking-duck">Paking Duck</a><a href="#/partners/instant-commerce">Instant Commerce</a>
       </div>
     </div>
     <div class="f-bottom"><span>© 2026 Nuwa</span><span>Built in China. Connected to the world.</span></div>
