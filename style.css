@@ -14,9 +14,9 @@ html {
 }
 
 body {
-  font-family: sf pro display;
+  font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: 1.125rem;
-  font-weight: medium;
+  font-weight: 400;
 }
 
 h1 {
@@ -80,7 +80,7 @@ h1 {
 }
 
 .home-link {
-  font-family: sf pro display;
+  font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   text-decoration: none;
   color: #000;
   font-size: 32px;
