@@ -129,7 +129,7 @@ h1 {
   padding-right: 0px;
 }
 
-.lang-select-wrapper::after {
+.lang-select-wrapper:not(.ls)::after {
   content: "▼";
   position: absolute;
   right: 0;
@@ -276,3 +276,68 @@ a:hover {
 .name { flex: 1; font-size: 18px; font-weight: 500; }
 .arr { flex: 0 0 auto; width: 18px; height: 18px; color: #a1a1a6; transition: transform .4s cubic-bezier(.22,1,.36,1), color .3s; }
 .proj:hover .arr { transform: translate(3px,-3px); color: #111; }
+
+/* seletor de idioma (estilo do menu do Nuwa) */
+.ls { position: relative; display: inline-block; }
+.ls .lang-select { position: absolute; opacity: 0; pointer-events: none; width: 1px; height: 1px; }
+.ls::after { content: none; }
+.ls-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+}
+.ls-btn:focus-visible { outline: 2px solid #111; outline-offset: 4px; border-radius: 4px; }
+.ls.open .ls-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  translate: -50% 0;
+  min-width: 150px;
+  list-style: none;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #e5e5e7;
+  border-radius: 9px;
+  box-shadow: 0 4px 10px rgba(9,9,11,.05), 0 40px 80px -30px rgba(9,9,11,.28);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(.985);
+  transform-origin: top center;
+  transition: opacity .35s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1), visibility 0s .35s;
+  z-index: 10;
+}
+.ls-menu::before { content: ""; position: absolute; inset: -16px 0 auto; height: 16px; }
+.ls.open .ls-menu { opacity: 1; visibility: visible; transform: none; transition: opacity .35s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1), visibility 0s; }
+.ls-menu li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #18181b;
+  cursor: pointer;
+  outline: none;
+  transition: background .25s;
+}
+.ls-menu li:hover, .ls-menu li:focus-visible { background: #f7f7f7; }
+.ls-check { width: 14px; height: 14px; opacity: 0; color: #111; }
+.ls-menu li[aria-selected="true"] { font-weight: 500; }
+.ls-menu li[aria-selected="true"] .ls-check { opacity: 1; }
+@media (max-width: 467px) {
+  .ls-btn { font-size: 2.22rem; }
+    .ls-menu li { font-size: 1.6rem; padding: 14px 18px; }
+  .ls-check { width: 22px; height: 22px; }
+  .ls-menu { min-width: 240px; }
+}
+@media (prefers-reduced-motion: reduce) { .ls-menu, }
