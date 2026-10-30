@@ -2,7 +2,8 @@
   var sel = document.querySelector("select.lang-select");
   if (!sel) return;
   var wrap = sel.parentNode;
-  wrap.classList.add("ls");
+  wrap.classList.add("ls", "ls-corner");
+  document.body.appendChild(wrap);
   sel.setAttribute("tabindex", "-1");
   sel.setAttribute("aria-hidden", "true");
 
@@ -10,8 +11,9 @@
   btn.type = "button";
   btn.className = "ls-btn";
   btn.setAttribute("aria-haspopup", "listbox");
+  btn.setAttribute("aria-label", "language");
   btn.setAttribute("aria-expanded", "false");
-  btn.innerHTML = '<span class="ls-label"></span>';
+  btn.innerHTML = '<svg class="ls-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg><span class="ls-label"></span>';
 
   var menu = document.createElement("ul");
   menu.className = "ls-menu";

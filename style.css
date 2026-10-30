@@ -395,3 +395,39 @@ a:hover {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
   .container-conteudo { animation: none; }
 }
+
+/* seletor de idioma: icone no canto superior direito */
+.ls-corner {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 20;
+}
+.ls-corner .ls-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  border-radius: 10px;
+}
+.ls-corner .ls-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.ls-globe { width: 22px; height: 22px; }
+.ls-corner .ls-menu {
+  top: calc(100% + 8px);
+  left: auto;
+  right: 0;
+  translate: 0 0;
+  transform-origin: top right;
+}
+@media (max-width: 467px) {
+  .ls-corner { top: 16px; right: 16px; }
+  .ls-corner .ls-btn { width: 48px; height: 48px; }
+  .ls-globe { width: 28px; height: 28px; }
+}
