@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Helloo is a business phone system with AI agents: reliable calls, an AI receptionist and a CRM that updates itself. A fictional project by Lucas Gava.">
+<meta name="theme-color" content="#ffffff">
+<title>Helloo | Business phone system with AI agents</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2309090b'/%3E%3Ccircle cx='16' cy='17' r='3.2' fill='white'/%3E%3Cpath d='M9.5 17a6.5 6.5 0 0 1 13 0' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="ann"><span><span class="long">Fictional project designed and developed by </span><span class="short">Fictional project by </span><a href="https://www.linkedin.com/in/lucasgava" target="_blank" rel="noopener">Lucas Gava</a></span></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Helloo"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="14" r="2.4" fill="currentColor" stroke="none"/><path d="M6 14a6 6 0 0 1 12 0"/><path d="M2.5 14a9.5 9.5 0 0 1 19 0" opacity=".55"/></svg></span>Helloo</a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="product.html">Product</a><a href="solutions.html">Solutions</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="btn login">Log in</a>
+      <a href="index.html#start" class="btn btn-primary">Try for free</a>
+      <button class="menu-btn" id="menu" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="m-panel" id="panel">
+  <a href="product.html">Product</a><a href="solutions.html">Solutions</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="index.html#faq">FAQ</a><a href="index.html#start">Try for free</a>
+</div>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+<h1>The last phone system <em>your team will ever need.</em></h1>
+      <p class="lead">Helloo gives you crystal-clear calls and an AI that works before you ask: it answers, follows up and keeps your CRM current, at a price that makes sense for a small team.</p>
+      <form class="signup" onsubmit="return false">
+        <input type="email" placeholder="Your work email" aria-label="Work email">
+        <button class="btn btn-primary" type="submit">Try for free <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+      </form>
+      <p class="fine">3-day free trial. Or <a href="#faq">talk it through with our team</a>.</p>
+    </div>
+    <div class="stage" id="product">
+      <div class="float f1"><p>Boiler quote confirmed. Site visit booked for Saturday morning.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>CRM updated</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Callback scheduled</li></ul></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status"><span>9:41</span><span>5G</span></div>
+          <div class="line-head"><b>Main line</b><span>(555) 123-0100</span></div>
+          <div class="tabs"><span class="on">All</span><span>Unread</span><span>Unanswered</span><span>Archived</span></div>
+          <div class="threads">
+            <div class="thread"><span class="av dark">EJ</span><div><b>Emma Johnson<small>3:51 PM</small></b><p>Called back about the replacement quote. Price works, asked for the earliest site visit.</p></div></div>
+            <div class="thread"><span class="av">MB</span><div><b>Mason Brooks<small>Aug 8</small></b><p>Went through Thursday's install list. He will confirm the parts order in the morning.</p></div></div>
+            <div class="thread"><span class="av">#</span><div><b>(555) 402-7788<small>Aug 8</small></b><p>Voicemail · 0:11</p></div></div>
+            <div class="thread"><span class="av">LC</span><div><b>Liam Carter<small>Aug 7</small></b><p>Wants the Friday slot moved to the morning if anything opens up.</p></div></div>
+            <div class="thread"><span class="av">OB</span><div><b>Olivia Bennett<small>Aug 7</small></b><p>Can you split the quote across two invoices?</p></div></div>
+          </div>
+          <div class="dock"><span class="on">Inbox</span><span>Calls</span><span>Keypad</span></div>
+        </div>
+      </div>
+      <div class="float f2"><p>"I can book you in on Saturday at 9. Does that work?"</p></div>
+    </div>
+  </div>
+
+  <div class="strip rv">
+    <div class="wrap">
+      <div class="strip-item"><b data-n="99.99" data-d="2">99.99%</b><span>Call uptime target</span></div>
+      <div class="strip-item"><b data-n="4" data-s="x">4x</b><span>Fewer dropped calls</span></div>
+      <div class="strip-item"><b data-n="15" data-s=" min">15 min</b><span>Average first response</span></div>
+      <div class="strip-item"><b data-n="0" data-s=" setup fee">0 setup fee</b><span>Free number porting</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Built for teams that are done <em>settling for less.</em></h2>
+      <p class="lead">Most phone systems are built for call centers. Helloo is built for everyone else.</p>
+    </div>
+    <div class="why">
+      <article class="wc rv">
+        <span class="bad">Dropped calls, spam flags</span>
+        <h3>Calls that sound like calls.</h3>
+        <p>Our own call network, tuned for voice. Callers see your name, not a spam label.</p>
+        <div class="mini-ui chips2"><span><i></i>Caller ID verified</span><span><i></i>HD audio</span><span><i></i>Spam risk low</span></div>
+      </article>
+      <article class="wc rv d1">
+        <span class="bad">Hundreds of clicks to change anything</span>
+        <h3>Admin in one sentence.</h3>
+        <p>Change hours, routing and greetings in the app, or just ask the assistant.</p>
+        <div class="mini-ui chat"><div class="me">Send calls to my cell after 6 pm</div><div class="ai">Done. Routing updated.</div></div>
+      </article>
+      <article class="wc rv">
+        <span class="bad">AI that waits for instructions</span>
+        <h3>An assistant that acts after every call.</h3>
+        <p>It writes the summary, updates the CRM and books the callback for you.</p>
+        <div class="mini-ui chips2"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> Summary</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> CRM</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> Callback</span></div>
+      </article>
+      <article class="wc rv d1">
+        <span class="bad">Support tickets that go nowhere</span>
+        <h3>A real person who knows you.</h3>
+        <p>Call, text or chat with the person who onboarded you. A fix, not a ticket number.</p>
+        <div class="mini-ui"><div class="row"><span>Jess · your onboarding lead</span><span class="st">Online</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="grok" style="padding-top:0">
+  <div class="wrap">
+    <div class="gk rv">
+      <div class="gk-top">
+<h2>Meet the <em>Grok bot.</em></h2>
+        <p>AI teammates for your phone line. They sign in to your tools, work the way you do, and come back with finished work.</p>
+        <div class="gk-actions"><a href="#start" class="btn">Try the Grok bot</a></div>
+      </div>
+
+      <div class="console">
+        <div class="c-col">
+          <div class="c-head"><span class="gdot"></span><b>Live call</b></div>
+          <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="bub them">Can someone look at my boiler this week?</div>
+          <div class="bub bot">I have Saturday at 9 or Monday at 8. Which works?</div>
+          <div class="bub them">Saturday is perfect.</div>
+          <div class="bub bot">Booked. Confirmation sent by text.</div>
+        </div>
+
+        <div class="c-col">
+          <div class="c-head"><b>What the bot does</b></div>
+          <ol class="steps">
+            <li style="--i:0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>Reads calendar and CRM</li>
+            <li style="--i:1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>Offers two free slots</li>
+            <li style="--i:2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>Books Saturday, 9:00</li>
+            <li style="--i:3"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg></span>Sends the SMS confirmation</li>
+            <li style="--i:4" class="run"><span class="ic"><i></i></span>Updating the CRM record</li>
+          </ol>
+        </div>
+
+        <div class="c-col out">
+          <div class="c-head"><b>Result</b></div>
+          <div class="res"><strong>Saturday · 9:00</strong><small>Emma Johnson · (555) 118-9043</small></div>
+          <p class="res-line">Synced to CRM · SMS sent · No human needed</p>
+          <div class="res-foot"><b>42s</b><span>from ring to booked</span></div>
+        </div>
+      </div>
+
+      <ul class="gk-points">
+        <li><b>Real time</b>Answers in the caller's language</li>
+        <li><b>Full context</b>Reads calendar, CRM and past calls</li>
+        <li><b>Acts after</b>Summary, tasks and follow-up</li>
+        <li><b>Hands off</b>Escalates to a person when it should</li>
+      </ul>
+      <p class="legal">Illustrative integration for a fictional product. Grok is a name owned by xAI, used here only to describe the concept. No affiliation or endorsement.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="grok-more" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Hand it the work. <em>Get it back finished.</em></h2>
+      <p class="lead">Treat Grok bots like teammates: message them, teach them once, and let them run in parallel, around the clock.</p>
+    </div>
+    <div class="gb-grid">
+      <article class="gb rv"><h3>Message bots like teammates</h3><p>Give a task the way you would to a colleague. The bot takes it from start to end and comes back only when it needs your approval.</p>
+        <div class="mini"><div class="m-me">Call back everyone who missed us today.</div><div class="m-bot">On it. 14 callbacks queued, 3 need your approval.</div></div></article>
+      <article class="gb rv d1"><h3>Work with many bots at once</h3><p>One on inbound, one on outbound, one on follow-ups. They work in parallel and keep going 24/7.</p>
+        <div class="mini"><div class="m-row"><span>Inbound</span><span class="st">Answering</span></div><div class="m-row"><span>Outbound</span><span class="st">Dialing 41/128</span></div><div class="m-row"><span>Follow-up</span><span class="st">Texting</span></div></div></article>
+      <article class="gb rv d2"><h3>Works where you work</h3><p>Log a bot in once. It uses your CRM, calendar and helpdesk like you would, including the tools that are hard to automate.</p>
+        <div class="mini chips"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> CRM</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> Calendar</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> Helpdesk</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg> Spreadsheets</span></div></article>
+      <article class="gb rv"><h3>Show a bot how it's done</h3><p>Do a workflow once while it watches. It saves the steps as a routine and runs it on its own next time.</p>
+        <div class="mini"><div class="m-row"><span>Weekly reporting</span><span class="st">Learning 0:04</span></div><div class="rec"><i></i>Teach a task</div></div></article>
+      <article class="gb rv d1"><h3>Bots get smarter over time</h3><p>They keep context and learn from each other. Teach one today, hand off the whole project by Friday.</p>
+        <div class="mini"><div class="m-bot">Noted for next time: this client books mornings, and Dana approves quotes.</div><div class="m-mem">Memory updated · Account bot</div></div></article>
+      <article class="gb rv d2"><h3>Connect the bots</h3><p>Put a few in the same thread and they pass work between themselves, so you are not approving every step.</p>
+        <div class="mini chain"><span>Receptionist</span><b>›</b><span>Scheduler</span><b>›</b><span>CRM keeper</span></div></article>
+    </div>
+    <div class="roles rv">
+<div class="role-list"><span>Inbound receptionist</span><span>Outbound dialer</span><span>Missed-call follow-up</span><span>Appointment setter</span><span>Voicemail triage</span><span>CRM keeper</span><span>Support concierge</span><span>Chief of staff</span></div>
+    </div>
+  </div>
+</section>
+<section class="section" id="switch" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Worried about switching? <em>We handle everything.</em></h2>
+    </div>
+    <div class="switch">
+      <div class="step rv"><span class="n">01</span><h3>Helloo connects to your system</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Your current provider</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Any legacy phone system</li></ul></div>
+      <div class="step rv d1"><span class="n">02</span><h3>Helloo recreates your routing</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Ports your number</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Reads your existing flows</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Rebuilds them with AI</li></ul></div>
+      <div class="step rv d2"><span class="n">03</span><h3>Helloo covers the switch</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Handles the paperwork</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Pays porting fees</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Takes over your contract</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Up to 3x more affordable. <em>Pay only for what you use.</em></h2>
+    </div>
+    <div class="price-wrap">
+      <div class="compare rv">
+        <div><span class="eyebrow">Cost per seat, per month</span><div class="bars">
+          <div class="bar"><b><span>Helloo</span><span>$29</span></b><div class="track"><i style="width:32%"></i></div></div>
+          <div class="bar alt"><b><span>Typical phone system</span><span>$90</span></b><div class="track"><i style="width:100%"></i></div></div>
+        </div></div>
+      </div>
+      <div class="rv d1">
+        <div class="toggle" id="bill"><button class="on" data-m="y">Yearly</button><button data-m="m">Monthly</button></div>
+        <div class="plans">
+          <div class="plan"><span class="eyebrow">Solo</span><div class="price"><span data-y="9" data-m="12">$9</span><small> /seat /mo</small></div><p>For one person with one line.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>One local number</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Calls and texts</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Free porting</li></ul><a href="#start" class="btn">Start free</a></div>
+          <div class="plan pop"><span class="eyebrow">Business</span><div class="price"><span data-y="29" data-m="39">$29</span><small> /seat /mo</small></div><p>For teams that work as one.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Shared inbox and routing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Recording and AI summaries</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>CRM sync and open API</li></ul><a href="#start" class="btn btn-primary">Start free</a></div>
+          <div class="plan"><span class="eyebrow">Ultra</span><div class="price"><span>$90</span><small> /seat /mo</small></div><p>For heavy usage, through sales.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Everything in Business</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Advanced reporting</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Priority support</li></ul><a href="#faq" class="btn">Talk to sales</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Everything you need for inbound <em>and outbound calls.</em></h2>
+    </div>
+    <div class="fgrid">
+      <article class="fcard wide rv"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg></span><h3>Local and international numbers</h3><p>Call and text from a local number in many countries, with clear per-minute rates and no surprises on the bill. Add a new number in seconds.</p><div class="code"><span class="c"># your numbers</span><br>+1 415 555 0128 &nbsp;<span class="k">active</span><br>+44 20 7946 0142 &nbsp;<span class="k">active</span><br>+33 1 99 00 12 34 &nbsp;<span class="k">added to your line</span></div></article>
+      <article class="fcard rv d1"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5"/></svg></span><h3>AI receptionist</h3><p>Answers what callers ask, books a slot that is really free on your calendar, hands off to a person when needed and writes the call into your CRM.</p></article>
+      <article class="fcard rv"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><h3>Power dialer</h3><p>Build a queue or push a filtered list from your CRM. See each contact before you connect, and skip, tag or note between calls.</p></article>
+      <article class="fcard rv d1"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><h3>Recording, transcripts, summaries</h3><p>A recording, a word-for-word transcript and an AI summary start the moment a call connects. Nothing to press.</p></article>
+      <article class="fcard rv d2"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><h3>Every device you use</h3><p>iOS, Android, macOS, Windows and Web. Same line, same inbox, wherever your team works.</p></article>
+      <article class="fcard rv"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span><h3>Click to call, in any tool</h3><p>Dial from your CRM and thousands of other apps without leaving them. Calls and notes land on the right record on their own.</p></article>
+      <article class="fcard rv d1"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg></span><h3>Build on the API</h3><p>Every call, summary and contact is readable and writable from your own code. Trigger anything on any call event.</p></article>
+      <article class="fcard rv d2"><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3zM18 15l.8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8z"/></svg></span><h3>Run it from your AI</h3><p>Connect Helloo to your AI client and manage your phone system in plain words.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fit" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head rv">
+<h2 class="h2">Sorry, enterprises. <em>Helloo is not for you.</em></h2>
+      <p class="lead">Most phone systems are made for teams of 250 and up. We built Helloo for everyone else.</p>
+    </div>
+    <div class="fit">
+      <div class="fit-col rv"><h3>Helloo is for</h3><ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Lean teams that want the best for less</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>A full phone system that works smarter, not harder</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Busy reps who cannot wait weeks for a fix</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>Paying only for what a small team needs</li></ul>
+        <div class="seats"><span class="eyebrow">Sweet spot: 1 to 50 seats</span><div class="track"><i style="width:20%"></i></div><div class="marks"><span>1</span><span>50</span><span>100</span><span>150</span><span>200</span><span>250+</span></div></div></div>
+      <div class="fit-col no rv d1"><h3>Helloo is not for</h3><ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Big organizations with even bigger budgets</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Teams that need numbers to burn, quantity over quality</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>People used to slow support tickets</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>Anyone happy to pay for bloated features</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head center rv" style="text-align:center">
+<h2 class="h2">Questions people ask <em>before they switch.</em></h2>
+    </div>
+    <div class="faq rv">
+      <div class="qa open"><button aria-expanded="true">How much does Helloo cost?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>Solo is $9 a seat per month, billed yearly. Business is $29 a seat per month billed yearly, or $39 month to month. Ultra is $90 a seat through sales. One number per seat and free porting are included, with no setup fee. The AI receptionist and power dialer are optional add-ons. There is no long contract, and the first 30 days are money-back.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">What is the Grok bot?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>It is Helloo's AI agent for calls. It picks up when nobody can, understands what the caller needs, checks your calendar and CRM, books or answers, and writes everything up afterward. When a conversation needs a person, it transfers the call with the context already attached.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Does it work with my CRM?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>Yes. Helloo syncs natively with the most popular CRMs and spreadsheets, and reaches everything else through automation tools or the open API. Calls, summaries, tags and texts land on the right record on their own, so nobody types a call into a CRM again.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Can I try it first, and how hard is the setup?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>There is a 3-day free trial. Setup is guided and you do it yourself, with no technical skills involved. Most teams are taking calls the same day. If you would rather hand it over, our team can set up everything for a one-time fee.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">What does the AI receptionist actually do?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>It answers when nobody on your team can, asks callers what they need, books straight into your calendar, texts back missed calls and writes every call into your CRM. It hands the call to a person the moment one is needed.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">How does it work with several people?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>Every seat comes with its own number, and you can add or remove people whenever you like. The team shares call history, tags and texts, so whoever picks up next sees what happened last time. You decide who rings and in what order.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Can I keep my current number?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="ans"><div><p>Yes, and porting is free in both directions. It takes a few business days with no downtime: you keep taking calls on your current service right up to the moment the number switches over.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="start" style="padding-top:0">
+  <div class="wrap">
+    <div class="final rv">
+      <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <h2>Say Helloo to a <em>better phone system.</em></h2>
+      <p>Reliable calls and proactive AI, at a price you can afford.</p>
+      <form class="signup" onsubmit="return false"><input type="email" placeholder="Your work email" aria-label="Work email"><button class="btn btn-primary" type="submit">Try for free</button></form>
+      <p class="fine">3-day free trial. No setup fee.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <a href="index.html" class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="14" r="2.4" fill="currentColor" stroke="none"/><path d="M6 14a6 6 0 0 1 12 0"/><path d="M2.5 14a9.5 9.5 0 0 1 19 0" opacity=".55"/></svg></span>Helloo</a>
+      <div class="f-links"><a href="product.html">Product</a><a href="solutions.html">Solutions</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="https://www.linkedin.com/in/lucasgava" target="_blank" rel="noopener">Lucas Gava</a></div>
+    </div>
+    <div class="f-bottom"><span>&copy; 2026 Helloo</span></div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>
