@@ -355,3 +355,21 @@ a:hover {
 .ls.open .ls-btn {
   background: #f0f0f2;
 }
+
+/* ajuste geral de espacamento */
+.container-conteudo { gap: 24px; }
+.container-conteudo p { line-height: 1.65; }
+.container-conteudo p + p { margin-top: -4px; }
+.container-conteudo .links { margin-top: 48px; }
+.links { gap: 2.2rem; }
+.works { margin: 8px auto 0; }
+.proj { padding: 15px 6px; }
+.proj:hover { padding-left: 14px; }
+.ls-menu { padding: 6px; }
+.ls-menu li { padding: 10px 14px; }
+.ls-menu li + li { margin-top: 2px; }
+@media (max-width: 467px) {
+  .container-conteudo { gap: 28px; }
+  .container-conteudo .links { margin-top: 48px; }
+  .links { gap: 1.6rem; }
+}
