@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lucas Gava</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="icon.png" type="image/x-icon">
+</head>
+
+<body>
+  <div class="container-conteudo">
+    <h1><a href="index.html" class="home-link" data-i18n="contact_title">contact</a></h1>
+
+    <p data-i18n="contact_text">
+      if you liked what you saw, access the links below.
+    </p>
+
+    <nav class="links">
+      <a href="index.html" data-i18n="nav_home">home</a>
+      <a href="https://www.linkedin.com/in/lucasgava/" data-i18n="nav_cv">cv</a>
+      <a href="https://www.instagram.com/lucasgava___/" data-i18n="nav_social">social media</a>
+      <div class="lang-select-wrapper">
+        <select class="lang-select" id="lang-switcher">
+          <option value="pt">português</option>
+          <option value="en">english</option>
+          <option value="es">español</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    const translations = {
+      pt: {
+        contact_title: "contato",
+        contact_text: "se você gostou do que viu, acesse os links abaixo.",
+        nav_home: "home",
+        nav_cv: "currículo",
+        nav_social: "redes sociais"
+      },
+      en: {
+        contact_title: "contact",
+        contact_text: "if you liked what you saw, access the links below.",
+        nav_home: "home",
+        nav_cv: "cv",
+        nav_social: "social media"
+      },
+      es: {
+        contact_title: "contacto",
+        contact_text: "si te gustó lo que viste, accede a los enlaces de abajo.",
+        nav_home: "inicio",
+        nav_cv: "currículum",
+        nav_social: "redes sociales"
+      },
+      zh: {
+        contact_title: "联系",
+        contact_text: "如果你喜欢你所看到的内容，请访问以下链接。",
+        nav_home: "主页",
+        nav_cv: "简历",
+        nav_social: "社交媒体"
+      }
+    };
+
+    const langSwitcher = document.getElementById("lang-switcher");
+    const elements = document.querySelectorAll("[data-i18n]");
+
+    const savedLang = localStorage.getItem("lang") || "pt";
+    langSwitcher.value = savedLang;
+    applyLanguage(savedLang);
+
+    langSwitcher.addEventListener("change", () => {
+      const lang = langSwitcher.value;
+      localStorage.setItem("lang", lang);
+      applyLanguage(lang);
+    });
+
+    function applyLanguage(lang) {
+      elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.innerHTML = translations[lang][key];
+      });
+    }
+  </script>
+</body>
+
+</html>
