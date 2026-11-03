@@ -147,6 +147,18 @@ var R=[
 ["Request sandbox keys","Solicitar claves de sandbox","申请沙盒密钥","Demander des clés sandbox"],
 
 /* home: safeguards */
+["Segregated accounts","Cuentas segregadas","独立账户","Comptes ségrégués"],
+["Proof of reserves","Prueba de reservas","储备证明","Preuve de réserves"],
+["Withdrawal controls","Controles de retiro","提币管控","Contrôles de retrait"],
+["Key custody","Custodia de claves","密钥托管","Conservation des clés"],
+["Independent testing","Pruebas independientes","独立测试","Tests indépendants"],
+["Incident reporting","Reporte de incidentes","事件通报","Signalement des incidents"],
+["Never lent out","Nunca se presta","绝不出借","Jamais prêtés"],
+["Monthly attestation","Certificación mensual","按月鉴证","Attestation mensuelle"],
+["Quorum approval","Aprobación por quórum","法定人数审批","Approbation par quorum"],
+["Two jurisdictions","Dos jurisdicciones","两个司法管辖区","Deux juridictions"],
+["No payout cap","Sin tope de pago","赏金无上限","Sans plafond de paiement"],
+["Named contact","Contacto nominal","专属联系人","Contact nommé"],
 ["Boring where it counts","Aburrido donde importa","在关键处求稳","Sobre là où cela compte"],
 ["Client assets are not a funding source. They sit apart from the company balance sheet and are reported monthly.",
  "Los activos de los clientes no son una fuente de financiación. Están separados del balance de la empresa y se reportan cada mes.",

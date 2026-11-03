@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 <script>try{if(localStorage.getItem("solen-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
@@ -262,14 +262,56 @@ ws.onmessage = (e) =&gt; {
         <p>Client assets are not a funding source. They sit apart from the company balance sheet and are reported monthly.</p>
       </div>
     </div>
-    <ul class="checks reveal">
-      <li><span class="d"></span><span><strong>Segregated accounts.</strong> Client funds are held separately from operating capital and never lent out.</span></li>
-      <li><span class="d"></span><span><strong>Proof of reserves.</strong> Monthly attestation by an independent auditor, published with the underlying addresses.</span></li>
-      <li><span class="d"></span><span><strong>Withdrawal controls.</strong> Address allowlists, quorum approval and a configurable delay on first use.</span></li>
-      <li><span class="d"></span><span><strong>Key custody.</strong> Hardware security modules in two jurisdictions, with no single person able to sign.</span></li>
-      <li><span class="d"></span><span><strong>Independent testing.</strong> Annual penetration test and a public bug bounty with no payout cap.</span></li>
-      <li><span class="d"></span><span><strong>Incident reporting.</strong> Status page, root cause write-ups and a named contact for every client.</span></li>
-    </ul>
+    <div class="trust reveal">
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v1"><div class="bx"><b>Client funds</b><span>segregated</span></div><div class="gp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></div><div class="bx ghost"><b>Operating</b><span>capital</span></div></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">01</span><span class="tr-chip"><i></i>Never lent out</span></div>
+          <h3>Segregated accounts</h3>
+          <p>Client funds are held separately from operating capital and never lent out.</p>
+        </div>
+      </article>
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v2"><div class="rw"><span>Reserves</span><i style="--w:100%"></i></div><div class="rw"><span>Liabilities</span><i class="o" style="--w:84%"></i></div><em>reserves ≥ liabilities</em></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">02</span><span class="tr-chip"><i></i>Monthly attestation</span></div>
+          <h3>Proof of reserves</h3>
+          <p>Monthly attestation by an independent auditor, published with the underlying addresses.</p>
+        </div>
+      </article>
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v3"><span>Allowlist</span><u></u><span>Quorum</span><u></u><span>Delay</span></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">03</span><span class="tr-chip"><i></i>Quorum approval</span></div>
+          <h3>Withdrawal controls</h3>
+          <p>Address allowlists, quorum approval and a configurable delay on first use.</p>
+        </div>
+      </article>
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v4"><div class="hsm"><b>HSM</b><small>Region A</small></div><div class="lk"></div><div class="hsm"><b>HSM</b><small>Region B</small></div></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">04</span><span class="tr-chip"><i></i>Two jurisdictions</span></div>
+          <h3>Key custody</h3>
+          <p>Hardware security modules in two jurisdictions, with no single person able to sign.</p>
+        </div>
+      </article>
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v5"><div><span>pen-test</span><em>annual</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div><span>bug-bounty</span><em>open · no cap</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">05</span><span class="tr-chip"><i></i>No payout cap</span></div>
+          <h3>Independent testing</h3>
+          <p>Annual penetration test and a public bug bounty with no payout cap.</p>
+        </div>
+      </article>
+      <article class="tr">
+        <div class="tr-vis" aria-hidden="true" data-notr><div class="v6"><div class="st"><i class="pulse"></i><span>status page</span></div><div class="bars"><i style="--h:62%"></i><i style="--h:78%"></i><i style="--h:70%"></i><i style="--h:84%"></i><i style="--h:66%"></i><i style="--h:90%"></i><i style="--h:74%"></i><i style="--h:80%"></i><i style="--h:68%"></i><i style="--h:86%"></i><i style="--h:72%"></i><i style="--h:92%"></i><i style="--h:64%"></i><i style="--h:82%"></i><i style="--h:76%"></i><i style="--h:88%"></i><i style="--h:70%"></i><i style="--h:94%"></i><i style="--h:66%"></i><i style="--h:84%"></i><i style="--h:78%"></i><i style="--h:90%"></i><i style="--h:72%"></i><i style="--h:86%"></i><i style="--h:68%"></i><i style="--h:80%"></i><i style="--h:92%"></i><i style="--h:74%"></i><i style="--h:86%"></i><i style="--h:70%"></i><i style="--h:96%"></i><i style="--h:82%"></i></div></div></div>
+        <div class="tr-body">
+          <div class="tr-meta"><span class="tr-idx">06</span><span class="tr-chip"><i></i>Named contact</span></div>
+          <h3>Incident reporting</h3>
+          <p>Status page, root cause write-ups and a named contact for every client.</p>
+        </div>
+      </article>
+    </div>
   </section>
 
   <!-- Closing CTA -->
@@ -335,7 +377,7 @@ ws.onmessage = (e) =&gt; {
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="i18n.js"></script>
+<script src="i18n.js?v=2"></script>
 <script src="script.js?v=5"></script>
 <script src="logo3d-mini.js?v=1" defer></script>
 <script src="logo3d.js?v=3" defer></script>
