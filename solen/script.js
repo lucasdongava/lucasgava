@@ -631,15 +631,19 @@ if(globeCanvas&&globeCanvas.getContext){
   requestAnimationFrame(frame);
 }
 
-/* hero: a imagem tem tamanho fixo (92,6% do grid, a mesma largura do texto) e não cresce ao rolar.
-   O espaço que o encolhimento deixaria vazio embaixo é recolhido (margin-bottom negativa). No celular ocupa a largura toda. */
+/* hero: a imagem começa pequena (S_INI do grid) e cresce com a rolagem até S_FIM do grid (menor que a largura total).
+   O espaço que ela deixa vazio embaixo é recolhido (margin-bottom negativa), então o conteúdo de baixo sobe junto.
+   Para ajustar o tamanho, mude S_INI / S_FIM (1 = largura total do grid). */
 (()=>{
   const m=document.querySelector(".hx-media");if(!m)return;
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const mq=matchMedia("(max-width:900px)");
-  const apply=()=>{
-    const s=mq.matches?1:.926;
-    m.style.transform=s===1?"none":"scale("+s+")";
-    m.style.marginBottom=s===1?"0":(-(1-s)*m.offsetHeight).toFixed(1)+"px";
-  };
-  addEventListener("resize",apply);apply();
+  const S_INI=()=>mq.matches?.7:.45, S_FIM=()=>mq.matches?.9:.75, DIST=440;
+  let cur=S_INI(),raf=0;
+  const target=()=>{if(reduced)return S_FIM();const p=Math.min(1,Math.max(0,scrollY/DIST));return S_INI()+(S_FIM()-S_INI())*p};
+  const apply=()=>{m.style.transform="scale("+cur.toFixed(4)+")";m.style.marginBottom=(-(1-cur)*m.offsetHeight).toFixed(1)+"px"};
+  const step=()=>{raf=0;const t=target();cur+=(t-cur)*.14;if(Math.abs(t-cur)<.0005)cur=t;apply();if(cur!==t)raf=requestAnimationFrame(step)};
+  const go=()=>{if(!raf)raf=requestAnimationFrame(step)};
+  addEventListener("scroll",go,{passive:true});addEventListener("resize",go);
+  cur=target();apply();go();
 })();

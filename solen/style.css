@@ -89,13 +89,13 @@ h3{font-size:17px;line-height:1.4;font-weight:600;letter-spacing:-.012em}
 .hx-text{width:92.6%;margin-inline:auto}
 .hx-text .lede{margin:24px 0 0;max-width:620px}
 .hx-slot{margin-top:72px;width:100%}
-.hx-media{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;transform:scale(.926);transform-origin:50% 0;will-change:transform}
+.hx-media{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;transform:scale(.45);transform-origin:50% 0;will-change:transform}
 .hx-media .img{position:absolute;inset:0}
 @media (max-width:900px){
   .hx-inner{padding-block:56px 0}
   .hx-text{width:100%}
   .hx-slot{margin-top:40px}
-  .hx-media{aspect-ratio:4/3;border-radius:16px;transform:none}
+  .hx-media{aspect-ratio:4/3;border-radius:16px;transform:scale(.7)}
 }
 
 
