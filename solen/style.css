@@ -569,3 +569,8 @@ html[data-theme="dark"] .stat:hover{background:#2b2b2b;border-color:#444}
 .ann-fic a:hover{text-decoration-color:#fff}
 .ann-fic .short{display:none}
 @media (max-width:620px){.ann-fic .long{display:none}.ann-fic .short{display:inline}}
+
+/* logo 3D no topo da home */
+.hx-media .logo3d{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;opacity:0;transition:opacity .8s ease}
+.hx-media.has3d .logo3d{opacity:1}
+.hx-media .logo3d.drag{cursor:grabbing}
