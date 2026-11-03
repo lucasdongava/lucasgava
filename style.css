@@ -238,7 +238,7 @@ a:hover {
 .ls-check { width: 14px; height: 14px; opacity: 0; color: #111; }
 .ls-menu li[aria-selected="true"] { font-weight: 500; }
 .ls-menu li[aria-selected="true"] .ls-check { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .ls-menu, }
+@media (prefers-reduced-motion: reduce) { .ls-menu { transition: none; } }
 
 /* hover em botao claro (nav e seletor de idioma) */
 .links a,
@@ -246,14 +246,25 @@ a:hover {
   padding: .35em .7em;
   margin: -.35em -.7em;
   border-radius: 8px;
-  transition: background .3s cubic-bezier(.16,1,.3,1);
+  transition: background-color .45s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1);
 }
 .links a,
-.ls-btn { background: #ebebee; }
+.ls-btn { background: #f5f5f7; }
 .links a:hover,
 .ls-btn:hover,
 .ls.open .ls-btn {
-  background: #dedee2;
+  background: #ececf0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -8px rgba(9,9,11,.18);
+}
+.links a:active,
+.ls-btn:active {
+  transform: translateY(0) scale(.98);
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .links a, .ls-btn { transition: none; }
+  .links a:hover, .ls-btn:hover, .ls.open .ls-btn, .links a:active, .ls-btn:active { transform: none; }
 }
 
 /* ajuste geral de espacamento */
