@@ -1,0 +1,102 @@
+/* Logo 3D no cabeçalho e no rodapé (Three.js, carregado só depois da página).
+ * Um único renderizador desenha todos os logos; o SVG original fica como reserva se não houver WebGL. */
+(function () {
+  var marks = [].slice.call(document.querySelectorAll('svg.brand-mark'));
+  if (!marks.length) return;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SHAPE = {"paths":["M0.19,0C2.36,0.04 9.46,0.32 13.01,0.65C16.56,0.98 19.21,1.52 21.51,1.96C23.81,2.40 24.83,2.62 26.82,3.29C28.81,3.96 31.04,4.78 33.45,5.96C35.86,7.14 39.14,9.00 41.29,10.40C43.44,11.80 44.72,12.93 46.37,14.34C48.02,15.75 47.69,15.14 51.19,18.88C54.69,22.62 64.41,33.60 67.34,36.77C70.27,39.94 68.48,37.59 68.78,37.88C69.08,38.17 68.98,38.40 69.13,38.53C69.28,38.66 69.31,38.37 69.68,38.65C70.05,38.93 70.92,39.92 71.34,40.23C71.76,40.54 71.72,40.20 72.22,40.51C72.72,40.81 73.58,41.58 74.32,42.06C75.06,42.54 75.33,42.80 76.64,43.39C77.95,43.98 80.47,45.09 82.16,45.62C83.85,46.14 85.14,46.41 86.80,46.54C88.46,46.67 91.00,46.49 92.11,46.43C93.22,46.37 92.89,46.18 93.43,46.15C93.98,46.12 95.04,44.70 95.38,46.27C95.72,47.84 95.49,53.95 95.48,55.55C95.47,57.14 97.82,55.78 95.31,55.84C92.80,55.90 83.42,55.86 80.40,55.91C77.38,55.96 77.89,56.03 77.19,56.13C76.49,56.23 77.40,56.33 76.20,56.51C75.00,56.69 72.00,56.87 70.01,57.21C68.02,57.55 65.89,58.14 64.27,58.58C62.65,59.02 61.91,59.13 60.29,59.86C58.67,60.59 55.77,62.23 54.55,62.97C53.33,63.71 53.59,63.71 53.00,64.32C52.41,64.92 51.64,65.70 50.99,66.60C50.34,67.49 49.55,68.75 49.11,69.69C48.67,70.63 48.50,71.55 48.36,72.23C48.22,72.91 48.24,73.25 48.24,73.78C48.24,74.31 48.26,74.91 48.34,75.44C48.42,75.97 48.52,76.44 48.74,76.99C48.96,77.54 49.21,78.08 49.64,78.75C50.07,79.42 50.74,80.33 51.34,80.99C51.94,81.65 52.69,82.30 53.22,82.73C53.75,83.16 53.52,83.06 54.55,83.58C55.58,84.09 58.19,85.31 59.39,85.82C60.59,86.33 60.46,86.34 61.73,86.62C63.00,86.90 65.50,87.28 67.03,87.51C68.56,87.74 69.23,87.88 70.90,87.98C72.58,88.08 75.39,88.11 77.08,88.11C78.77,88.11 79.27,88.13 81.06,87.98C82.85,87.84 85.96,87.53 87.80,87.24C89.64,86.95 90.93,86.59 92.11,86.25C93.29,85.91 94.32,85.28 94.87,85.19C95.42,85.10 95.35,84.96 95.40,85.71C95.45,86.46 95.19,88.62 95.17,89.69C95.15,90.76 95.28,90.74 95.29,92.12C95.30,93.50 95.37,96.91 95.23,97.98C95.09,99.05 95.45,98.44 94.43,98.53C93.41,98.63 90.74,98.51 89.12,98.55C87.50,98.59 85.69,98.69 84.71,98.78C83.73,98.87 84.60,99.02 83.27,99.08C81.94,99.14 78.08,99.09 76.75,99.16C75.42,99.23 75.84,99.49 75.31,99.52C74.78,99.55 74.71,99.36 73.55,99.36C72.39,99.36 69.52,99.44 68.36,99.53C67.20,99.62 67.13,99.89 66.59,99.90C66.06,99.91 65.91,99.59 65.15,99.59C64.40,99.59 64.73,99.80 62.06,99.87C59.39,99.94 53.61,100.28 49.13,100.00C44.66,99.72 39.31,98.93 35.21,98.19C31.11,97.45 27.21,96.45 24.50,95.56C21.79,94.67 20.52,93.68 18.97,92.85C17.42,92.02 16.52,91.47 15.22,90.58C13.92,89.69 12.35,88.55 11.16,87.48C9.97,86.41 8.82,85.02 8.09,84.17C7.36,83.32 7.23,83.17 6.77,82.40C6.31,81.63 5.68,80.39 5.32,79.53C4.96,78.67 4.79,78.00 4.61,77.25C4.43,76.50 4.30,75.97 4.24,75.00C4.18,74.03 4.07,72.79 4.26,71.46C4.45,70.13 4.96,68.22 5.36,67.04C5.76,65.86 6.13,65.27 6.67,64.39C7.21,63.51 7.92,62.58 8.59,61.77C9.26,60.96 10.04,60.15 10.69,59.53C11.33,58.91 11.49,58.76 12.46,58.08C13.44,57.40 15.05,56.24 16.54,55.44C18.03,54.64 19.76,53.93 21.40,53.27C23.04,52.61 24.74,52.00 26.38,51.48C28.02,50.96 29.64,50.52 31.24,50.15C32.84,49.78 34.89,49.44 35.99,49.28C37.09,49.12 37.42,49.24 37.86,49.17C38.30,49.10 37.39,48.92 38.64,48.85C39.89,48.78 44.07,48.82 45.38,48.76C46.70,48.70 46.39,48.60 46.53,48.48C46.67,48.36 46.62,48.22 46.23,48.04C45.84,47.86 45.23,47.86 44.17,47.38C43.11,46.90 40.68,45.65 39.85,45.17C39.02,44.69 40.06,45.09 39.19,44.50C38.32,43.91 35.83,42.49 34.63,41.63C33.43,40.77 32.82,40.12 32.01,39.36C31.20,38.60 30.68,38.14 29.78,37.10C28.88,36.06 28.49,35.73 26.60,33.15C24.71,30.57 20.56,24.35 18.42,21.60C16.28,18.85 14.94,17.77 13.78,16.65C12.62,15.53 12.51,15.47 11.46,14.87C10.41,14.27 8.99,13.60 7.48,13.06C5.97,12.52 3.63,11.92 2.40,11.65C1.17,11.38 0.50,13.34 0.10,11.47C-0.30,9.60 -0.01,2.34 0.00,0.43C0.01,-1.48 -1.98,-0.04 0.19,0.00Z"],"extrude":{"depth":18,"bevelEnabled":true,"bevelThickness":4,"bevelSize":2,"bevelSegments":6,"curveSegments":10}};
+  var finishOf = function (svg) { var m = getComputedStyle(svg.parentNode).color.match(/[d.]+/g) || [0, 0, 0]; return (m[0] * 0.3 + m[1] * 0.59 + m[2] * 0.11) > 140 ? 'chrome' : 'lacquer'; };
+
+  function load(src) { return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+  function start() {
+    var THREE = window.THREE; if (!THREE) return;
+    var R;
+    try { R = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return; }
+    var N = 160;
+    R.setPixelRatio(1); R.setSize(N, N, false); R.setClearColor(0x000000, 0);
+    R.outputEncoding = THREE.sRGBEncoding; R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.05; R.physicallyCorrectLights = true;
+
+    var scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(20, 1, 0.1, 100);
+    camera.position.set(0, 0, 14.5); camera.lookAt(0, 0, 0);
+    var pm = new THREE.PMREMGenerator(R), env = new THREE.Scene();
+    env.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x2a2a2c, side: THREE.BackSide })));
+    [[0, 6, 0, 14, 1, 14, 0xffffff], [-9, 1, 2, 1, 8, 6, 0xffffff], [9, 2, -2, 1, 6, 10, 0xd8d8d8], [0, 0, 9.5, 8, 3, 1, 0xbdbdbd], [0, -6, 0, 10, 1, 10, 0x111111]].forEach(function (a) {
+      var m = new THREE.Mesh(new THREE.BoxGeometry(a[3], a[4], a[5]), new THREE.MeshBasicMaterial({ color: a[6] })); m.position.set(a[0], a[1], a[2]); env.add(m);
+    });
+    scene.environment = pm.fromScene(env, 0.04).texture;
+    var key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(4, 6, 8); scene.add(key);
+    var rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(-6, 2, -5); scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.6));
+
+    function toShape(d) {
+      var t = d.match(/[MLQCZ]|-?\d*\.?\d+/g), s = new THREE.Shape(), i = 0, c;
+      var n = function () { return parseFloat(t[i++]); }, p = function () { var x = n(), y = n(); return [x, -y]; };
+      while (i < t.length) {
+        if (/[MLQCZ]/.test(t[i])) c = t[i++];
+        if (c === 'M') { var a = p(); s.moveTo(a[0], a[1]); c = 'L'; }
+        else if (c === 'L') { var l = p(); s.lineTo(l[0], l[1]); }
+        else if (c === 'C') { var c1 = p(), c2 = p(), e = p(); s.bezierCurveTo(c1[0], c1[1], c2[0], c2[1], e[0], e[1]); }
+        else if (c === 'Z') { s.closePath(); }
+      }
+      return s;
+    }
+    var geo = new THREE.ExtrudeGeometry(SHAPE.paths.map(toShape), SHAPE.extrude);
+    geo.center(); geo.computeVertexNormals();
+    var sz = new THREE.Box3().setFromBufferAttribute(geo.attributes.position).getSize(new THREE.Vector3());
+    var k = 4 / Math.max(sz.x, sz.y); geo.scale(k, k, k);
+    var MAT = {
+      lacquer: new THREE.MeshPhysicalMaterial({ color: 0x070708, roughness: 0.2, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 0.85 }),
+      chrome: new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.08, metalness: 1, envMapIntensity: 1.4 })
+    };
+    var mesh = new THREE.Mesh(geo, MAT.lacquer), pivot = new THREE.Group(); pivot.add(mesh); scene.add(pivot);
+
+    var items = marks.map(function (svg, idx) {
+      var r = svg.getBoundingClientRect(), css = Math.round(r.height || r.width || 26), dpr = Math.min(devicePixelRatio || 1, 2);
+      var cv = document.createElement('canvas');
+      cv.className = svg.getAttribute('class') + ' brand-mark-3d';
+      cv.width = cv.height = Math.round(css * dpr); cv.setAttribute('role', 'img'); cv.setAttribute('aria-hidden', 'true');
+      svg.parentNode.insertBefore(cv, svg);
+      return { svg: svg, cv: cv, ctx: cv.getContext('2d'), host: svg.closest('a, button') || svg.parentNode, visible: true, shown: false, angle: 0, drawn: NaN, hover: false };
+    });
+    function drawItem(it) {
+      mesh.material = MAT[finishOf(it.svg)];
+      pivot.rotation.set(0, it.angle, 0);   // 0 = de frente
+      R.render(scene, camera);
+      it.ctx.clearRect(0, 0, it.cv.width, it.cv.height);
+      it.ctx.drawImage(R.domElement, 0, 0, N, N, 0, 0, it.cv.width, it.cv.height);
+      it.drawn = it.angle;
+      if (!it.shown) { it.shown = true; it.svg.style.display = 'none'; }
+    }
+    var raf = 0, last = 0, TAU = Math.PI * 2, SPIN = TAU / 2.4;
+    function frame(now) {
+      raf = 0;
+      var dt = Math.min((now - last) / 1000, 0.05); last = now;
+      var animating = false;
+      items.forEach(function (it) {
+        if (it.hover) { it.angle += dt * SPIN; animating = true; }
+        else if (it.angle !== 0) {                       // termina a volta e para de frente
+          var tgt = Math.ceil(it.angle / TAU - 1e-4) * TAU, d = tgt - it.angle;
+          if (d > 0.002) { it.angle += d * (1 - Math.exp(-dt * 7)); animating = true; }
+          else it.angle = 0;
+        }
+        if (it.visible && it.drawn !== it.angle) drawItem(it);
+      });
+      if (animating) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+    items.forEach(function (it) {
+      if (reduced) return;                                // sem movimento: fica sempre de frente
+      it.host.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; it.hover = true; kick(); });
+      it.host.addEventListener("pointerleave", function () { it.hover = false; kick(); });
+      it.host.addEventListener("touchstart", function () { it.hover = true; kick(); clearTimeout(it.tt); it.tt = setTimeout(function () { it.hover = false; kick(); }, 900); }, { passive: true });
+    });
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { items.forEach(function (it) { if (it.cv === e.target) { it.visible = e.isIntersecting; if (it.visible) it.drawn = NaN; } }); }); kick(); });
+    items.forEach(function (it) { io.observe(it.cv); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+    new MutationObserver(function () { items.forEach(function (it) { it.drawn = NaN; }); kick(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    kick();
+  }
+  function init() { (window.__three = window.__three || load('/nuwa/js/three.min.js')).then(start).catch(function () {}); }
+  if (document.readyState === 'complete') (window.requestIdleCallback || setTimeout)(init);
+  else addEventListener('load', function () { (window.requestIdleCallback || setTimeout)(init); });
+})();

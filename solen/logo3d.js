@@ -73,7 +73,7 @@
       .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     // arrastar para girar (rolagem vertical da página continua funcionando no celular)
-    var rotY = 0.5, rotX = -0.12, velY = 0, drag = null, spin = !reduced, visible = true, raf = 0, last = performance.now();
+    var TAU = Math.PI * 2, rotY = 0, rotX = 0, velY = 0, drag = null, hover = false, visible = true, raf = 0, last = performance.now();
     cv.style.touchAction = 'pan-y';
     cv.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY }; velY = 0; cv.classList.add('drag'); cv.setPointerCapture(e.pointerId); kick(); });
     cv.addEventListener('pointermove', function (e) {
@@ -83,6 +83,8 @@
       draw();
     });
     function end() { drag = null; cv.classList.remove('drag'); kick(); }
+    cv.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') { hover = true; kick(); } });
+    cv.addEventListener('pointerleave', function () { hover = false; kick(); });
     cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
 
     function resize() {
@@ -99,8 +101,12 @@
       var moving = false;
       if (!drag) {
         if (Math.abs(velY) > 0.0002) { velY *= 0.94; rotY += velY; moving = true; }
-        if (spin) { rotY += dt * (Math.PI * 2 / 10); moving = true; }
-        var back = (-0.12 - rotX) * 0.03; if (Math.abs(back) > 0.0002) { rotX += back; moving = true; }
+        if (hover && !reduced) { rotY += dt * (TAU / 6); moving = true; }
+        else if (Math.abs(velY) < 0.002) {            // sem o mouse em cima: termina o giro e volta de frente
+          var tgt = Math.round(rotY / TAU) * TAU, dY = tgt - rotY;
+          if (Math.abs(dY) > 0.002) { rotY += dY * (1 - Math.exp(-dt * 6)); moving = true; } else rotY = tgt;
+        }
+        var back = (0 - rotX) * 0.08; if (Math.abs(back) > 0.0002) { rotX += back; moving = true; }
       } else moving = true;
       draw();
       if (moving && visible) raf = requestAnimationFrame(loop);
@@ -114,7 +120,7 @@
     requestAnimationFrame(function () { host.classList.add('has3d'); });
   }
 
-  function init() { load('js/three.min.js').then(start).catch(function () {}); }
+  function init() { (window.__three = window.__three || load('js/three.min.js')).then(start).catch(function () {}); }
   if (document.readyState === 'complete') (window.requestIdleCallback || setTimeout)(init);
   else addEventListener('load', function () { (window.requestIdleCallback || setTimeout)(init); });
 })();
