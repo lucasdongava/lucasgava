@@ -106,12 +106,13 @@ main {
 .ls-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; border-radius: 8px;
-  color: var(--text-tertiary);
-  transition: background-color var(--duration-snappy) ease, color var(--duration-snappy) ease;
+  color: var(--text-primary); opacity: .35;
+  transition: opacity var(--duration-snappy) ease;
 }
-@media (hover: hover) { .ls-btn:hover { background: var(--background-tertiary); color: var(--text-primary); } }
-.ls.open .ls-btn { background: var(--background-tertiary); color: var(--text-primary); }
-.ls-btn svg { width: 18px; height: 18px; }
+@media (hover: hover) { .ls-btn:hover { opacity: 1; } }
+.ls-btn:focus-visible, .ls.open .ls-btn { opacity: 1; }
+.ls-btn svg { width: 16px; height: 16px; }
+.ls-btn svg.ls-globe { width: 16px; height: 14px; }
 .ls-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .ls-menu {
   position: absolute; top: calc(100% + 6px); right: 0; z-index: 10; min-width: 150px;
