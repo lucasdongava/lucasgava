@@ -92,6 +92,12 @@
     }
   </script>
   <script src="lang-select.js"></script>
+  <script>
+    /* proj-newtab: no computador (mouse), os projetos abrem em nova guia; no celular continuam na mesma */
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      document.querySelectorAll("a.proj").forEach(function (a) { a.target = "_blank"; a.rel = "noopener"; });
+    }
+  </script>
   <script src="menu-hover.js?v=2" defer></script>
 </body>
 
