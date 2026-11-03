@@ -280,26 +280,28 @@ a:hover {
 .ls-menu li { padding: 10px 14px; }
 .ls-menu li + li { margin-top: 2px; }
 
-/* transicao entre paginas */
+/* transicao entre paginas e troca de tema: dissolve suave, sem movimento */
 @view-transition { navigation: auto; }
 
-::view-transition-old(root) {
-  animation: pg-out .28s cubic-bezier(.4,0,1,1) both;
-}
-::view-transition-new(root) {
-  animation: pg-in .6s cubic-bezier(.16,1,.3,1) .08s both;
-}
-@keyframes pg-out { to { opacity: 0; transform: translateY(-6px); } }
-@keyframes pg-in { from { opacity: 0; transform: translateY(12px); } }
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) { animation: vt-in .32s ease both; }
+@keyframes vt-in { from { opacity: 0; } }
+
+/* botoes do canto ficam parados durante a troca (sem piscar) */
+.ls-corner { view-transition-name: lang-btn; }
+.theme-corner { view-transition-name: theme-btn; }
+::view-transition-group(lang-btn), ::view-transition-group(theme-btn) { animation: none; }
+::view-transition-old(lang-btn), ::view-transition-old(theme-btn) { display: none; }
+::view-transition-new(lang-btn), ::view-transition-new(theme-btn) { animation: none; }
 
 /* fallback: navegadores sem View Transitions */
 @supports not (view-transition-name: none) {
-  .container-conteudo { animation: pg-in .6s cubic-bezier(.16,1,.3,1) both; }
+  .container, .container-conteudo { animation: vt-in .35s ease both; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
-  .container-conteudo { animation: none; }
+  ::view-transition-new(root) { animation: none; }
+  .container, .container-conteudo { animation: none; }
 }
 
 /* seletor de idioma: icone no canto superior direito */
