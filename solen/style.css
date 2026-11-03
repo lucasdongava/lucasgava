@@ -562,3 +562,10 @@ html[data-theme="dark"] .card-i:hover,html[data-theme="dark"] .step:hover{backgr
 html[data-theme="dark"] .stat:hover{background:#2b2b2b;border-color:#444}
 @media (max-width:1000px){.stat:nth-child(n+3){border-top:1px solid var(--rule)}}
 @media (max-width:760px){.stats{gap:12px}.stat,.stat + .stat,.stat:nth-child(odd){min-height:0;padding:24px 24px 26px}.stat .n{margin-top:6px;padding-top:0}}
+
+/* aviso de projeto ficticio */
+.ann-fic{display:flex;justify-content:center;padding:9px 16px;text-align:center;background:#18181b;border-bottom:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:400;color:#d4d4d8;letter-spacing:.005em}
+.ann-fic a{color:#fff;font-weight:500;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.45);transition:text-decoration-color .3s}
+.ann-fic a:hover{text-decoration-color:#fff}
+.ann-fic .short{display:none}
+@media (max-width:620px){.ann-fic .long{display:none}.ann-fic .short{display:inline}}
