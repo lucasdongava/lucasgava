@@ -1,138 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lucas Gava</title>
+  <meta name="description" content="Lucas Gava, Front End Developer. Desenvolvedor front-end brasileiro dedicado a criar produtos e soluções digitais eficientes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=swap">
+  <link rel="stylesheet" href="style.css?v=7">
   <link rel="icon" href="icon.png" type="image/x-icon">
-<script>try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 </head>
 
 <body>
-  <!-- HOME ANTIGA (comentada): foto + menu. Para restaurar, apague o conteudo da About abaixo
-       (container-conteudo e scripts) e descomente este bloco. O link "thoughts" do menu ja estava desativado.
+  <main>
+    <div class="layout">
+      <div class="intro">
+        <header>
+          <div class="identity">
+            <h1 class="name">Lucas Gava</h1>
+            <p class="role">Front End Developer</p>
+          </div>
+        </header>
 
-  <main class="container">
-    <img src="provisorio2.jpg" alt="Building photo" class="main-image" />
-
-    <nav class="links">
-      <a href="/" data-i18n="home">home</a>
-      <a href="/about" data-i18n="about">about</a>
-      <a href="/works" data-i18n="works">works</a>
-      <a href="/contact" data-i18n="contact">contact</a>
-
-      <div class="lang-select-wrapper">
-        <select class="lang-select" id="lang-switcher">
-          <option value="pt">português</option>
-          <option value="en">english</option>
-          <option value="es">español</option>
-          <option value="zh">中文</option>
-        </select>
+        <section class="about">
+          <p data-i18n="about_p1">nascido em 2003, Lucas Gava é um desenvolvedor front-end brasileiro dedicado a criar produtos e soluções digitais eficientes.</p>
+          <p data-i18n="about_p2">possui experiência no desenvolvimento de projetos escaláveis, de alta conversão e alta retenção em colaboração com equipes criativas.</p>
+          <p>
+            <span data-i18n="find_pre">se você gostou do que viu, me encontre no</span>
+            <a href="https://www.linkedin.com/in/lucasgava/" target="_blank" rel="noopener"><span class="company"><span class="mark" style="background:#0a66c2"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.5 9h3v10.5h-3zM6 4.2a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10 9h2.9v1.4c.5-.9 1.7-1.7 3.3-1.7 3.2 0 3.8 2.1 3.8 4.8v6h-3v-5.3c0-1.3 0-2.9-1.8-2.9s-2.1 1.4-2.1 2.8v5.4h-3.1z"/></svg></span>LinkedIn</span></a>
+            <span data-i18n="find_mid">e no</span>
+            <a href="https://www.instagram.com/lucasgava___/" target="_blank" rel="noopener"><span class="company"><span class="mark" style="background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>Instagram</span></a>.
+          </p>
+        </section>
       </div>
-    </nav>
 
+      <section id="works" class="section" aria-labelledby="works-heading">
+        <div class="section-head">
+          <h2 id="works-heading" class="section-title" data-i18n="works_title">Trabalhos</h2>
+        </div>
+        <div class="stack">
+          <ul class="stack-list">
+            <li class="stack-item"><a class="stack-row" href="https://thothdev.com/" target="_blank" rel="noopener"><span class="stack-title">Thoth</span><span class="stack-desc" data-i18n="d_thoth">Plataforma de estudos com aulas curtas, exercícios e progresso: Java, UML, React e JavaScript.</span></a></li>
+            <li class="stack-item"><a class="stack-row" href="nuwa/"><span class="stack-title">Nuwa</span><span class="stack-desc" data-i18n="d_nuwa">Fulfillment na China para marcas DTC: da ideia ao produto pronto.</span></a></li>
+            <li class="stack-item"><a class="stack-row" href="helloo/"><span class="stack-title">Helloo</span><span class="stack-desc" data-i18n="d_helloo">Sistema de telefonia empresarial com agentes de IA.</span></a></li>
+            <li class="stack-item"><a class="stack-row" href="solen/"><span class="stack-title">Solen</span><span class="stack-desc" data-i18n="d_solen">Bolsa institucional de ativos digitais: execução, custódia e liquidação num só lugar.</span></a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <script src="lang.js"></script>
-  <script src="lang-select.js"></script>
-  -->
-
-  <div class="container-conteudo">
-    <h1><a href="/" class="home-link" data-i18n="about_title">about</a></h1>
-
-    <p data-i18n="about_p1">
-      born in 2003, Lucas Gava is a brazilian front-end developer<br>
-      dedicated to creating efficient digital products and solutions.
-    </p>
-
-    <p data-i18n="about_p2">
-      he has experience developing high-conversion, high-retention,<br>
-      and scalable projects in collaboration with creative teams.
-    </p>
-
-    <nav class="links">
-      <a href="/" data-i18n="nav_home">home</a>
-      <a href="/works" data-i18n="nav_works">works</a>
-      <a href="/contact" data-i18n="nav_contact">contact</a>
-      <div class="lang-select-wrapper">
-        <select class="lang-select" id="lang-switcher">
-          <option value="pt">português</option>
-          <option value="en">english</option>
-          <option value="es">español</option>
-          <option value="zh">中文</option>
-        </select>
-      </div>
-    </nav>
+  <div class="lang-select-wrapper">
+    <select class="lang-select" id="lang-switcher">
+      <option value="pt">português</option>
+      <option value="en">english</option>
+      <option value="es">español</option>
+      <option value="zh">中文</option>
+    </select>
   </div>
 
   <script>
     const translations = {
       pt: {
-        about_title: "sobre",
-        about_p1: "nascido em 2003, Lucas Gava é um desenvolvedor front-end brasileiro<br>dedicado a criar produtos e soluções digitais eficientes.",
-        about_p2: "possui experiência no desenvolvimento de projetos escaláveis,<br>de alta conversão e alta retenção em colaboração com equipes criativas.",
-        nav_home: "home",
-        nav_about: "sobre",
-        nav_works: "trabalhos",
-        nav_contact: "contato"
+        about_p1: "nascido em 2003, Lucas Gava é um desenvolvedor front-end brasileiro dedicado a criar produtos e soluções digitais eficientes.",
+        about_p2: "possui experiência no desenvolvimento de projetos escaláveis, de alta conversão e alta retenção em colaboração com equipes criativas.",
+        find_pre: "se você gostou do que viu, me encontre no",
+        find_mid: "e no",
+        works_title: "Trabalhos",
+        d_thoth: "Plataforma de estudos com aulas curtas, exercícios e progresso: Java, UML, React e JavaScript.",
+        d_nuwa: "Fulfillment na China para marcas DTC: da ideia ao produto pronto.",
+        d_helloo: "Sistema de telefonia empresarial com agentes de IA.",
+        d_solen: "Bolsa institucional de ativos digitais: execução, custódia e liquidação num só lugar."
       },
       en: {
-        about_title: "about",
-        about_p1: "born in 2003, Lucas Gava is a brazilian front-end developer<br>dedicated to creating efficient digital products and solutions.",
-        about_p2: "has experience developing high-conversion, high-retention,<br>and scalable projects in collaboration with creative teams.",
-        nav_home: "home",
-        nav_about: "about",
-        nav_works: "works",
-        nav_contact: "contact"
+        about_p1: "born in 2003, Lucas Gava is a brazilian front-end developer dedicated to creating efficient digital products and solutions.",
+        about_p2: "has experience developing high-conversion, high-retention, and scalable projects in collaboration with creative teams.",
+        find_pre: "if you liked what you saw, find me on",
+        find_mid: "and",
+        works_title: "Works",
+        d_thoth: "Study platform with short lessons, exercises and progress: Java, UML, React and JavaScript.",
+        d_nuwa: "China fulfillment for DTC brands, from idea to ready.",
+        d_helloo: "Business phone system with AI agents.",
+        d_solen: "Institutional digital asset exchange: execution, custody and settlement in one venue."
       },
       es: {
-        about_title: "sobre mí",
-        about_p1: "nacido en 2003, Lucas Gava es un desarrollador front-end brasileño<br>dedicado a crear productos y soluciones digitales eficientes.",
-        about_p2: "tiene experiencia desarrollando proyectos escalables,<br>de alta conversión y alta retención junto a equipos creativos.",
-        nav_home: "inicio",
-        nav_about: "sobre mí",
-        nav_works: "trabajos",
-        nav_contact: "contacto"
+        about_p1: "nacido en 2003, Lucas Gava es un desarrollador front-end brasileño dedicado a crear productos y soluciones digitales eficientes.",
+        about_p2: "tiene experiencia desarrollando proyectos escalables, de alta conversión y alta retención junto a equipos creativos.",
+        find_pre: "si te gustó lo que viste, encuéntrame en",
+        find_mid: "y en",
+        works_title: "Trabajos",
+        d_thoth: "Plataforma de estudio con clases cortas, ejercicios y progreso: Java, UML, React y JavaScript.",
+        d_nuwa: "Fulfillment en China para marcas DTC: de la idea al producto listo.",
+        d_helloo: "Sistema telefónico empresarial con agentes de IA.",
+        d_solen: "Bolsa institucional de activos digitales: ejecución, custodia y liquidación en un solo lugar."
       },
       zh: {
-        about_title: "关于",
-        about_p1: "出生于2003年，Lucas Gava 是一名巴西前端开发者，<br>致力于创造高效的数字产品和解决方案。",
-        about_p2: "他拥有开发高转化率、高留存率、可扩展项目的经验，<br>并与创意团队合作完成这些项目。",
-        nav_home: "主页",
-        nav_about: "关于",
-        nav_works: "作品",
-        nav_contact: "联系"
+        about_p1: "出生于2003年，Lucas Gava 是一名巴西前端开发者，致力于创造高效的数字产品和解决方案。",
+        about_p2: "他拥有开发高转化率、高留存率、可扩展项目的经验，并与创意团队合作完成这些项目。",
+        find_pre: "如果你喜欢你所看到的内容，欢迎在",
+        find_mid: "和",
+        works_title: "作品",
+        d_thoth: "学习平台，包含简短课程、练习和进度跟踪：Java、UML、React 和 JavaScript。",
+        d_nuwa: "面向 DTC 品牌的中国履约服务：从创意到成品。",
+        d_helloo: "带有 AI 代理的企业电话系统。",
+        d_solen: "机构数字资产交易所：执行、托管和结算一站式完成。"
       }
     };
-
+    const htmlLang = { pt: "pt-BR", en: "en", es: "es", zh: "zh-CN" };
     const langSwitcher = document.getElementById("lang-switcher");
     const elements = document.querySelectorAll("[data-i18n]");
-
-    const savedLang = localStorage.getItem("lang") || "pt";
+    function applyLanguage(lang) {
+      const t = translations[lang] || translations.pt;
+      elements.forEach(el => { el.textContent = t[el.getAttribute("data-i18n")]; });
+      document.documentElement.lang = htmlLang[lang] || "pt-BR";
+    }
+    let savedLang = "pt";
+    try { savedLang = localStorage.getItem("lang") || "pt"; } catch (e) {}
     langSwitcher.value = savedLang;
     applyLanguage(savedLang);
-
     langSwitcher.addEventListener("change", () => {
       const lang = langSwitcher.value;
-      localStorage.setItem("lang", lang);
+      try { localStorage.setItem("lang", lang); } catch (e) {}
       applyLanguage(lang);
     });
 
-    function applyLanguage(lang) {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.innerHTML = translations[lang][key];
-      });
+    /* no computador (mouse), os projetos abrem em nova guia; no celular continuam na mesma */
+    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      document.querySelectorAll(".stack-row").forEach(a => { a.target = "_blank"; a.rel = "noopener"; });
     }
   </script>
   <script src="lang-select.js"></script>
   <script src="theme.js?v=1" defer></script>
-  <script src="menu-hover.js?v=2" defer></script>
+  <script src="stack-hover.js?v=1" defer></script>
 </body>
 
 </html>

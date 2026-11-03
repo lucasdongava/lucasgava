@@ -1,99 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lucas Gava</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=6">
-  <link rel="icon" href="icon.png" type="image/x-icon">
-<script>try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=/">
+  <link rel="canonical" href="https://lucasgava.com/">
+  <script>location.replace("/");</script>
 </head>
-
-<body>
-  <div class="container-conteudo">
-    <h1><a href="/" class="home-link" data-i18n="contact_title">contact</a></h1>
-
-    <p data-i18n="contact_text">
-      if you liked what you saw, access the links below.
-    </p>
-
-    <nav class="links">
-      <a href="/" data-i18n="nav_home">home</a>
-      <a href="/works" data-i18n="nav_works">works</a>
-      <a href="https://www.linkedin.com/in/lucasgava/" data-i18n="nav_cv">cv</a>
-      <a href="https://www.instagram.com/lucasgava___/" data-i18n="nav_social">social media</a>
-      <div class="lang-select-wrapper">
-        <select class="lang-select" id="lang-switcher">
-          <option value="pt">português</option>
-          <option value="en">english</option>
-          <option value="es">español</option>
-          <option value="zh">中文</option>
-        </select>
-      </div>
-    </nav>
-  </div>
-
-  <script>
-    const translations = {
-      pt: {
-        contact_title: "contato",
-        contact_text: "se você gostou do que viu, acesse os links abaixo.",
-        nav_home: "home",
-        nav_works: "trabalhos",
-        nav_cv: "currículo",
-        nav_social: "redes sociais"
-      },
-      en: {
-        contact_title: "contact",
-        contact_text: "if you liked what you saw, access the links below.",
-        nav_home: "home",
-        nav_works: "works",
-        nav_cv: "cv",
-        nav_social: "social media"
-      },
-      es: {
-        contact_title: "contacto",
-        contact_text: "si te gustó lo que viste, accede a los enlaces de abajo.",
-        nav_home: "inicio",
-        nav_cv: "currículum",
-        nav_social: "redes sociales"
-      },
-      zh: {
-        contact_title: "联系",
-        contact_text: "如果你喜欢你所看到的内容，请访问以下链接。",
-        nav_home: "主页",
-        nav_cv: "简历",
-        nav_social: "社交媒体"
-      }
-    };
-
-    const langSwitcher = document.getElementById("lang-switcher");
-    const elements = document.querySelectorAll("[data-i18n]");
-
-    const savedLang = localStorage.getItem("lang") || "pt";
-    langSwitcher.value = savedLang;
-    applyLanguage(savedLang);
-
-    langSwitcher.addEventListener("change", () => {
-      const lang = langSwitcher.value;
-      localStorage.setItem("lang", lang);
-      applyLanguage(lang);
-    });
-
-    function applyLanguage(lang) {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.innerHTML = translations[lang][key];
-      });
-    }
-  </script>
-  <script src="lang-select.js"></script>
-  <script src="theme.js?v=1" defer></script>
-  <script src="menu-hover.js?v=2" defer></script>
-</body>
-
+<body></body>
 </html>

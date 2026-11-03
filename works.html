@@ -1,105 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lucas Gava</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css?v=6">
-  <link rel="icon" href="icon.png" type="image/x-icon">
-<script>try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=/#works">
+  <link rel="canonical" href="https://lucasgava.com/#works">
+  <script>location.replace("/#works");</script>
 </head>
-
-<body>
-  <div class="container-conteudo">
-    <h1 data-i18n="works_title">Works</h1>
-
-    <ul class="works">
-      <li><a class="proj" href="https://thothdev.com/" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 400 240" fill="currentColor" aria-hidden="true" style="width:26px;height:auto"><path d="M0 0H400V222C392 150 310 16 232 16H224A12 12 0 0 0 212 28C212 170 260 240 400 240H0C140 240 188 170 188 28A12 12 0 0 0 176 16H168C90 16 8 150 0 222Z"/></svg></span><span class="name">Thoth</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
-      <li><a class="proj" href="nuwa/"><span class="ico"><svg viewBox="0 0 26 26" fill="currentColor" aria-hidden="true"><path d="M6.5 3h6l-4.6 20h-6z"/><path d="M15.5 3h6l-4.6 20h-6z"/></svg></span><span class="name">Nuwa</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
-      <li><a class="proj" href="helloo/"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="14" r="2.4" fill="currentColor" stroke="none"/><path d="M6 14a6 6 0 0 1 12 0"/><path d="M2.5 14a9.5 9.5 0 0 1 19 0" opacity=".6"/></svg></span><span class="name">Helloo</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
-      <li><a class="proj" href="solen/"><span class="ico"><svg viewBox="296 165 506 757" fill="currentColor" aria-hidden="true" style="width:auto;height:22px"><path d="M296,168L549,295L549,165L802,292L802,555L549,428L549,545L802,672L802,922L549,795L549,545L296,418Z"/></svg></span><span class="name">Solen</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
-    </ul>
-
-    <nav class="links">
-      <a href="/" data-i18n="nav_home">home</a>
-      <a href="/works" data-i18n="nav_works">works</a>
-      <a href="/contact" data-i18n="nav_contact">contact</a>
-      <div class="lang-select-wrapper">
-        <select class="lang-select" id="lang-switcher">
-          <option value="pt">português</option>
-          <option value="en">english</option>
-          <option value="es">español</option>
-          <option value="zh">中文</option>
-        </select>
-      </div>
-    </nav>
-  </div>
-
-  <script>
-    const translations = {
-      pt: {
-        works_title: "Trabalhos",
-        nav_home: "home",
-        nav_about: "sobre",
-        nav_works: "trabalhos",
-        nav_contact: "contato"
-      },
-      en: {
-        works_title: "Works",
-        nav_home: "home",
-        nav_about: "about",
-        nav_works: "works",
-        nav_contact: "contact"
-      },
-      es: {
-        works_title: "Trabajos",
-        nav_home: "inicio",
-        nav_about: "sobre mí",
-        nav_works: "trabajos",
-        nav_contact: "contacto"
-      },
-      zh: {
-        works_title: "作品",
-        nav_home: "主页",
-        nav_about: "关于",
-        nav_works: "作品",
-        nav_contact: "联系"
-      }
-    };
-
-    const langSwitcher = document.getElementById("lang-switcher");
-    const elements = document.querySelectorAll("[data-i18n]");
-
-    const savedLang = localStorage.getItem("lang") || "pt";
-    langSwitcher.value = savedLang;
-    applyLanguage(savedLang);
-
-    langSwitcher.addEventListener("change", () => {
-      const lang = langSwitcher.value;
-      localStorage.setItem("lang", lang);
-      applyLanguage(lang);
-    });
-
-    function applyLanguage(lang) {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        el.innerHTML = translations[lang][key];
-      });
-    }
-  </script>
-  <script src="lang-select.js"></script>
-  <script>
-    /* proj-newtab: no computador (mouse), os projetos abrem em nova guia; no celular continuam na mesma */
-    if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-      document.querySelectorAll("a.proj").forEach(function (a) { a.target = "_blank"; a.rel = "noopener"; });
-    }
-  </script>
-  <script src="theme.js?v=1" defer></script>
-  <script src="menu-hover.js?v=2" defer></script>
-</body>
-
+<body></body>
 </html>
