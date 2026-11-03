@@ -178,7 +178,7 @@ section{scroll-margin-top:96px}
 .about h2{font-size:clamp(32px,4.4vw,52px);line-height:1.08;font-weight:600;margin:18px 0 22px}
 .about p{color:var(--muted);font-size:17px;line-height:1.65;margin:0 0 40px;max-width:44ch}
 .map{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px;position:relative}
-.map canvas{width:100%;height:auto;aspect-ratio:16/10;display:block;max-width:100%}
+.map canvas{width:100%;height:auto;aspect-ratio:1440/730;display:block;max-width:100%}
 .map-legend{display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:8px}
 .cities{display:flex;flex-wrap:wrap;gap:6px}
 
