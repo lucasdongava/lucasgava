@@ -1,7 +1,7 @@
 (function(){
   const MEGA={
     wm:{t:"Wealth Management",x:"Wealth solutions for families and individuals, with a global view.",l:["Home","Who we serve","What we offer","Insights","About us","Contact us"]},
-    ib:{t:"Investment Bank",x:"Financial advisory and market access for corporates and institutions.",l:["Norte Investment Bank Brazil","Norte IB global"]},
+    ib:{t:"Investment Bank",x:"Financial advisory and market access for corporates and institutions.",l:["Norte Investment Bank","Global markets"]},
     qs:{t:"About us",x:"Learn about the group, our governance and our commitment to impact.",l:["Our firm","Investor relations","Media","Sustainability and impact","Cybersecurity","Media contacts"]},
     car:{t:"Careers",x:"Opportunities for students, graduates and experienced professionals.",l:["Overview","About us","Professional careers","Early careers","Apprenticeships","Search jobs"]}
   };
@@ -79,7 +79,7 @@
     ctx.globalAlpha=.62; ctx.beginPath(); ctx.arc((c+.5)*CELL,(r+.5)*CELL,CELL*.3,0,7); ctx.fill();
   }
   ctx.globalAlpha=1;
-  const cities=[[-46.6,-23.5],[8.5,47.4],[-74,40.7],[-0.1,51.5],[103.8,1.35]], sp=cities[0];
+  const cities=[[8.5,47.4],[-74,40.7],[-0.1,51.5],[-46.6,-23.5],[103.8,1.35]], sp=cities[0];
   cities.slice(1).forEach(c=>{
     ctx.strokeStyle=acc; ctx.lineWidth=2.2; ctx.setLineDash([5,8]);
     const x1=px(sp[0]),y1=py(sp[1]),x2=px(c[0]),y2=py(c[1]);
