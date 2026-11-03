@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Norte Brasil</title>
+  <meta name="description" content="Wealth Management and Investment Banking in Brazil.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css?v=1">
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="ann-fic"><span><span class="long">Fictional project designed and developed by </span><span class="short">Fictional project by </span><a href="https://www.linkedin.com/in/lucasgava" target="_blank" rel="noopener">Lucas Gava</a></span></div>
+
+<header class="header" id="top">
+  <div class="main-row">
+    <div class="wrap">
+      <a class="logo" href="#top" aria-label="Norte, home">
+        <span class="logo-mark"><svg viewBox="0 0 14 14" fill="none"><path d="M2 12V2l10 10V2" stroke="var(--surface)" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        Norte <small>BRAZIL</small>
+      </a>
+      <nav class="nav" id="mainnavigation" aria-label="Main navigation">
+        <button type="button" data-mega="wm" aria-expanded="false">Wealth Management <svg class="chev" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5 5 6.5 8 3.5"/></svg></button>
+        <button type="button" data-mega="ib" aria-expanded="false">Investment Bank <svg class="chev" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5 5 6.5 8 3.5"/></svg></button>
+        <button type="button" data-mega="qs" aria-expanded="false">About us <svg class="chev" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5 5 6.5 8 3.5"/></svg></button>
+        <button type="button" data-mega="car" aria-expanded="false">Careers <svg class="chev" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5 5 6.5 8 3.5"/></svg></button>
+      </nav>
+      <div class="actions">
+        <button class="icon-btn" type="button" id="searchBtn" aria-expanded="false" aria-controls="searchPanel" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+        <a class="btn btn-ghost" href="#contact">Contact us</a>
+        <div class="rel">
+          <button class="btn btn-primary" type="button" id="loginBtn" aria-expanded="false" aria-controls="loginDrop"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span class="lbl">Log in</span></button>
+          <div class="drop login-drop" id="loginDrop" hidden>
+            <span class="mono">Choose your login</span>
+            <div class="cols">
+              <div>
+                <h4>Wealth Management</h4>
+                <a href="#">Complete your onboarding</a>
+                <a href="#">Digital Private Banking</a>
+                <a href="#">External Portfolio Managers</a>
+                <a href="#">Internet Solution Center</a>
+                <a href="#">Client Service Platform</a>
+                <a href="#">Access instructions</a>
+              </div>
+              <div>
+                <h4>Investment Bank</h4>
+                <a href="#">Client Portal</a>
+                <a href="#">Norte KeyLink</a>
+                <a href="#">Norte Neo</a>
+              </div>
+            </div>
+            <div class="foot"><a href="#">More logins</a><span class="mono">Secure access</span></div>
+          </div>
+        </div>
+        <button class="icon-btn burger" type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel mega" id="megaPanel" hidden>
+    <div class="wrap">
+      <div class="mega-intro">
+        <span class="mono">Overview</span>
+        <h3 id="megaTitle"></h3>
+        <p id="megaText"></p>
+        <a class="btn btn-ghost" href="#">See overview</a>
+      </div>
+      <div class="mega-links" id="megaLinks"></div>
+    </div>
+  </div>
+
+  <div class="panel" id="searchPanel" hidden>
+    <div class="wrap search">
+      <form role="search" id="searchForm">
+        <label for="q" class="sr-only">Search the site</label>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search services, insights, documents…" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      <p class="mono" id="searchMsg" style="margin:12px 0 0" hidden></p>
+      <div class="hint"><span class="mono" style="align-self:center">Popular</span>
+        <button class="chip" type="button">Regulatory documents</button>
+        <button class="chip" type="button">Ombudsman</button>
+        <button class="chip" type="button">Fraud prevention</button>
+        <button class="chip" type="button">3Q26 results</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="wrap">
+    <div class="drawer-head">
+      <span class="logo"><span class="logo-mark"><svg viewBox="0 0 14 14" fill="none"><path d="M2 12V2l10 10V2" stroke="var(--surface)" stroke-width="2" stroke-linejoin="round"/></svg></span>Norte</span>
+      <button class="icon-btn" type="button" id="drawerClose" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div id="drawerAcc"></div>
+    <div class="drawer-foot">
+      <a class="btn btn-primary btn-lg" href="#" style="justify-content:center">Log in</a>
+      <a class="btn btn-ghost btn-lg" href="#" style="justify-content:center">Locations</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+  <h1 class="sr-only">Norte Brazil</h1>
+
+  <!-- Highlight (storyboard) -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <a class="pill" href="#"><b>3Q26</b> Investor Relations</a>
+        <h2 id="hero-title">Third quarter 2026 financial results</h2>
+        <p class="lead">Our third quarter 2026 results were published on October 28. Reports, the presentation and the webcast recording are now available.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary btn-lg" href="#">View reports and webcast</a>
+          <a class="btn btn-ghost btn-lg" href="#capabilities">Our capabilities</a>
+        </div>
+      </div>
+
+      <aside class="report" aria-label="Release schedule">
+        <div class="report-top"><div class="dots"><i></i><i></i><i></i></div><span class="mono">Quarterly report</span></div>
+        <div class="report-body">
+          <span class="mono">3Q 2026</span>
+          <h3>Release schedule</h3>
+          <p class="sub">Materials published for shareholders, analysts and the media.</p>
+          <ol class="tl">
+            <li><time datetime="2026-10-28T06:45">Oct 28 · 6:45</time><div><strong>Results release</strong><small>Press release and quarterly report</small></div><span class="tag">Published</span></li>
+            <li><time datetime="2026-10-28T09:00">Oct 28 · 9:00</time><div><strong>Analyst presentation</strong><small>Live webcast with Q&amp;A</small></div><span class="tag live">Recording</span></li>
+            <li><time datetime="2026-10-28T11:00">Oct 28 · 11:00</time><div><strong>Media conference</strong><small>Transcript available</small></div><span class="tag">Published</span></li>
+          </ol>
+        </div>
+        <div class="report-files">
+          <a class="file" href="#"><span>PDF</span>3Q26 report</a>
+          <a class="file" href="#"><span>PDF</span>Presentation</a>
+          <a class="file" href="#"><span>XLSX</span>Financial data</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Our capabilities -->
+  <section class="sec" id="capabilities" aria-labelledby="cap-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="mono">Our capabilities</span>
+          <h2 id="cap-title">Financial services for individuals, corporates and institutions.</h2>
+        </div>
+        <p>Norte is a global financial services firm serving private clients, companies and institutions. In Brazil, we focus on two businesses.</p>
+      </div>
+
+      <div class="cap-stats">
+        <div><strong>50+</strong><span>countries with Norte offices</span></div>
+        <div><strong>All</strong><span>major financial centers covered</span></div>
+        <div><strong>2</strong><span>businesses in Brazil: Wealth Management and Investment Banking</span></div>
+      </div>
+
+      <div class="seg">
+        <article class="seg-card seg-dark">
+          <div>
+            <span class="mono">For individuals</span>
+            <h3>Wealth Management</h3>
+            <p class="desc">Advice and solutions to grow, protect and pass on wealth, backed by our global research.</p>
+          </div>
+          <div class="focus" aria-label="Areas of focus">
+            <span>Wealth planning</span><span>Investments</span><span>Succession</span><span>Global banking</span>
+          </div>
+          <a class="btn btn-light btn-lg" href="#">Explore Wealth Management</a>
+        </article>
+
+        <article class="seg-card seg-light">
+          <div>
+            <span class="mono">For corporates and institutions</span>
+            <h3>Investment Banking</h3>
+            <p class="desc">Advisory, capital markets access and the tools institutional clients use every day.</p>
+          </div>
+          <div class="svc">
+            <a href="#">
+              <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+              <strong>Norte Investment Bank</strong>
+              <small>M&amp;A advisory and capital markets in Brazil.</small>
+            </a>
+            <a href="#">
+              <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></span>
+              <strong>Client Portal</strong>
+              <small>Reports, research and transactions in one place.</small>
+            </a>
+            <a href="#">
+              <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span>
+              <strong>Regulatory documents</strong>
+              <small>Disclosures required by Brazilian regulation.</small>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="notice" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" stroke-linejoin="round"/><path d="M12 9v4M12 16h.01"/></svg>
+        <div>
+          <h3>Important notice about fraud</h3>
+          <p>Norte Group in Brazil does not offer loans, investment recommendations or courses through WhatsApp, phone, PIX, apps or social media.</p>
+          <p id="noticeMore" hidden>This is the only official page of Norte Group in Brazil. Treat any communication using the Norte name outside official channels as suspicious and stop it immediately. The Group has identified fraudulent websites and WhatsApp groups promoting financial services and courses, and has reported them to the police.</p>
+        </div>
+        <button type="button" id="noticeBtn" aria-expanded="false" aria-controls="noticeMore">Read full notice</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our insights -->
+  <section class="sec" aria-labelledby="ins-title">
+    <div class="wrap">
+      <div class="banner">
+        <div class="banner-art" aria-hidden="true">
+          <div class="ins"><div><span class="mono">Outlook</span><strong>2027 outlook for investors</strong></div><span class="tag">8 min</span></div>
+          <div class="ins"><div><span class="mono">Fixed income</span><strong>Brazilian rates: what changes in this cycle</strong></div><span class="tag">5 min</span></div>
+          <div class="ins"><div><span class="mono">Currencies</span><strong>The real and the dollar next half</strong></div><span class="tag">6 min</span></div>
+        </div>
+        <div class="banner-copy">
+          <span class="mono">Our insights</span>
+          <h2 id="ins-title">Financial analysis and investment ideas for you.</h2>
+          <p>Research from our team on markets, the economy and wealth allocation.</p>
+          <div><a class="btn btn-primary btn-lg" href="#">Read more</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About us -->
+  <section class="sec" id="contact" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div>
+        <span class="mono">About us</span>
+        <h2 id="about-title">Creating value for our clients, shareholders and employees.</h2>
+        <p>We aim to stand out in our industry, with a global footprint and local expertise.</p>
+        <div class="rows">
+          <a href="#">Our firm</a>
+          <a href="#">Media</a>
+          <a href="#">Sustainability and impact</a>
+          <a href="#">Investor relations</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <figure class="map" style="margin:0">
+        <canvas id="globe" width="960" height="600" aria-label="Dot map of major financial centers"></canvas>
+        <figcaption class="map-legend">
+          <span class="mono">Present in 50+ countries</span>
+          <span class="cities"><span class="tag">São Paulo</span><span class="tag">Zurich</span><span class="tag">New York</span><span class="tag">London</span><span class="tag">Singapore</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <nav class="crumb" aria-label="You are here">
+    <div class="wrap">
+      <ol><li class="mono">You are here</li><li aria-hidden="true">/</li><li><a href="#top" aria-current="page">Brazil</a></li></ol>
+      <a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </nav>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <span class="logo"><span class="logo-mark"><svg viewBox="0 0 14 14" fill="none"><path d="M2 12V2l10 10V2" stroke="var(--surface)" stroke-width="2" stroke-linejoin="round"/></svg></span>Norte</span>
+        <p>Wealth Management and Investment Banking in Brazil.</p>
+        <button class="domicile" type="button"><span class="mono">Domicile</span><b>Brazil</b></button>
+      </div>
+      <div><h3>Capabilities</h3><ul><li><a href="#">Wealth Management</a></li><li><a href="#">Asset Management</a></li><li><a href="#">Investment Bank</a></li></ul></div>
+      <div><h3>About us</h3><ul><li><a href="#">About the group</a></li><li><a href="#">Latest news</a></li><li><a href="#">Investor relations</a></li><li><a href="#">Sustainability and impact</a></li><li><a href="#">Corporate governance</a></li><li><a href="#">Sponsorships</a></li><li><a href="#">Cybersecurity</a></li><li><a href="#">Fraud prevention alert</a></li><li><a href="#">Regulatory documents</a></li></ul></div>
+      <div><h3>Careers</h3><ul><li><a href="#">Overview</a></li><li><a href="#">About us</a></li><li><a href="#">Search jobs</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="#">Global contacts</a></li><li><a href="#">Main offices</a></li><li><a href="#">Ombudsman</a></li></ul></div>
+    </div>
+    <div class="f-legal">
+      <a href="#">Information about Norte</a><a href="#">Terms of use</a><a href="#">Privacy statement</a><a href="#">Report fake emails</a><a href="#">Additional legal information</a><button type="button">Privacy settings</button>
+    </div>
+    <div class="f-note">
+      <p class="mono" style="text-transform:none;letter-spacing:.02em">© Norte 1998 – 2026. All rights reserved. Fictional brand for demonstration purposes.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js?v=1"></script>
+</body>
+</html>
