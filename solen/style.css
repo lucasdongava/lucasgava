@@ -45,8 +45,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   background:var(--head-bg);-webkit-backdrop-filter:saturate(1.6) blur(14px);backdrop-filter:saturate(1.6) blur(14px)}
 .nav-inner{width:min(var(--track),100%);margin-inline:auto;height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:inline-flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
-.brand-dot{width:20px;height:20px;border-radius:50%;background-size:cover;background-color:#d6d6da;transition:transform .5s var(--ease)}
-.brand:hover .brand-dot{transform:rotate(90deg) scale(1.08)}
+.brand-mark{height:22px;width:auto;flex:none;transition:transform .5s var(--ease)}
+.brand:hover .brand-mark{transform:scale(1.08)}
 .nav{display:flex;align-items:center;gap:32px;font-size:15px}
 .nav a{color:var(--faint);transition:color .2s}
 .nav a:hover{color:var(--ink)}
