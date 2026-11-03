@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — Solen Markets</title>
+<meta name="description" content="Talk to the Solen coverage team about accounts, liquidity, custody or API access.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>try{if(localStorage.getItem("solen-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+
+<header class="site-head" id="head">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="blog.html">Blog</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-primary" href="#form">Open an account</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav">Menu</button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Main mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="benefits.html">Benefits</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero track" style="padding-block:84px 44px">
+    <h1 class="reveal" style="max-width:14ch">Tell us what you trade.</h1>
+    <p class="lede reveal" style="--d:120ms">A coverage contact reads every message and replies within one business day.
+      If you are opening an account, the onboarding pack comes with that first reply.</p>
+  </section>
+
+  <section class="sec track" id="form" style="border-top:0;padding-block:20px 72px">
+    <div class="contact-grid">
+
+      <form class="form-panel reveal" id="contactForm" novalidate>
+        <h2>Send a message</h2>
+        <p class="sub">The more precise the last two answers, the better the first reply.</p>
+
+        <div class="fset" role="group" aria-labelledby="g-about">
+          <p class="glabel" id="g-about">About you</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Full name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Ada Lovelace" required>
+            </div>
+            <div class="field">
+              <label for="f-company">Company</label>
+              <input id="f-company" name="company" type="text" autocomplete="organization" placeholder="Northwind Capital" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-email">Work email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+            </div>
+            <div class="field">
+              <label for="f-country">Country</label>
+              <select id="f-country" name="country" required>
+                <option value="">Select a country</option>
+                <option>Brazil</option>
+                <option>United Kingdom</option>
+                <option>Singapore</option>
+                <option>United States</option>
+                <option>Switzerland</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="fset" role="group" aria-labelledby="g-need">
+          <p class="glabel" id="g-need">What you need</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-type">Type of firm</label>
+              <select id="f-type" name="type" required>
+                <option value="">Select one</option>
+                <option>Hedge fund</option>
+                <option>Proprietary trading firm</option>
+                <option>Asset manager</option>
+                <option>Corporate treasury</option>
+                <option>Broker or exchange</option>
+                <option>Family office</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-interest">Reason for contact</label>
+              <select id="f-interest" name="interest" required>
+                <option value="">Select one</option>
+                <option>Open a trading account</option>
+                <option>Liquidity and pricing</option>
+                <option>Custody</option>
+                <option>API and sandbox access</option>
+                <option>Broker program</option>
+                <option>Something else</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-msg">Anything we should know <span class="opt">(optional)</span></label>
+            <textarea id="f-msg" name="message"
+              placeholder="Monthly volume, the products you trade, settlement currencies, and anything your operations team needs."></textarea>
+          </div>
+        </div>
+
+        <label class="consent" for="f-consent">
+          <input id="f-consent" name="consent" type="checkbox" required>
+          <span>I agree that Solen may contact me about this enquiry and store the details I provided.</span>
+        </label>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p class="form-note" id="formNote" role="status" aria-live="polite">We reply within one business day.</p>
+        </div>
+      </form>
+
+
+    </div>
+  </section>
+
+  <section class="sec track">
+    <div class="sec-head">
+      <div>
+        <h2>Where we are</h2>
+        <p>Coverage follows the clock, so there is a desk awake whenever the market is.</p>
+      </div>
+    </div>
+
+    <div class="globe-wrap reveal">
+      <div class="globe-stage">
+        <canvas id="globe" tabindex="0" role="img"
+          aria-label="Rotating globe marking the London, Singapore and Sao Paulo offices. Drag to spin, or use the arrow keys."></canvas>
+        <p class="globe-hint">Drag to spin &middot; tap a city for its details</p>
+      </div>
+
+      <div class="globe-side">
+        <div class="city-tabs" role="tablist" aria-label="Offices">
+          <button type="button" role="tab" data-city="0" aria-selected="true">London</button>
+          <button type="button" role="tab" data-city="1" aria-selected="false">Singapore</button>
+          <button type="button" role="tab" data-city="2" aria-selected="false">S&atilde;o Paulo</button>
+        </div>
+
+        <div class="city-card" id="cityCard">
+          <div class="cc-top">
+            <h3 id="ccCity">London</h3>
+            <span class="cc-time"><span class="dot"></span><b class="num" id="ccTime">--:--</b> local</span>
+          </div>
+          <p class="cc-addr" id="ccAddr">14 Finsbury Square<br>EC2A 1AH, United Kingdom</p>
+          <dl class="cc-meta">
+            <div><dt>Desk hours</dt><dd id="ccHours">07:00&ndash;19:00 GMT</dd></div>
+            <div><dt>Coordinates</dt><dd class="num" id="ccCoord">51.5205&deg; N, 0.0866&deg; W</dd></div>
+            <div><dt>Covers</dt><dd id="ccCovers">Europe, Middle East and Africa</dd></div>
+          </dl>
+          <a class="btn btn-ghost" id="ccMap" href="https://www.google.com/maps/search/?api=1&amp;query=14+Finsbury+Square,+London+EC2A+1AH"
+            target="_blank" rel="noopener noreferrer">Open in Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec track">
+    <div class="sec-head">
+      <div>
+        <h2>What happens next</h2>
+        <p>Three business days from first reply to a funded account, assuming documents arrive together.</p>
+      </div>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="d">Day one</div>
+        <strong>First reply</strong>
+        <p>A coverage contact answers, sends the onboarding pack and opens a sandbox key.</p>
+      </div>
+      <div class="step">
+        <div class="d">Day two</div>
+        <strong>Compliance review</strong>
+        <p>Entity documents, beneficial owners and source of funds.</p>
+      </div>
+      <div class="step">
+        <div class="d">Day three</div>
+        <strong>Account opened</strong>
+        <p>Limits agreed and settlement instructions confirmed with your operations team.</p>
+      </div>
+      <div class="step">
+        <div class="d">After that</div>
+        <strong>Quarterly review</strong>
+        <p>Limits and fees revisited, plus a direct line to the desk during market hours.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot track">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    </div>
+    <div class="foot-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="index.html#markets">Markets</a></li>
+        <li><a href="index.html#api">API</a></li>
+        <li><a href="contact.html">Fees</a></li>
+        <li><a href="contact.html">Custody</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="benefits.html">Benefits</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Press</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="index.html#api">Documentation</a></li>
+        <li><a href="contact.html">Status</a></li>
+        <li><a href="contact.html">Proof of reserves</a></li>
+        <li><a href="contact.html">Market data</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="contact.html">Terms</a></li>
+        <li><a href="contact.html">Privacy</a></li>
+        <li><a href="contact.html">Disclosures</a></li>
+        <li><a href="contact.html">Complaints</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Solen Markets</span>
+    <span>London &middot; Singapore &middot; S&atilde;o Paulo</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="world.js"></script>
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

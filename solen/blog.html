@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Blog — Solen Markets</title>
+<meta name="description" content="Crypto market, regulation and security news, summarised by the Solen desk with links to every source.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>try{if(localStorage.getItem("solen-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+
+<header class="site-head" id="head">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-primary" href="contact.html">Open an account</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav">Menu</button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Main mobile">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="benefits.html">Benefits</a>
+    <a href="blog.html" aria-current="page">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <div id="blogIndex">
+    <section class="hero track" style="padding-block:88px 48px">
+      <h1 class="r">Blog</h1>
+      <p class="lede r" style="margin-top:24px">What moved in crypto markets, regulation and security, summarised by the Solen desk with a link to every source.</p>
+    </section>
+
+    <section class="sec track" style="border-top:0;padding-block:24px 104px">
+      <div class="blog-grid" id="blogGrid"></div>
+    </section>
+  </div>
+
+  <article id="post" hidden></article>
+</main>
+
+<footer class="site-foot track">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    </div>
+    <div class="foot-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="index.html#markets">Markets</a></li>
+        <li><a href="index.html#api">API</a></li>
+        <li><a href="contact.html">Fees</a></li>
+        <li><a href="contact.html">Custody</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="benefits.html">Benefits</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Press</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="index.html#api">Documentation</a></li>
+        <li><a href="contact.html">Status</a></li>
+        <li><a href="contact.html">Proof of reserves</a></li>
+        <li><a href="contact.html">Market data</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="contact.html">Terms</a></li>
+        <li><a href="contact.html">Privacy</a></li>
+        <li><a href="contact.html">Disclosures</a></li>
+        <li><a href="contact.html">Complaints</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Solen Markets</span>
+    <span>London &middot; Singapore &middot; S&atilde;o Paulo</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+<script src="blog.js"></script>
+</body>
+</html>

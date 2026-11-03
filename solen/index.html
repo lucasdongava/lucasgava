@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solen Markets</title>
+<meta name="description" content="Institutional digital asset exchange: execution, custody and settlement in one venue.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>try{if(localStorage.getItem("solen-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+
+<header class="site-head" id="head">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="benefits.html">Benefits</a>
+      <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-primary" href="contact.html">Open an account</a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav">Menu</button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Main mobile">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="about.html">About</a>
+    <a href="benefits.html">Benefits</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hx" id="hx">
+    <div class="hx-stick">
+      <div class="hx-inner track">
+        <div class="hx-text">
+          <h1 class="reveal">Execution, custody and<br>settlement <span>in one venue.</span></h1>
+          <p class="lede reveal" style="--d:120ms">Solen gives trading desks, funds and treasuries a single place to price risk,
+            move size and keep assets under segregated custody. One account, one API, one counterparty.</p>
+          <div class="hero-actions reveal" style="--d:180ms">
+            <a class="btn btn-primary" href="contact.html">Open an account</a>
+            <a class="btn btn-ghost" href="#markets">See the markets</a>
+          </div>
+        </div>
+        <div class="hx-slot">
+          <div class="hx-media"><div class="img grad" data-grad="0"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="sec track" aria-label="Platform figures">
+    <div class="sec-head">
+      <div>
+        <h2>A track record you can check</h2>
+        <p>Every figure here is published monthly, with the underlying data available to clients on request.</p>
+      </div>
+    </div>
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="v">$1.2T</div>
+        <div class="k">Notional traded since 2019</div>
+        <div class="n">Spot, futures and the OTC desk combined</div>
+      </div>
+      <div class="stat">
+        <div class="v">$18B</div>
+        <div class="k">Client assets in custody</div>
+        <div class="n">Segregated, attested by an independent auditor</div>
+      </div>
+      <div class="stat">
+        <div class="v">240</div>
+        <div class="k">Spot and derivative pairs</div>
+        <div class="n">Quoted by 26 market makers around the clock</div>
+      </div>
+      <div class="stat">
+        <div class="v">99.99%</div>
+        <div class="k">Matching engine uptime</div>
+        <div class="n">Rolling twelve months, incidents published</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Markets -->
+  <section class="sec track" id="markets">
+    <div class="sec-head">
+      <div>
+        <h2>Deep books on the pairs<br>desks actually trade</h2>
+        <p>Continuous two-sided liquidity from twenty-six market makers, with request for quote
+          when the order book is not the right tool.</p>
+      </div>
+      <a class="btn-text" href="contact.html">Request the full pair list<span class="chev">&rsaquo;</span></a>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="market">
+        <thead>
+          <tr>
+            <th scope="col">Pair</th>
+            <th scope="col">Last price</th>
+            <th scope="col">24h</th>
+            <th scope="col">24h volume</th>
+            <th scope="col">30d</th>
+          </tr>
+        </thead>
+        <tbody id="marketBody"></tbody>
+      </table>
+    </div>
+    <p class="table-note">Sample figures shown for layout. Connect the table to your own feed to make it live.</p>
+  </section>
+
+  <!-- Products -->
+  <section class="sec track">
+    <div class="sec-head">
+      <div>
+        <h2>Six desks, one balance</h2>
+        <p>Margin is shared across the platform, so collateral posted once works everywhere.</p>
+      </div>
+    </div>
+    <div class="cards reveal">
+      <div class="card-i">
+        <h3>Spot exchange</h3>
+        <p>Central limit order book with maker rebates from 10,000 BTC in monthly volume.</p>
+        <a class="btn-text" href="contact.html">Fee schedule<span class="chev">&rsaquo;</span></a>
+      </div>
+      <div class="card-i">
+        <h3>Perpetuals and futures</h3>
+        <p>Linear contracts settled in USD stablecoins, with funding published every hour.</p>
+        <a class="btn-text" href="contact.html">Contract specs<span class="chev">&rsaquo;</span></a>
+      </div>
+      <div class="card-i">
+        <h3>OTC desk</h3>
+        <p>Voice and chat coverage for block trades, with settlement the same business day.</p>
+        <a class="btn-text" href="contact.html">Talk to the desk<span class="chev">&rsaquo;</span></a>
+      </div>
+      <div class="card-i">
+        <h3>Custody</h3>
+        <p>Segregated wallets under a qualified custodian, with withdrawal allowlists and quorum approval.</p>
+        <a class="btn-text" href="about.html">How custody works<span class="chev">&rsaquo;</span></a>
+      </div>
+      <div class="card-i">
+        <h3>Portfolio margin</h3>
+        <p>Risk netted across spot, futures and options, so hedged books post less collateral.</p>
+        <a class="btn-text" href="contact.html">Margin model<span class="chev">&rsaquo;</span></a>
+      </div>
+      <div class="card-i">
+        <h3>Market data</h3>
+        <p>Full order book snapshots and trade history, streamed live or delivered as flat files.</p>
+        <a class="btn-text" href="#api">Data API<span class="chev">&rsaquo;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Execution split -->
+  <section class="sec track">
+    <div class="split">
+      <div class="reveal">
+        <h2>Built for size,<br>not for screenshots</h2>
+        <p class="lede" style="margin-top:22px">Most venues look the same until you send a real order.
+          These are the parts that decide what your fill looks like.</p>
+        <ul class="plist">
+          <li><span><strong>Sub-millisecond matching</strong>
+            <span>Median internal latency of 180 microseconds, measured at the gateway and published monthly.</span></span></li>
+          <li><span><strong>Colocation</strong>
+            <span>Cross-connect in Equinix LD4 and NY4, with a dedicated FIX session per strategy.</span></span></li>
+          <li><span><strong>Honest rejects</strong>
+            <span>No last look. An order that passes risk checks is filled or rests on the book.</span></span></li>
+          <li><span><strong>Settlement you can plan around</strong>
+            <span>Fiat out by 16:00 London on the same day, for instructions received before 14:00.</span></span></li>
+        </ul>
+      </div>
+      <div class="art reveal" style="--d:100ms"><div class="img grad" data-grad="5"></div></div>
+    </div>
+  </section>
+
+  <!-- API -->
+  <section class="sec track" id="api">
+    <div class="sec-head">
+      <div>
+        <h2>An API your engineers<br>will not fight</h2>
+        <p>REST for state, WebSocket for everything that moves, FIX 4.4 when your OMS insists.
+          Keys are scoped per strategy and can be restricted by IP.</p>
+      </div>
+      <a class="btn-text" href="contact.html">Request sandbox keys<span class="chev">&rsaquo;</span></a>
+    </div>
+    <div class="code-wrap reveal">
+      <div class="code-head">
+        <div class="code-tabs" role="tablist" aria-label="API examples">
+          <button type="button" role="tab" data-tab="rest" aria-selected="true">REST</button>
+          <button type="button" role="tab" data-tab="ws" aria-selected="false">WebSocket</button>
+          <button type="button" role="tab" data-tab="node" aria-selected="false">Node</button>
+        </div>
+        <button class="copy" type="button" data-copy="[data-panel]:not([hidden]) code">Copy</button>
+      </div>
+
+      <div data-panel="rest">
+<pre class="code"><code><span class="c"># place a limit order</span>
+curl -X POST https://api.solen.markets/v1/orders \
+  -H <span class="s">"Authorization: Bearer $SOLEN_KEY"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "symbol": "BTC-USD",
+    "side": "buy",
+    "type": "limit",
+    "price": "104500.00",
+    "size": "2.5",
+    "time_in_force": "GTC"
+  }'</span></code></pre>
+      </div>
+
+      <div data-panel="ws" hidden>
+<pre class="code"><code><span class="c">// stream the top of book</span>
+<span class="k">const</span> ws = <span class="k">new</span> WebSocket(<span class="s">"wss://stream.solen.markets/v1"</span>);
+
+ws.onopen = () =&gt; ws.send(JSON.stringify({
+  op: <span class="s">"subscribe"</span>,
+  channel: <span class="s">"book"</span>,
+  symbols: [<span class="s">"BTC-USD"</span>, <span class="s">"ETH-USD"</span>],
+  depth: <span class="s">10</span>
+}));
+
+ws.onmessage = (e) =&gt; {
+  <span class="k">const</span> { symbol, bids, asks } = JSON.parse(e.data);
+  console.log(symbol, bids[<span class="s">0</span>], asks[<span class="s">0</span>]);
+};</code></pre>
+      </div>
+
+      <div data-panel="node" hidden>
+<pre class="code"><code><span class="c">// npm i @solen/sdk</span>
+<span class="k">import</span> { Solen } <span class="k">from</span> <span class="s">"@solen/sdk"</span>;
+
+<span class="k">const</span> solen = <span class="k">new</span> Solen({ key: process.env.SOLEN_KEY });
+
+<span class="k">const</span> quote = <span class="k">await</span> solen.rfq({
+  symbol: <span class="s">"BTC-USD"</span>,
+  side: <span class="s">"buy"</span>,
+  size: <span class="s">"50"</span>
+});
+
+<span class="k">if</span> (quote.bps &lt; <span class="s">6</span>) <span class="k">await</span> solen.accept(quote.id);</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="sec track">
+    <div class="sec-head">
+      <div>
+        <h2>Boring where it counts</h2>
+        <p>Client assets are not a funding source. They sit apart from the company balance sheet and are reported monthly.</p>
+      </div>
+    </div>
+    <ul class="checks reveal">
+      <li><span class="d"></span><span><strong>Segregated accounts.</strong> Client funds are held separately from operating capital and never lent out.</span></li>
+      <li><span class="d"></span><span><strong>Proof of reserves.</strong> Monthly attestation by an independent auditor, published with the underlying addresses.</span></li>
+      <li><span class="d"></span><span><strong>Withdrawal controls.</strong> Address allowlists, quorum approval and a configurable delay on first use.</span></li>
+      <li><span class="d"></span><span><strong>Key custody.</strong> Hardware security modules in two jurisdictions, with no single person able to sign.</span></li>
+      <li><span class="d"></span><span><strong>Independent testing.</strong> Annual penetration test and a public bug bounty with no payout cap.</span></li>
+      <li><span class="d"></span><span><strong>Incident reporting.</strong> Status page, root cause write-ups and a named contact for every client.</span></li>
+    </ul>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="cta track">
+    <h2 class="reveal">Ready to see real pricing?</h2>
+    <p class="reveal" style="--d:60ms">Onboarding takes about three business days once documents are in.
+      You get a sandbox key on day one.</p>
+    <div class="hero-actions reveal" style="--d:120ms">
+      <a class="btn btn-primary" href="contact.html">Open an account</a>
+      <a class="btn btn-ghost" href="about.html">About Solen</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot track">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="index.html"><span class="brand-dot" data-grad="0"></span>Solen</a>
+    </div>
+    <div class="foot-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="#markets">Markets</a></li>
+        <li><a href="#api">API</a></li>
+        <li><a href="contact.html">Fees</a></li>
+        <li><a href="contact.html">Custody</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="benefits.html">Benefits</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Press</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#api">Documentation</a></li>
+        <li><a href="contact.html">Status</a></li>
+        <li><a href="contact.html">Proof of reserves</a></li>
+        <li><a href="contact.html">Market data</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="contact.html">Terms</a></li>
+        <li><a href="contact.html">Privacy</a></li>
+        <li><a href="contact.html">Disclosures</a></li>
+        <li><a href="contact.html">Complaints</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Solen Markets</span>
+    <span>London &middot; Singapore &middot; S&atilde;o Paulo</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="i18n.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
