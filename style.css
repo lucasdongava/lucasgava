@@ -364,3 +364,9 @@ a:hover {
   .ls-menu li { font-size: 15px; padding: 12px 14px; }
   .ls-check { width: 16px; height: 16px; }
 }
+/* menu: pill compartilhado (ver menu-hover.js) */
+.links{position:relative}
+.links>a{position:relative;z-index:1}
+.sp-stage{position:absolute;inset:0;pointer-events:none;perspective:1400px;z-index:0}
+.sp-pill{position:absolute;left:0;top:0;width:0;height:0;border-radius:8px;background:#ececf0;opacity:0;transition:opacity .8s ease;will-change:transform,left,top,width,height}
+.links.sp a,.links.sp a:hover,.links.sp a:active{background:transparent;transform:none;box-shadow:none;transition:none}
