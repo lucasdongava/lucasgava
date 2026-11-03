@@ -66,30 +66,45 @@
 
   // mapa-múndi pontilhado: continentes reais (Natural Earth 110m), projeção Miller, grade regular de pontos só sobre a terra
   const cv=$("#globe"), ctx=cv.getContext("2d");
-  const G={cols:150,rows:76,bits:"AAAAAPif//8dAAAAAAAAAAAAAAAAAID9+///AwAIwAAADAAAAAAAAADgf/z/fwBwBwAAAAcAAAAAAACI9e///w8AHAAAAAAGAAAAAADAAvDg//8DAAYAAAAAAAAAAAAAGLE9/P//AAAAAGAA4AcAAAAAAPj8D+D/PwAAAAADwP8BeAEAAMABAADw/w8AAABgAPgfAAAAAABw2XoB+P8BAAAADID//w8AAAAA/Cf+AP9/AAAAAIP5//+DBwAPAOgz/4H/DwAAHgBw/////x/g//78nnnA/wMA4A8A2x8AAACAAwAAx5DFB+D//wMgAQgAAAAAwAEAAADgwQH8/38AGAAAAAAAABAAAAAAHvrgH/4PwgEAAAAAAADA////n+PABzgAvv///////////P///0Mw4AAA4Pf/////////N7///3+AAzAAAPj9////////Pw4X/v8f4AQAAAB+/P///////0WAA/z/D/gDAAAEDP///////wcMEAD+/w/+AAAAg/L///////8ABwGA///f/wAAoAD8//////8fwAAAwP//9z8AAGj+////////PxAAAOD///8PAAD4/////////wcAAAD4//8fAgAA+P////////8FAAAA/P//jwMAgP////////9/AAAAAP///wcAAMD/D9//////DwAAAMD//38BAADw98P7/////wkAAADw//8PAACAD3ng/P///x8AAAAA/P//AAAA4AHNf////7+DAAAAAP7/PwAAAHgA+Z/////HAAAAAID//w8AAADEA+j/////IwYAAADA//8BAAAA/wD4/////+AAAAAA4P8/AAAA4H8E/////z8EAAAAAOD/BwAAAPh///////8fAAAAAADwBwAAAAD////z////BwAAAAAA+oAAAADg///78f///wAAAAAAADwAAAAA/P///YL//18AAAAAAAAPGAAAAP//f//Bf/8BAAAAAQDAIwAAAMD//58/4McvAAAAAAAAwA8IAADw///PB/jgAwEAAAAAAAAPAAAA/P//9wAM8EEAAAAAAAAAAwAAAP///wcAA3QwAAAAAAAAgFAAAMD///8MwAAYAAAAAAAAAMD/AADg////AWBAAgQAAAAAAACA/wAA8P//fwAQIBAAAAAAAAAA4P8AAAD4/w8AABoGAAAAAAAAAPx/AAAA/v8BAADHAQAAAAAAAAD/PwAAgP8/AACAeQAAAAAAAADg/x8AAOD/BwAAwGxgAAAAAAAA+P9/AADw/wAAACAAeAAAAAAAAPz/PwAA+D8AAABwADwAAAAAAAD//wcAAP4PAAAAAAAQAgAAAACA//8BAID/BwAAAAAIAAAAAAAA4P8/AADw/xEAAAAAJwAAAAAAAPD/DwAA/H8GAAAA8BsAAAAAAADw/wMAAP/HAQAAAP4HAAAAAAAA/H8AAID/MAAAAOD/BwIAAAAAAP8fAADgfwwAAAD+/wMAAAAAAMD/AAAA+A8DAACA//8AAAAAAADwPwAAAPwBAAAA4P9/AAAAAAAA/gcAAAB/AAAAAPD/HwAAAAAAgP8BAACADwAAAAD8/wcAAAAAAOA/AAAA4AEAAAAAD/8AAAAAAAD4AwAAAAAAAAAAAIA/AAAAAAAA/gAAAAAAAAAAAACABwAAAAAAgA8AAAAAAAAAAAAAgAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAAIAAAAAAAADwAAAAAAAAAAAAAAAAgAAAAAwAEAAAAAAAAAAAAAAAACAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAARwAAAAAAAAAAAAAAAAAAAAAAwAEAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA"};
+  const G={cols:200,rows:101,bits:"AAAAAADA/5///38eAAAAAAAAAAAAAAAAAAAAAAAAsP/P////DwAAAAAAAAAYAAAAAAAAAAAAAPj+9////wAAwA+AAQAAPAAAAAAAAAAAAADw/eH///8BAHwCAAAAAHgAAAAAAAAAAACE5X78////AAD4AAAAAACAAwAAAAAAAAAABgA9/v///wAAcAIAAAAAAAAAAAAAAAAA4AAIH/z///8BACAAAAAAAAADAAAAAAAAADAJYxD4////AAAAAAAADwDAPwAAAAAAAACAP+IfAPz//wAAAAAAwAEA/n8A4AEAAAAAAAaQDwD8//8AAAAAAGAAgP8fAAAAAAAAAPgAcAAA+P//AAAAAAAwAPD/fwCAAAAAAAD8O5YtAPD/fwAAAAAAGCD4////AAAAAAAA3C+G/wD4/z8AAAAAABxw/v///8APAIABAIB/OP8D4P9/AAAAEAAY+AAAAAAAwP/wv4AA/zjcD/D/fwAAAD8AAHj///////8D8P/3P97sjA/AD+D//z8A/v8MAAAAAAAAgAMAAADOC3HhHwD8//8fALgDgAAAAAAAAAAPAAAAAADwwQ8A////DwCwAIAAAAAAAAAAEwAAAAAA/pAPgL/7/wcACwAAAAAAAAAAAAMAAAAAADigH/B/8P8HBg4AAAAAAAAAAADg/////38OPuAPgAMA/P79////////////+P////9/ACzABwAAAH/+//////////////z/////H8ABgAcAAIA//v///////////+/43////x/ABwAGAACAP/7////////////w4Av+//8PwAcAAAAAgH/g//////////9/CIAD+P//H8BvAAAAAII5/P////////9/AASAAuD//z+A/wAAAAAHOP7/////////PwAPQADA////gf8AAAAAAhr//////////x8ABwgAgP///8//AwAAgAYC//////////8PAAcAAAD////P/wcAAMAM////////////fwADAABA/v//z/8HAADAnv////////////8AAQAAAP7/////AwAAAP7///////////9/AAAAAAD6////XwQAAADw////////////fwEAAAAA8P///zceAAAA/v///////////78AAAAAAPj///87GAAAAPj///////////8/AAAAAAD4////fwEAAAD4/z/9+f//////HwAAAAAA+P///28AAAAA+Ocf/Pz//////48AAAAAAPj///8DAAAAgD/MD/D8///////HAQAAAAD4////BwAAAIA/mp/x8f//////QAAAAAAA+P///wAAAACAD+L5//v/////90AAAAAAAPj///8AAAAAwA8g8//x/////0FAAAAAAADw//9/AAAAAIAHEPD/8//////LYAAAAAAA4P//fwAAAAAA8AMA/v//////x3AAAAAAAMD//z8AAAAAAP8DAP7//////wcaAAAAAACA//8fAAAAAID/BwD+//////8HAwAAAAAAgP7/DwAAAADA/x9P////////DwAAAAAAAAD9fwgAAAAAwP/////8/////w8AAAAAAAAA/gcYAAAAAOD//3///f////8HAAAAAAAAAPIHUAAAAADw/////sP/////BwAAAAAAAAD0BwAAAAAA+P////wT+P///wsAAAAAAAAA6AcAAAAAAPj////5f/D///8BAAAAAAAAAMAHYAAAAAD8////+3/g//w/AAAAAAAAAADAh8EAAAAA/P////M/gH/4AwAAAAAAAAAAgO8ADwAAAPz////zH4A/+BMAAAAAAAAAAAD+AAAAAAD8////5w+AD/AHCAAAAAAAAAAA4AcAAAAA/P///+8DAAfgDwAAAAAAAAAAAIAHAAAAAPz/////AAAHwA8QAAAAAAAAAAAABgIAAAD8////HwAAB0APIAAAAAAAAAAAAARfAAAA+P////8DAAYABBAAAAAAAAAAAADY/wEAAPD/////AwAKQAAwAAAAAAAAAAAAwP8DAADg/////wEACIAAIAAAAAAAAAAAAMD/HwAAwIX///8AAACQAQMAAAAAAAAAAADA/z8AAAAA/P//AAAAoIEBAAAAAAAAAAAAwP9/AAAAAPz/fwAAAMDwAQAAAAAAAAAAAOD/PwAAAAD+/x8AAADA8QUAAAAAAAAAAADw//8DAAAA/v8PAAAAgOENBAAAAAAAAAAA4P//HwAAAPz/DwAAAACDzP0gAAAAAAAAAPD//z8AAAD4/wcAAAAAAgTgIwAAAAAAAADg//9/AAAA+P8HAAAAACwA4IMAAAAAAAAAwP//fwAAAPD/BwAAAACAQoAEBAAAAAAAAMD//38AAADw/w8AAAAAAAAACAAAAAAAAACA//8/AAAA8P8PAAAAAAAABAAAAAAAAAAAgP//HwAAAPj/DwAAAAAAAI4AAAAAAAAAAAD//x8AAAD4/w8DAAAAAOCPAQAAAAAAAAAA/v8fAAAA+P/HAQAAAADgvwMAAAAAAAAAAPj/HwAAAPj/wQEAAAAA8P8DAAAAAAAAAAD4/w8AAADw/8ABAAAAAPz/BwAAAAAAAAAA+P8PAAAA8P/hAAAAAAD//w8gAAAAAAAAAPj/AwAAAPD/wQAAAACA//8fAAAAAAAAAAD8/wAAAADg/8AAAAAAgP//PwAAAAAAAAAA/H8AAAAA4H8AAAAAAID//z8AAAAAAAAAAPx/AAAAAOB/AAAAAACA//8/AAAAAAAAAAD8fwAAAADAPwAAAAAAAP//PwAAAAAAAAAA/D8AAAAAgD8AAAAAAAD//z8AAAAAAAAAAPwfAAAAAIAfAAAAAAAAP/gfAAAAAAAAAAD8DwAAAACAAQAAAAAAAAPgHwAAAAAAAAAA/gMAAAAAAAAAAAAAAAAAwA8AAAAAAAAAAP4DAAAAAAAAAAAAAAAAAMAPAAAAAAAAAAD+AQAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAA/AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAPwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAA="};
   const bin=atob(G.bits), isLand=(c,r)=>{const i=r*G.cols+c;return (bin.charCodeAt(i>>3)>>(i&7))&1};
   const st=getComputedStyle(document.documentElement);
-  const muted=st.getPropertyValue("--muted").trim(), acc=st.getPropertyValue("--accent").trim();
+  const muted=st.getPropertyValue("--muted").trim(), acc=st.getPropertyValue("--accent").trim(), ink=st.getPropertyValue("--ink").trim(), surf=st.getPropertyValue("--surface").trim();
   const W=cv.width,H=cv.height,D=Math.PI/180,L0=-170*D,L1=170*D,SC=W/(L1-L0),CELL=W/G.cols;
   const my=la=>1.25*Math.log(Math.tan(Math.PI/4+.4*la*D)), yTop=my(82);
   const px=lo=>(lo*D-L0)*SC, py=la=>(yTop-my(la))*SC;
-  ctx.fillStyle=muted;
-  for(let r=0;r<G.rows;r++)for(let c=0;c<G.cols;c++){
-    if(!isLand(c,r))continue;
-    ctx.globalAlpha=.62; ctx.beginPath(); ctx.arc((c+.5)*CELL,(r+.5)*CELL,CELL*.3,0,7); ctx.fill();
+  // cidades: [nome, lon, lat, lado do rótulo]; a primeira é a sede e de onde saem as rotas
+  const cities=[["Zurich",8.54,47.37,"r"],["New York",-74,40.7,"l"],["London",-0.13,51.5,"t"],["São Paulo",-46.6,-23.5,"r"],["Singapore",103.8,1.35,"r"]], sp=cities[0];
+  function draw(){
+    // u = pixels do desenho por pixel de tela: marcadores e textos mantêm tamanho legível em qualquer largura
+    const u=W/Math.max(cv.clientWidth,1), labels=cv.clientWidth>=520, mk=labels?1:.62, ml=labels?1:.8;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=muted;
+    for(let r=0;r<G.rows;r++)for(let c=0;c<G.cols;c++){
+      if(!isLand(c,r))continue;
+      ctx.globalAlpha=.72; ctx.beginPath(); ctx.arc((c+.5)*CELL,(r+.5)*CELL,CELL*.34,0,7); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    cities.slice(1).forEach(c=>{
+      const x1=px(sp[1]),y1=py(sp[2]),x2=px(c[1]),y2=py(c[2]);
+      ctx.strokeStyle=acc; ctx.lineWidth=1.6*u*ml; ctx.setLineDash([u*ml,5*u*ml]); ctx.lineCap="round"; ctx.globalAlpha=.9;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.quadraticCurveTo((x1+x2)/2,Math.min(y1,y2)-Math.abs(x2-x1)*.26-20*u,x2,y2); ctx.stroke();
+    });
+    ctx.setLineDash([]); ctx.globalAlpha=1;
+    ctx.font="600 "+Math.round(13.5*u)+"px 'Geist Mono',ui-monospace,monospace"; ctx.textBaseline="middle";
+    cities.forEach((c,i)=>{
+      const x=px(c[1]),y=py(c[2]),hub=i===0, r=(hub?6.5:5)*u*mk;
+      ctx.fillStyle=acc; ctx.globalAlpha=.2; ctx.beginPath(); ctx.arc(x,y,r*2.6,0,7); ctx.fill();
+      ctx.globalAlpha=1; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+      ctx.strokeStyle=surf; ctx.lineWidth=2*u*mk; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke();
+      if(!labels)return;
+      const dx=c[3]==="l"?-13*u:c[3]==="r"?13*u:0, dy=c[3]==="t"?-19*u:0;
+      ctx.textAlign=c[3]==="l"?"right":c[3]==="r"?"left":"center";
+      ctx.lineJoin="round"; ctx.lineWidth=4.5*u; ctx.strokeStyle=surf; ctx.strokeText(c[0].toUpperCase(),x+dx,y+dy);
+      ctx.fillStyle=ink; ctx.fillText(c[0].toUpperCase(),x+dx,y+dy);
+    });
   }
-  ctx.globalAlpha=1;
-  const cities=[[8.5,47.4],[-74,40.7],[-0.1,51.5],[-46.6,-23.5],[103.8,1.35]], sp=cities[0];
-  cities.slice(1).forEach(c=>{
-    ctx.strokeStyle=acc; ctx.lineWidth=2.2; ctx.setLineDash([5,8]);
-    const x1=px(sp[0]),y1=py(sp[1]),x2=px(c[0]),y2=py(c[1]);
-    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.quadraticCurveTo((x1+x2)/2,Math.min(y1,y2)-Math.abs(x2-x1)*.28-30,x2,y2); ctx.stroke();
-  });
-  ctx.setLineDash([]);
-  cities.forEach(c=>{
-    const x=px(c[0]),y=py(c[1]);
-    ctx.fillStyle=acc; ctx.globalAlpha=.22; ctx.beginPath(); ctx.arc(x,y,20,0,7); ctx.fill();
-    ctx.globalAlpha=1; ctx.beginPath(); ctx.arc(x,y,8.5,0,7); ctx.fill();
-    ctx.strokeStyle="#fff"; ctx.lineWidth=2.5; ctx.beginPath(); ctx.arc(x,y,8.5,0,7); ctx.stroke();
-  });
+  draw();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);   // redesenha quando a fonte mono carregar (rótulos)
+  if(window.ResizeObserver)new ResizeObserver(draw).observe(cv);               // e quando a largura muda (celular, rotação, janela)
 })();

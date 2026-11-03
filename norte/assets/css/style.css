@@ -174,11 +174,12 @@ section{scroll-margin-top:96px}
 .banner-copy p{color:var(--muted);font-size:17px;line-height:1.65;margin:0 0 10px;max-width:40ch}
 
 /* about */
-.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px;align-items:center}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px 96px;align-items:end}
+.about-head p{margin-bottom:0}
 .about h2{font-size:clamp(32px,4.4vw,52px);line-height:1.08;font-weight:600;margin:18px 0 22px}
 .about p{color:var(--muted);font-size:17px;line-height:1.65;margin:0 0 40px;max-width:44ch}
-.map{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px;position:relative}
-.map canvas{width:100%;height:auto;aspect-ratio:1440/730;display:block;max-width:100%}
+.map{grid-column:1/-1;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:40px 40px 28px;position:relative}
+.map canvas{width:100%;height:auto;aspect-ratio:2160/1096;display:block;max-width:100%}
 .map-legend{display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:8px}
 .cities{display:flex;flex-wrap:wrap;gap:6px}
 
@@ -214,7 +215,8 @@ footer{background:var(--surface);border-top:1px solid var(--line);font-size:14px
   .svc{grid-template-columns:repeat(3,minmax(0,1fr))}
   .hero .wrap{gap:56px;padding-block:80px 96px}
   .sec-head{gap:20px;margin-bottom:56px}
-  .about{gap:56px}
+  .about{gap:48px}
+  .map{padding:24px 18px 20px}
   .f-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .f-brand{grid-column:1/-1}
 }
