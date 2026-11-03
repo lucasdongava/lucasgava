@@ -631,14 +631,14 @@ if(globeCanvas&&globeCanvas.getContext){
   requestAnimationFrame(frame);
 }
 
-/* hero: a imagem começa pequena (S_INI do grid) e cresce com a rolagem até S_FIM do grid (menor que a largura total).
+/* hero: a imagem começa em S_INI do grid (65%) e cresce com a rolagem até S_FIM do grid (menor que a largura total).
    O espaço que ela deixa vazio embaixo é recolhido (margin-bottom negativa), então o conteúdo de baixo sobe junto.
    Para ajustar o tamanho, mude S_INI / S_FIM (1 = largura total do grid). */
 (()=>{
   const m=document.querySelector(".hx-media");if(!m)return;
   const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
   const mq=matchMedia("(max-width:900px)");
-  const S_INI=()=>mq.matches?.7:.45, S_FIM=()=>mq.matches?.9:.75, DIST=440;
+  const S_INI=()=>mq.matches?.7:.65, S_FIM=()=>mq.matches?.9:.8, DIST=440;
   let cur=S_INI(),raf=0;
   const target=()=>{if(reduced)return S_FIM();const p=Math.min(1,Math.max(0,scrollY/DIST));return S_INI()+(S_FIM()-S_INI())*p};
   const apply=()=>{m.style.transform="scale("+cur.toFixed(4)+")";m.style.marginBottom=(-(1-cur)*m.offsetHeight).toFixed(1)+"px"};
