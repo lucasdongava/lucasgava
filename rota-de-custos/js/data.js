@@ -332,8 +332,8 @@ const CONFIG = {
   origins:['RBR','MCZ','MCP','MAO','SSA','FOR','BSB','VIX','GYN','SLZ','CGB','CGR','CNF','BEL','JPA','CWB','REC','THE','GIG','NAT','POA','PVH','BVB','FLN','GRU','AJU','PMW'],
   // localização aproximada pelo IP (sem pedir permissão); deixe '' para desativar
   ipGeoUrl:'https://get.geojs.io/v1/ip/geo.json',
-  flightsDir:'data/flights/',   // um arquivo de voos por aeroporto de saída (gerado pelo coletor)
-  pricesUrl:'data/prices.json', // arquivo gerado pelo coletor diário
+  flightsDir:'https://raw.githubusercontent.com/lucasdongava/rota-de-custos/main/docs/data/flights/',   // um arquivo de voos por aeroporto de saída (gerado pelo coletor)
+  pricesUrl:'https://raw.githubusercontent.com/lucasdongava/rota-de-custos/main/docs/data/prices.json', // arquivo gerado pelo coletor diário
   defaultUsdBrl:5.20            // usado só se o arquivo de preços ainda não tiver o câmbio do dia
 };
 
