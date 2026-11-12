@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -17,7 +17,7 @@
   --line:#D3D6DC;
   --surface:#FFFFFF;
   --accent:#2747F5;
-  --font-display:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-display:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif;
   --font-mono:var(--font-display);
 }
 @media (prefers-color-scheme: dark){
@@ -168,51 +168,52 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-r
 <canvas id="cur" aria-hidden="true"></canvas>
 <video id="cam" playsinline muted aria-hidden="true"></video>
 
-<nav id="menu" class="toggles" aria-label="Opções">
-  <button id="camToggle" class="textbtn" type="button" aria-pressed="false" hidden>Câmera desligada</button>
-  <button id="sound" class="textbtn" type="button" aria-pressed="true">Som ligado</button>
-  <button id="theme" class="textbtn" type="button">Tema claro</button>
+<nav id="menu" class="toggles" aria-label="Options">
+  <button id="lang" class="textbtn" type="button" aria-label="Language">English</button>
+  <button id="camToggle" class="textbtn" type="button" aria-pressed="false" hidden>Camera off</button>
+  <button id="sound" class="textbtn" type="button" aria-pressed="true">Sound on</button>
+  <button id="theme" class="textbtn" type="button">Light theme</button>
 </nav>
 
 <main>
 <section class="sec" id="s0" aria-labelledby="t0">
   <canvas class="sc" id="c0" aria-hidden="true"></canvas>
   <div class="copy">
-    <h1 id="t0">Ligue a câmera</h1>
-    <p class="st" id="u0" role="status" aria-live="polite">Sua mão vira o cursor. A imagem é processada no seu navegador e não é enviada.</p>
+    <h1 id="t0">Turn on the camera</h1>
+    <p class="st" id="u0" role="status" aria-live="polite">Your hand becomes the cursor. The image is processed in your browser and is never sent.</p>
     <div class="actions" id="actions">
-      <button id="camStart" class="pill" type="button">Ligar câmera</button>
-      <button id="noCam" class="textbtn" type="button">Continuar sem câmera</button>
+      <button id="camStart" class="pill" type="button">Turn on camera</button>
+      <button id="noCam" class="textbtn" type="button">Continue without camera</button>
     </div>
   </div>
 </section>
 <section class="sec" id="s1" aria-labelledby="t1">
   <canvas class="sc" id="c1" aria-hidden="true"></canvas>
   <div class="copy">
-    <h1 id="t1">Arraste a caixa</h1>
-    <p class="st" id="u1" role="status" aria-live="polite">Leve a caixa até a área marcada.</p>
+    <h1 id="t1">Drag the box</h1>
+    <p class="st" id="u1" role="status" aria-live="polite">Take the box to the marked area.</p>
   </div>
 </section>
 <section class="sec" id="s2" aria-labelledby="t2">
   <canvas class="sc" id="c2" aria-hidden="true"></canvas>
   <div class="copy">
-    <h1 id="t2">Aumente o volume da música com o dedo</h1>
-    <p class="st" id="u2" role="status" aria-live="polite">Deslize para cima.</p>
+    <h1 id="t2">Raise the music volume with your finger</h1>
+    <p class="st" id="u2" role="status" aria-live="polite">Swipe up.</p>
   </div>
 </section>
 <section class="sec" id="s3" aria-labelledby="t3">
   <canvas class="sc" id="c3" aria-hidden="true"></canvas>
   <div class="copy">
-    <h1 id="t3">Guie a cobrinha</h1>
-    <p class="st" id="u3" role="status" aria-live="polite">Leve a cobrinha até as bolinhas.</p>
+    <h1 id="t3">Guide the snake</h1>
+    <p class="st" id="u3" role="status" aria-live="polite">Lead the snake to the dots.</p>
   </div>
 </section>
 <section class="sec" id="s4" aria-labelledby="t4">
   <canvas class="sc" id="c4" aria-hidden="true"></canvas>
   <div class="copy">
-    <h1 id="t4">Pronto.</h1>
+    <h1 id="t4">Done.</h1>
     <p class="st" id="u4" role="status" aria-live="polite"></p>
-    <button id="again" class="pill" type="button">Recomeçar</button>
+    <button id="again" class="pill" type="button">Play again</button>
   </div>
 </section>
 </main>
@@ -222,6 +223,13 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-r
 'use strict';
 
 const $ = id => document.getElementById(id);
+
+/* ---------- idiomas: abre sempre em inglês, a menos que a pessoa já tenha escolhido outro ---------- */
+const I18N = {"en":{"name":"English","opts":"Options","lang_aria":"Language","cam_off":"Camera off","cam_on":"Camera on","cam_loading":"Camera loading","sound_on":"Sound on","sound_off":"Sound off","theme_light":"Light theme","theme_dark":"Dark theme","theme_aria_light":"Light theme. Switch to the dark theme","theme_aria_dark":"Dark theme. Switch to the light theme","t_intro":"Turn on the camera","s_intro":"Your hand becomes the cursor. The image is processed in your browser and is never sent.","start":"Turn on camera","nocam":"Continue without camera","asking_btn":"Waiting for permission","loading_btn":"Loading","retry_btn":"Try again","show_hand":"Show your hand","keep_open":"Keep your hand open in front of the camera.","asking_msg":"Allow camera access in the browser window.","loading_msg":"Loading hand tracking. The first time takes a few seconds.","err_nomedia":"This browser does not give this page access to the camera. Continue without it.","err_notfound":"No camera found. Continue without it.","err_blocked":"Camera blocked or unavailable on this page. Allow access in the browser or continue without it.","err_load":"Could not load hand tracking. Check your connection and try again.","t_box":"Drag the box","s_box":"Take the box to the marked area.","s_box_hand":"Pinch your thumb and index finger over the box and take it to the marked area.","t_vol_hand":"Raise the music volume with your hand","t_vol_finger":"Raise the music volume with your finger","s_vol_hand":"Raise your hand.","s_vol_finger":"Swipe up.","s_vol_reset":"Lower your hand and raise it again.","t_snake":"Guide the snake","s_snake":"Lead the snake to the dots.","s_snake_hand":"Lead the snake to the dots with your hand.","t_end":"Done.","again":"Play again"},"pt":{"name":"Português","opts":"Opções","lang_aria":"Idioma","cam_off":"Câmera desligada","cam_on":"Câmera ligada","cam_loading":"Câmera carregando","sound_on":"Som ligado","sound_off":"Som desligado","theme_light":"Tema claro","theme_dark":"Tema escuro","theme_aria_light":"Tema claro. Mudar para o tema escuro","theme_aria_dark":"Tema escuro. Mudar para o tema claro","t_intro":"Ligue a câmera","s_intro":"Sua mão vira o cursor. A imagem é processada no seu navegador e não é enviada.","start":"Ligar câmera","nocam":"Continuar sem câmera","asking_btn":"Aguardando permissão","loading_btn":"Carregando","retry_btn":"Tentar de novo","show_hand":"Mostre a mão","keep_open":"Deixe a mão aberta em frente à câmera.","asking_msg":"Autorize o uso da câmera na janela do navegador.","loading_msg":"Carregando o rastreamento da mão. Na primeira vez leva alguns segundos.","err_nomedia":"Este navegador não dá acesso à câmera nesta página. Continue sem ela.","err_notfound":"Nenhuma câmera encontrada. Continue sem ela.","err_blocked":"Câmera bloqueada ou indisponível nesta página. Libere o acesso no navegador ou continue sem ela.","err_load":"Não foi possível carregar o rastreamento da mão. Verifique a conexão e tente de novo.","t_box":"Arraste a caixa","s_box":"Leve a caixa até a área marcada.","s_box_hand":"Junte o polegar e o indicador sobre a caixa e leve até a área marcada.","t_vol_hand":"Aumente o volume da música com a mão","t_vol_finger":"Aumente o volume da música com o dedo","s_vol_hand":"Levante a mão.","s_vol_finger":"Deslize para cima.","s_vol_reset":"Abaixe a mão e levante de novo.","t_snake":"Guie a cobrinha","s_snake":"Leve a cobrinha até as bolinhas.","s_snake_hand":"Leve a cobrinha até as bolinhas com a mão.","t_end":"Pronto.","again":"Recomeçar"},"es":{"name":"Español","opts":"Opciones","lang_aria":"Idioma","cam_off":"Cámara apagada","cam_on":"Cámara encendida","cam_loading":"Cámara cargando","sound_on":"Sonido activado","sound_off":"Sonido desactivado","theme_light":"Tema claro","theme_dark":"Tema oscuro","theme_aria_light":"Tema claro. Cambiar al tema oscuro","theme_aria_dark":"Tema oscuro. Cambiar al tema claro","t_intro":"Enciende la cámara","s_intro":"Tu mano se convierte en el cursor. La imagen se procesa en tu navegador y no se envía.","start":"Encender cámara","nocam":"Continuar sin cámara","asking_btn":"Esperando permiso","loading_btn":"Cargando","retry_btn":"Intentar de nuevo","show_hand":"Muestra la mano","keep_open":"Mantén la mano abierta frente a la cámara.","asking_msg":"Autoriza el uso de la cámara en la ventana del navegador.","loading_msg":"Cargando el seguimiento de la mano. La primera vez tarda unos segundos.","err_nomedia":"Este navegador no da acceso a la cámara en esta página. Continúa sin ella.","err_notfound":"No se encontró ninguna cámara. Continúa sin ella.","err_blocked":"Cámara bloqueada o no disponible en esta página. Permite el acceso en el navegador o continúa sin ella.","err_load":"No se pudo cargar el seguimiento de la mano. Revisa la conexión e inténtalo de nuevo.","t_box":"Arrastra la caja","s_box":"Lleva la caja hasta el área marcada.","s_box_hand":"Junta el pulgar y el índice sobre la caja y llévala hasta el área marcada.","t_vol_hand":"Sube el volumen de la música con la mano","t_vol_finger":"Sube el volumen de la música con el dedo","s_vol_hand":"Levanta la mano.","s_vol_finger":"Desliza hacia arriba.","s_vol_reset":"Baja la mano y levántala de nuevo.","t_snake":"Guía la serpiente","s_snake":"Lleva la serpiente hasta los puntos.","s_snake_hand":"Lleva la serpiente hasta los puntos con la mano.","t_end":"Listo.","again":"Jugar de nuevo"},"zh":{"name":"中文","opts":"选项","lang_aria":"语言","cam_off":"摄像头已关闭","cam_on":"摄像头已开启","cam_loading":"摄像头加载中","sound_on":"声音已开启","sound_off":"声音已关闭","theme_light":"浅色主题","theme_dark":"深色主题","theme_aria_light":"浅色主题。切换到深色主题","theme_aria_dark":"深色主题。切换到浅色主题","t_intro":"打开摄像头","s_intro":"你的手就是光标。图像只在浏览器中处理，不会被上传。","start":"打开摄像头","nocam":"不使用摄像头继续","asking_btn":"等待授权","loading_btn":"加载中","retry_btn":"重试","show_hand":"请展示你的手","keep_open":"请在摄像头前张开手掌。","asking_msg":"请在浏览器弹窗中允许使用摄像头。","loading_msg":"正在加载手部追踪，首次需要几秒钟。","err_nomedia":"此浏览器不允许本页面使用摄像头。请不使用摄像头继续。","err_notfound":"未找到摄像头。请不使用摄像头继续。","err_blocked":"本页面的摄像头被阻止或不可用。请在浏览器中允许访问，或不使用摄像头继续。","err_load":"无法加载手部追踪。请检查网络后重试。","t_box":"拖动方块","s_box":"把方块移到标记区域。","s_box_hand":"用拇指和食指捏住方块，把它移到标记区域。","t_vol_hand":"用手调高音乐音量","t_vol_finger":"用手指调高音乐音量","s_vol_hand":"把手举高。","s_vol_finger":"向上滑动。","s_vol_reset":"先放下手，再重新举起。","t_snake":"操控小蛇","s_snake":"带小蛇去吃圆点。","s_snake_hand":"用手带小蛇去吃圆点。","t_end":"完成。","again":"再玩一次"}};
+const LANGS = ['en', 'pt', 'es', 'zh'];
+let lang = 'en';
+try { const sv = localStorage.getItem('humantouch:lang'); if (LANGS.indexOf(sv) >= 0) lang = sv; } catch (_) {}
+const T = k => (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;
 let ctx = null;
 const elSound = $('sound'), elAgain = $('again');
 const elActions = $('actions'), elCamStart = $('camStart'), elNoCam = $('noCam');
@@ -349,7 +357,7 @@ const Hand = (() => {
   async function start() {
     if (state === 'asking' || state === 'loading' || state === 'on') return;
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      set('error', 'Este navegador não dá acesso à câmera nesta página. Continue sem ela.');
+      set('error', 'err_nomedia');
       return;
     }
     set('asking');
@@ -357,8 +365,8 @@ const Hand = (() => {
       stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
     } catch (e) {
       set('error', e && e.name === 'NotFoundError'
-        ? 'Nenhuma câmera encontrada. Continue sem ela.'
-        : 'Câmera bloqueada ou indisponível nesta página. Libere o acesso no navegador ou continue sem ela.');
+        ? 'err_notfound'
+        : 'err_blocked');
       return;
     }
     set('loading');
@@ -376,7 +384,7 @@ const Hand = (() => {
       set('on');
     } catch (e) {
       stopStream();
-      set('error', 'Não foi possível carregar o rastreamento da mão. Verifique a conexão e tente de novo.');
+      set('error', 'err_load');
     }
   }
 
@@ -432,7 +440,7 @@ const Hand = (() => {
   return {
     start, stop, tick, draw, BONES,
     state: () => state,
-    error: () => err,
+    error: () => err ? T(err) : '',
     on: () => state === 'on',
     seen: () => state === 'on' && now - lastSeen < 300,
     seenFor: () => (state === 'on' && now - lastSeen < 300) ? now - seenSince : 0
@@ -547,8 +555,8 @@ function complete(msg, holdMs) {
 /* ---------- início: ligar a câmera e mostrar a mão ---------- */
 const OPEN_HAND = [[.50,.95],[.36,.86],[.25,.74],[.17,.62],[.10,.52],[.36,.55],[.32,.38],[.30,.27],[.28,.17],[.48,.52],[.48,.33],[.48,.21],[.48,.10],[.59,.54],[.62,.37],[.64,.26],[.65,.16],[.69,.60],[.75,.47],[.79,.39],[.82,.31]];
 const intro = {
-  name: 'Ligue a câmera',
-  sub: 'Sua mão vira o cursor. A imagem é processada no seu navegador e não é enviada.',
+  get name() { return T('t_intro'); },
+  get sub() { return T('s_intro'); },
   enter() { this.layout(); this.sync(); },
   layout() {
     this.sz = Math.min(S.h * 0.9, S.w * 0.5, 400 * U);
@@ -559,13 +567,13 @@ const intro = {
     const s = Hand.state();
     elActions.hidden = s === 'on';
     elCamStart.disabled = s === 'asking' || s === 'loading';
-    elCamStart.textContent = s === 'asking' ? 'Aguardando permissão' : s === 'loading' ? 'Carregando' : s === 'error' ? 'Tentar de novo' : 'Ligar câmera';
-    if (s === 'on') { this.T.textContent = 'Mostre a mão'; setStatus('Deixe a mão aberta em frente à câmera.', false, this); }
+    elCamStart.textContent = s === 'asking' ? T('asking_btn') : s === 'loading' ? T('loading_btn') : s === 'error' ? T('retry_btn') : T('start');
+    if (s === 'on') { this.T.textContent = T('show_hand'); setStatus(T('keep_open'), false, this); }
     else {
       this.T.textContent = this.name;
       setStatus(s === 'error' ? Hand.error()
-        : s === 'asking' ? 'Autorize o uso da câmera na janela do navegador.'
-        : s === 'loading' ? 'Carregando o rastreamento da mão. Na primeira vez leva alguns segundos.'
+        : s === 'asking' ? T('asking_msg')
+        : s === 'loading' ? T('loading_msg')
         : this.sub, false, this);
     }
     resize();
@@ -592,12 +600,8 @@ const intro = {
 /* ---------- gesto 1: arrastar a caixa ---------- */
 const box = {
   slot: 0,
-  name: 'Arraste a caixa',
-  get sub() {
-    return Hand.on()
-      ? 'Junte o polegar e o indicador sobre a caixa e leve até a área marcada.'
-      : 'Leve a caixa até a área marcada.';
-  },
+  get name() { return T('t_box'); },
+  get sub() { return Hand.on() ? T('s_box_hand') : T('s_box'); },
   b: null,
   enter() { this.b = null; this.layout(); },
   layout() {
@@ -702,8 +706,8 @@ const box = {
    Com a câmera, o volume segue a altura da mão. Sem ela, deslizar para cima. */
 const vol = {
   slot: 1,
-  get name() { return Hand.on() ? 'Aumente o volume da música com a mão' : 'Aumente o volume da música com o dedo'; },
-  get sub() { return Hand.on() ? 'Levante a mão.' : 'Deslize para cima.'; },
+  get name() { return Hand.on() ? T('t_vol_hand') : T('t_vol_finger'); },
+  get sub() { return Hand.on() ? T('s_vol_hand') : T('s_vol_finger'); },
   v: 0.12, shown: 0.12, sent: -1, drag: false, py: 0, v0: 0, pk: 0.3, armed: false, highAt: 0, said: '',
   enter() {
     this.v = 0.12; this.shown = 0.12; this.sent = -1; this.drag = false; this.pk = 0.3;
@@ -723,7 +727,7 @@ const vol = {
         this.drag = false;
         this.v = clamp((this.bot - P.y) / span, 0, 1);
         if (this.v <= 0.6) this.armed = true;
-        const want = (!this.armed && this.v > 0.6) ? 'Abaixe a mão e levante de novo.' : this.sub;
+        const want = (!this.armed && this.v > 0.6) ? T('s_vol_reset') : this.sub;
         if (want !== this.said) { this.said = want; setStatus(want, false); }
         if (this.armed && this.v >= 0.95) {
           if (!this.highAt) this.highAt = now;
@@ -801,12 +805,8 @@ const vol = {
    A cabeça segue o cursor (mouse, dedo ou mão); ela anda sozinha na direção dele. */
 const snake = {
   slot: 2,
-  name: 'Guie a cobrinha',
-  get sub() {
-    return Hand.on()
-      ? 'Leve a cobrinha até as bolinhas com a mão.'
-      : 'Leve a cobrinha até as bolinhas.';
-  },
+  get name() { return T('t_snake'); },
+  get sub() { return Hand.on() ? T('s_snake_hand') : T('s_snake'); },
   GOAL: 5, n: 0, h: null, ang: 0, trail: [], food: null,
   enter() { this.n = 0; this.h = null; this.trail = []; this.food = null; this.layout(); },
   layout() {
@@ -961,22 +961,24 @@ elCam.addEventListener('click', () => {
   Music.unlock();
   if (Hand.on()) Hand.stop(); else Hand.start();
 });
+function refreshCopy() {
+  for (const sc of [box, vol, snake]) { sc.T.textContent = sc.name; setStatus(sc.sub, false, sc); }
+  vol.said = '';
+  resize();
+}
 function onHandChange() {
   const s = Hand.state();
-  elCam.textContent = s === 'on' ? 'Câmera ligada' : (s === 'asking' || s === 'loading') ? 'Câmera carregando' : 'Câmera desligada';
+  elCam.textContent = s === 'on' ? T('cam_on') : (s === 'asking' || s === 'loading') ? T('cam_loading') : T('cam_off');
   elCam.setAttribute('aria-pressed', String(s === 'on'));
   intro.sync();
-  if (s === 'on' || s === 'off') {
-    for (const sc of [box, vol, snake]) { sc.T.textContent = sc.name; setStatus(sc.sub, false, sc); }
-    vol.said = '';
-    resize();
-  } else if (s === 'error' && activeSc && activeSc !== intro) setStatus(Hand.error(), false, activeSc);
+  if (s === 'on' || s === 'off') refreshCopy();
+  else if (s === 'error' && activeSc && activeSc !== intro) setStatus(Hand.error(), false, activeSc);
 }
 /* ---------- som ---------- */
 let soundOn = true;
 try { soundOn = localStorage.getItem('humantouch:som') !== '0'; } catch (_) {}
 function paintSound() {
-  elSound.textContent = soundOn ? 'Som ligado' : 'Som desligado';
+  elSound.textContent = soundOn ? T('sound_on') : T('sound_off');
   elSound.setAttribute('aria-pressed', String(soundOn));
   Music.mute(!soundOn);
 }
@@ -997,8 +999,8 @@ function currentTheme() {
 }
 function paintTheme() {
   const t = currentTheme();
-  elTheme.textContent = t === 'dark' ? 'Tema escuro' : 'Tema claro';
-  elTheme.setAttribute('aria-label', t === 'dark' ? 'Tema escuro. Mudar para o tema claro' : 'Tema claro. Mudar para o tema escuro');
+  elTheme.textContent = t === 'dark' ? T('theme_dark') : T('theme_light');
+  elTheme.setAttribute('aria-label', t === 'dark' ? T('theme_aria_dark') : T('theme_aria_light'));
 }
 try {
   const saved = localStorage.getItem('humantouch:tema');
@@ -1014,6 +1016,28 @@ elTheme.addEventListener('click', () => {
 darkQuery.addEventListener('change', paintTheme);
 new MutationObserver(paintTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 paintTheme();
+
+const elLang = $('lang');
+function applyLang() {
+  document.documentElement.lang = lang;
+  elLang.textContent = I18N[lang].name;
+  elLang.setAttribute('aria-label', T('lang_aria'));
+  $('menu').setAttribute('aria-label', T('opts'));
+  elNoCam.textContent = T('nocam');
+  elAgain.textContent = T('again');
+  $('t4').textContent = T('t_end');
+  paintSound();
+  paintTheme();
+  onHandChange();
+  intro.sync();
+  refreshCopy();
+}
+elLang.addEventListener('click', () => {
+  lang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
+  try { localStorage.setItem('humantouch:lang', lang); } catch (_) {}
+  Music.unlock();
+  applyLang();
+});
 
 addEventListener('keydown', e => {
   Music.unlock();
@@ -1071,7 +1095,7 @@ function drawCursor(dt) {
 /* ---------- menu e botões clicáveis com a mão ----------
    Com a câmera, a pinça age como um clique do mouse: o anel destaca o botão sob
    ele e fechar a pinça em cima dele aciona o botão (o mesmo clique do mouse/teclado). */
-const UI = ['camToggle', 'sound', 'theme', 'camStart', 'noCam', 'again'].map($).filter(Boolean);
+const UI = ['camToggle', 'lang', 'sound', 'theme', 'camStart', 'noCam', 'again'].map($).filter(Boolean);
 let hot = null;
 function uiAt(x, y) {
   const o = { left: 0, top: 0 };
@@ -1183,7 +1207,7 @@ try { history.scrollRestoration = 'manual'; } catch (_) {}
 readTokens();
 resize();
 for (const sc of SCENES) { env(sc); sc.enter(); }
-paintSound();
+applyLang();
 if (window.ResizeObserver) {
   const ro = new ResizeObserver(resize);
   ro.observe(document.body);
