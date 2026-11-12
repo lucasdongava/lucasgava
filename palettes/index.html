@@ -345,7 +345,7 @@ const esc = s => String(s).replace(/[&<>"]/g,
 // A camada que sai do fundido cruzado fica com pointer-events: none, senão
 // o link dela continuaria clicável por baixo e abriria a obra anterior.
 const titleLink = (title, url) => url
-  ? '<a href="' + esc(url) + '" rel="noopener"><em>' + esc(title) + "</em></a>"
+  ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"><em>' + esc(title) + "</em></a>"
   : "<em>" + esc(title) + "</em>";
 
 // O aviso diz de onde a paleta veio, e é honesto sobre as que não são extraídas
