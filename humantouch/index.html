@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}</style>
+<title>HumanTouch</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=swap">
+<style>
+/* Layout: telas empilhadas, uma por gesto, na rolagem vertical. A instrução fica no
+   alto à esquerda de cada tela e a cena é desenhada em linhas finas no canvas atrás. */
+:root{
+  --bg:#F3F4F6;
+  --ink:#0F1217;
+  --muted:#5F6570;
+  --line:#D3D6DC;
+  --surface:#FFFFFF;
+  --accent:#2747F5;
+  --font-display:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:var(--font-display);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D0E11; --ink:#F1F2F4; --muted:#9096A0; --line:#2B2E35; --surface:#17191E; --accent:#8C9EFF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D0E11; --ink:#F1F2F4; --muted:#9096A0; --line:#2B2E35; --surface:#17191E; --accent:#8C9EFF;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{height:100%;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-display);
+  font-optical-sizing:none;
+  font-feature-settings:"calt","ccmp","locl","kern","cv01","ss03";
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+main{display:block}
+/* cada gesto é uma tela inteira; as telas se empilham e a página rola na vertical */
+.sec{
+  position:relative;
+  height:100vh;
+  height:100svh;
+  min-height:520px;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  overflow:hidden;
+  padding-top:calc(clamp(16px,3vh,32px) + 44px);
+  padding-bottom:clamp(16px,3vh,32px);
+  padding-left:max(clamp(16px,4vw,56px), env(safe-area-inset-left, 0px));
+  padding-right:max(clamp(16px,4vw,56px), env(safe-area-inset-right, 0px));
+}
+.sc{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none;
+  cursor:none;
+}
+.sec .copy{position:relative;z-index:1;pointer-events:none}
+#menu{
+  position:fixed;
+  top:max(clamp(16px,3vh,32px), env(safe-area-inset-top, 0px));
+  right:max(clamp(16px,4vw,56px), env(safe-area-inset-right, 0px));
+  z-index:4;
+  pointer-events:none;
+}
+#cur{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:5;
+  pointer-events:none;
+}
+#cam{
+  position:absolute;
+  left:0;
+  top:0;
+  width:2px;
+  height:2px;
+  opacity:0;
+  pointer-events:none;
+}
+
+.toggles{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px clamp(14px,2.5vw,28px);align-items:center}
+.copy{
+  display:grid;
+  gap:clamp(8px,1.4vh,14px);
+  justify-items:start;
+  min-width:0;
+}
+h1{
+  margin:0;
+  font-weight:500;
+  font-size:clamp(2.125rem, 1.2rem + 4.2vw, 4.75rem);
+  line-height:1.02;
+  letter-spacing:-.035em;
+  max-width:15ch;
+  text-wrap:balance;
+}
+.st{
+  margin:0;
+  font-size:clamp(1rem, .95rem + .3vw, 1.1875rem);
+  line-height:1.4;
+  color:var(--muted);
+  max-width:38ch;
+}
+
+button{font:inherit;color:inherit;cursor:pointer}
+#menu button,.copy button{pointer-events:auto}
+.textbtn{
+  background:none;
+  border:0;
+  padding:12px 2px;
+  margin:-12px -2px;
+  font-family:var(--font-mono);
+  font-size:.8125rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  transition:color .15s ease;
+}
+.textbtn:hover,.textbtn.hot{color:var(--ink)}
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px 24px;
+  margin-top:clamp(6px,1vh,12px);
+}
+.actions .textbtn{margin:0;padding:12px 2px}
+.pill{
+  background:transparent;
+  border:1px solid var(--ink);
+  border-radius:999px;
+  padding:.7rem 1.3rem;
+  font-size:1rem;
+  transition:background .15s ease,color .15s ease,opacity .15s ease;
+}
+.pill:hover,.pill.hot{background:var(--ink);color:var(--bg)}
+.pill.hot:disabled{background:transparent;color:var(--ink)}
+.pill:disabled{opacity:.55;cursor:default;background:transparent;color:var(--ink)}
+#again{margin-top:clamp(6px,1vh,12px)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.pill:focus-visible{border-radius:999px}
+
+@media (prefers-reduced-motion: reduce){
+  .textbtn,.pill{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+
+</head>
+<body>
+<canvas id="cur" aria-hidden="true"></canvas>
+<video id="cam" playsinline muted aria-hidden="true"></video>
+
+<nav id="menu" class="toggles" aria-label="Opções">
+  <button id="camToggle" class="textbtn" type="button" aria-pressed="false" hidden>Câmera desligada</button>
+  <button id="sound" class="textbtn" type="button" aria-pressed="true">Som ligado</button>
+  <button id="theme" class="textbtn" type="button">Tema claro</button>
+</nav>
+
+<main>
+<section class="sec" id="s0" aria-labelledby="t0">
+  <canvas class="sc" id="c0" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1 id="t0">Ligue a câmera</h1>
+    <p class="st" id="u0" role="status" aria-live="polite">Sua mão vira o cursor. A imagem é processada no seu navegador e não é enviada.</p>
+    <div class="actions" id="actions">
+      <button id="camStart" class="pill" type="button">Ligar câmera</button>
+      <button id="noCam" class="textbtn" type="button">Continuar sem câmera</button>
+    </div>
+  </div>
+</section>
+<section class="sec" id="s1" aria-labelledby="t1">
+  <canvas class="sc" id="c1" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1 id="t1">Arraste a caixa</h1>
+    <p class="st" id="u1" role="status" aria-live="polite">Leve a caixa até a área marcada.</p>
+  </div>
+</section>
+<section class="sec" id="s2" aria-labelledby="t2">
+  <canvas class="sc" id="c2" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1 id="t2">Aumente o volume da música com o dedo</h1>
+    <p class="st" id="u2" role="status" aria-live="polite">Deslize para cima.</p>
+  </div>
+</section>
+<section class="sec" id="s3" aria-labelledby="t3">
+  <canvas class="sc" id="c3" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1 id="t3">Guie a cobrinha</h1>
+    <p class="st" id="u3" role="status" aria-live="polite">Leve a cobrinha até as bolinhas.</p>
+  </div>
+</section>
+<section class="sec" id="s4" aria-labelledby="t4">
+  <canvas class="sc" id="c4" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1 id="t4">Pronto.</h1>
+    <p class="st" id="u4" role="status" aria-live="polite"></p>
+    <button id="again" class="pill" type="button">Recomeçar</button>
+  </div>
+</section>
+</main>
+
+<script>
+(() => {
+'use strict';
+
+const $ = id => document.getElementById(id);
+let ctx = null;
+const elSound = $('sound'), elAgain = $('again');
+const elActions = $('actions'), elCamStart = $('camStart'), elNoCam = $('noCam');
+const elCam = $('camToggle');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const ease = p => { p = clamp(p, 0, 1); return p * p * (3 - 2 * p); };
+const angDiff = (a, b) => { let d = (a - b) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return d; };
+
+/* ---------- cores vindas dos tokens CSS ---------- */
+const C = {};
+function readTokens() {
+  const s = getComputedStyle(document.documentElement);
+  for (const k of ['bg', 'ink', 'muted', 'line', 'surface', 'accent']) C[k] = s.getPropertyValue('--' + k).trim();
+}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTokens);
+new MutationObserver(readTokens).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+/* ---------- palco ---------- */
+let W = 0, H = 0, DPR = 1, U = 1;
+let S = { x: 0, y: 0, w: 0, h: 0 };          // área livre entre o texto e o rodapé
+let now = performance.now(), last = now;
+
+/* ---------- ponteiro ----------
+   feed() é a única porta de entrada: mouse, toque e mão chamam a mesma função.
+   Para a mão, "down" é a pinça fechada (polegar encostado no indicador). */
+const PR = { x: -999, y: -999, down: false, pressed: false, released: false, present: false, vx: 0, vy: 0, kind: 'pointer', samples: [] };
+let P = PR;       // as cenas leem P: durante o desenho de cada tela, P é uma cópia com y relativo a ela
+let lastAction = now;
+
+function feed(x, y, down, t, kind) {
+  kind = kind || 'pointer';
+  if (kind !== P.kind) { P.samples.length = 0; P.kind = kind; }
+  P.present = true;
+  if (down && !P.down) { P.pressed = true; lastAction = now; }
+  if (!down && P.down) P.released = true;
+  P.down = down; P.x = x; P.y = y;
+  const s = P.samples;
+  s.push({ t, x, y });
+  while (s.length > 2 && t - s[0].t > 90) s.shift();
+  const a = s[0], dt = (t - a.t) / 1000;
+  if (s.length > 1 && dt > 0.004) { P.vx = (x - a.x) / dt; P.vy = (y - a.y) / dt; }
+  else if (s.length < 2) { P.vx = 0; P.vy = 0; }
+  if (Math.hypot(P.vx, P.vy) > 140) lastAction = now;
+}
+
+let activeId = null;
+const VW = () => document.documentElement.clientWidth || innerWidth;
+function at(e) { return [e.clientX, e.clientY]; }
+function attach(cv) {
+  cv.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (activeId !== null) return;
+    activeId = e.pointerId;
+    try { cv.setPointerCapture(e.pointerId); } catch (_) {}
+    P.samples.length = 0;
+    const p = at(e);
+    feed(p[0], p[1], true, e.timeStamp);
+    Music.unlock();
+    e.preventDefault();
+  });
+  cv.addEventListener('pointermove', e => {
+    if (activeId !== null && e.pointerId !== activeId) return;
+    if (activeId === null && e.pointerType !== 'mouse') return;
+    if (activeId === null && Hand.seen()) return;          // com a mão em cena, o mouse parado não disputa o cursor
+    const p = at(e);
+    feed(p[0], p[1], activeId !== null, e.timeStamp);
+  });
+  const end = e => {
+    if (e.pointerId !== activeId) return;
+    const p = at(e);
+    feed(p[0], p[1], false, e.timeStamp);
+    activeId = null;
+    if (e.pointerType !== 'mouse') P.present = false;
+  };
+  cv.addEventListener('pointerup', end);
+  cv.addEventListener('pointercancel', end);
+  cv.addEventListener('pointerleave', () => { if (activeId === null && P.kind === 'pointer') P.present = false; });
+  cv.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+/* ---------- mão pela webcam (MediaPipe Hand Landmarker) ---------- */
+function OneEuro(minCut, beta) {              // filtro que tira o tremor sem atrasar movimentos rápidos
+  let x = null, dx = 0, tp = 0;
+  const al = (c, dt) => 1 / (1 + (1 / (2 * Math.PI * c)) / dt);
+  return {
+    reset() { x = null; },
+    f(v, t) {
+      if (x === null) { x = v; dx = 0; tp = t; return v; }
+      const dt = Math.max(0.001, (t - tp) / 1000); tp = t;
+      const d = (v - x) / dt;
+      dx += (d - dx) * al(1, dt);
+      x += (v - x) * al(minCut + beta * Math.abs(dx), dt);
+      return x;
+    }
+  };
+}
+
+const Hand = (() => {
+  const BASE = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+  const MODEL = 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
+  const MX = 0.16, MY = 0.16;                  // margem do quadro: a mão não precisa ir até a borda da câmera
+  const PINCH_ON = 0.30, PINCH_OFF = 0.45;     // dois limites, para a pinça não soltar sozinha
+  const video = $('cam');
+  const fx = OneEuro(1.4, 0.006), fy = OneEuro(1.4, 0.006);
+  let state = 'off', err = '', stream = null, landmarker = null;
+  let lm = null, ax = 0, ay = 0, ar = 4 / 3;
+  let lastVT = -1, lastSeen = -1e9, seenSince = 0, pinch = false, ratio = 1;
+
+  function set(s, e) { state = s; err = e || ''; onHandChange(); }
+
+  function release(t) {
+    if (P.kind === 'hand' && P.present) { feed(P.x, P.y, false, t, 'hand'); P.present = false; }
+    pinch = false; ratio = 1; lm = null; seenSince = 0;
+    fx.reset(); fy.reset();
+  }
+
+  function stopStream() {
+    if (stream) { stream.getTracks().forEach(tr => tr.stop()); stream = null; }
+    try { video.srcObject = null; } catch (_) {}
+  }
+
+  async function start() {
+    if (state === 'asking' || state === 'loading' || state === 'on') return;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      set('error', 'Este navegador não dá acesso à câmera nesta página. Continue sem ela.');
+      return;
+    }
+    set('asking');
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
+    } catch (e) {
+      set('error', e && e.name === 'NotFoundError'
+        ? 'Nenhuma câmera encontrada. Continue sem ela.'
+        : 'Câmera bloqueada ou indisponível nesta página. Libere o acesso no navegador ou continue sem ela.');
+      return;
+    }
+    set('loading');
+    try {
+      video.srcObject = stream;
+      await video.play();
+      if (!landmarker) {
+        const mp = await import(BASE + '/vision_bundle.mjs');
+        const files = await mp.FilesetResolver.forVisionTasks(BASE + '/wasm');
+        const opts = d => ({ baseOptions: { modelAssetPath: MODEL, delegate: d }, runningMode: 'VIDEO', numHands: 1 });
+        try { landmarker = await mp.HandLandmarker.createFromOptions(files, opts('GPU')); }
+        catch (_) { landmarker = await mp.HandLandmarker.createFromOptions(files, opts('CPU')); }
+      }
+      lastVT = -1;
+      set('on');
+    } catch (e) {
+      stopStream();
+      set('error', 'Não foi possível carregar o rastreamento da mão. Verifique a conexão e tente de novo.');
+    }
+  }
+
+  function stop() {
+    stopStream();
+    release(performance.now());
+    set('off');
+  }
+
+  function tick(t) {
+    if (state !== 'on' || !landmarker || video.readyState < 2) return;
+    if (video.currentTime !== lastVT) {
+      lastVT = video.currentTime;
+      let res = null;
+      try { res = landmarker.detectForVideo(video, t); } catch (_) { res = null; }
+      const h = res && res.landmarks && res.landmarks[0];
+      if (h) {
+        if (t - lastSeen > 300) seenSince = t;
+        lastSeen = t;
+        ar = (video.videoWidth || 4) / (video.videoHeight || 3);
+        lm = h;
+        ax = (h[4].x + h[8].x) / 2;            // âncora do cursor: meio entre polegar e indicador
+        ay = (h[4].y + h[8].y) / 2;
+        const palm = Math.hypot((h[0].x - h[9].x) * ar, h[0].y - h[9].y) || 0.001;
+        const gap = Math.hypot((h[4].x - h[8].x) * ar, h[4].y - h[8].y);
+        ratio = lerp(ratio, gap / palm, 0.6);
+        if (!pinch && ratio < PINCH_ON) pinch = true;
+        else if (pinch && ratio > PINCH_OFF) pinch = false;
+        const X = fx.f(VW() * clamp((1 - ax - MX) / (1 - 2 * MX), -0.02, 1.02), t);   // espelhado
+        const Y = fy.f(innerHeight * clamp((ay - MY) / (1 - 2 * MY), -0.02, 1.02), t);
+        if (activeId === null) feed(X, Y, pinch, t, 'hand');
+      }
+    }
+    if (t - lastSeen > 300 && (lm || (P.kind === 'hand' && P.present))) release(t);
+  }
+
+  const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+
+  // esqueleto da mão, sem distorção, preso ao cursor
+  function draw(color) {
+    if (!lm || P.kind !== 'hand' || !P.present) return;
+    const k = H * 0.8;
+    const px = i => P.x - (lm[i].x - ax) * k * ar, py = i => P.y + (lm[i].y - ay) * k;
+    ctx.lineCap = 'round';
+    pen(color, 1.5);
+    ctx.beginPath();
+    for (const b of BONES) { ctx.moveTo(px(b[0]), py(b[0])); ctx.lineTo(px(b[1]), py(b[1])); }
+    ctx.stroke();
+    ctx.fillStyle = color;
+    for (let i = 0; i < 21; i++) { circ(px(i), py(i), 2); ctx.fill(); }
+  }
+
+  return {
+    start, stop, tick, draw, BONES,
+    state: () => state,
+    error: () => err,
+    on: () => state === 'on',
+    seen: () => state === 'on' && now - lastSeen < 300,
+    seenFor: () => (state === 'on' && now - lastSeen < 300) ? now - seenSince : 0
+  };
+})();
+
+/* ---------- música (sintetizada na hora, sem arquivos) ---------- */
+const Music = (() => {
+  let ac = null, bus, lp, an, level, master, bytes;
+  let timer = 0, playing = false, nextT = 0, step = 0, muted = false, lvl = 0;
+  const SD = 60 / 92 / 2;                        // colcheia a 92 bpm
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  const CH = [
+    { b: 45, p: [57, 60, 64, 67], a: [69, 72, 76, 72, 79, 76, 72, 76] },
+    { b: 41, p: [57, 60, 64, 65], a: [69, 72, 77, 72, 76, 72, 77, 72] },
+    { b: 48, p: [55, 59, 60, 64], a: [67, 72, 76, 72, 79, 76, 71, 72] },
+    { b: 43, p: [55, 59, 62, 64], a: [67, 71, 74, 71, 76, 74, 71, 74] }
+  ];
+
+  function unlock() {
+    try {
+      if (!ac) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        ac = new AC();
+        bus = ac.createGain();
+        lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 3600;
+        an = ac.createAnalyser(); an.fftSize = 1024; an.smoothingTimeConstant = 0;
+        bytes = new Uint8Array(an.fftSize);
+        level = ac.createGain(); level.gain.value = lvl;
+        master = ac.createGain(); master.gain.value = muted ? 0 : 1;
+        bus.connect(lp); lp.connect(an); lp.connect(level); level.connect(master); master.connect(ac.destination);
+      }
+      if (ac.state === 'suspended') ac.resume();
+    } catch (_) { ac = null; }
+  }
+
+  function tone(type, f, t, peak, att, dec) {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(peak, t + att);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + att + dec);
+    o.connect(g); g.connect(bus);
+    o.start(t); o.stop(t + att + dec + 0.05);
+    return o;
+  }
+
+  function playStep(s, t) {
+    const c = CH[(s >> 3) % 4], k = s & 7;
+    if (k === 0) c.p.forEach((m, i) => tone('triangle', mtof(m) * (i % 2 ? 1.003 : 0.997), t, 0.045, 0.5, SD * 8.4));
+    if (k === 0 || k === 5) tone('sine', mtof(c.b), t, 0.24, 0.01, 0.9);
+    if (k === 0 || k === 4) { const o = tone('sine', 120, t, 0.3, 0.004, 0.22); o.frequency.exponentialRampToValueAtTime(44, t + 0.14); }
+    tone('triangle', mtof(c.a[k]), t, k % 2 ? 0.07 : 0.1, 0.006, 0.42);
+  }
+
+  function tick() {
+    if (!ac || !playing || ac.state !== 'running') return;
+    const t = ac.currentTime;
+    if (nextT < t) nextT = t + 0.05;
+    while (nextT < t + 0.25) { playStep(step, nextT); nextT += SD; step = (step + 1) % 32; }
+  }
+
+  function setLevel(v, tc) {
+    lvl = v * v * 0.7;
+    if (ac) { try { level.gain.setTargetAtTime(lvl, ac.currentTime, tc || 0.04); } catch (_) {} }
+  }
+
+  return {
+    unlock,
+    setLevel,
+    start() { playing = true; step = 0; nextT = 0; clearInterval(timer); timer = setInterval(tick, 60); },
+    stop() { playing = false; clearInterval(timer); setLevel(0, 0.25); },
+    mute(m) { muted = m; if (ac) { try { master.gain.setTargetAtTime(m ? 0 : 1, ac.currentTime, 0.03); } catch (_) {} } },
+    wave() {
+      if (!ac || !playing || ac.state !== 'running') return null;
+      an.getByteTimeDomainData(bytes);
+      return bytes;
+    }
+  };
+})();
+
+/* ---------- desenho ---------- */
+function pen(color, w) { ctx.strokeStyle = color; ctx.lineWidth = w; }
+function seg(x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+function circ(x, y, r) { ctx.beginPath(); ctx.arc(x, y, Math.max(0.1, r), 0, Math.PI * 2); }
+function rrect(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+/* ---------- estado geral ---------- */
+let phase = 'in';
+const completed = [false, false, false];
+let scene = null, activeSc = null;
+
+function setStatus(text, ok, sc) {
+  const t = sc || scene;
+  if (t && t.St && t.St.textContent !== text) t.St.textContent = text;
+}
+function complete(msg, holdMs) {
+  if (phase !== 'play') return;
+  if (scene.slot != null) completed[scene.slot] = true;
+  phase = 'done'; scene.isDone = true; scene.doneAt = now; scene.hold = holdMs || 1500; scene.adv = false;
+}
+
+/* ---------- início: ligar a câmera e mostrar a mão ---------- */
+const OPEN_HAND = [[.50,.95],[.36,.86],[.25,.74],[.17,.62],[.10,.52],[.36,.55],[.32,.38],[.30,.27],[.28,.17],[.48,.52],[.48,.33],[.48,.21],[.48,.10],[.59,.54],[.62,.37],[.64,.26],[.65,.16],[.69,.60],[.75,.47],[.79,.39],[.82,.31]];
+const intro = {
+  name: 'Ligue a câmera',
+  sub: 'Sua mão vira o cursor. A imagem é processada no seu navegador e não é enviada.',
+  enter() { this.layout(); this.sync(); },
+  layout() {
+    this.sz = Math.min(S.h * 0.9, S.w * 0.5, 400 * U);
+    this.cx = W < 640 ? S.x + S.w * 0.5 : S.x + S.w * 0.72;
+    this.cy = S.y + S.h * 0.5;
+  },
+  sync() {
+    const s = Hand.state();
+    elActions.hidden = s === 'on';
+    elCamStart.disabled = s === 'asking' || s === 'loading';
+    elCamStart.textContent = s === 'asking' ? 'Aguardando permissão' : s === 'loading' ? 'Carregando' : s === 'error' ? 'Tentar de novo' : 'Ligar câmera';
+    if (s === 'on') { this.T.textContent = 'Mostre a mão'; setStatus('Deixe a mão aberta em frente à câmera.', false, this); }
+    else {
+      this.T.textContent = this.name;
+      setStatus(s === 'error' ? Hand.error()
+        : s === 'asking' ? 'Autorize o uso da câmera na janela do navegador.'
+        : s === 'loading' ? 'Carregando o rastreamento da mão. Na primeira vez leva alguns segundos.'
+        : this.sub, false, this);
+    }
+    resize();
+  },
+  update() {
+    if (phase === 'play' && Hand.on() && Hand.seenFor() > 700) complete('Mão detectada.', 1100);
+  },
+  draw() {
+    if (Hand.seen()) { Hand.draw(C.ink); return; }
+    const z = this.sz, x0 = this.cx - z / 2, y0 = this.cy - z / 2;
+    ctx.lineCap = 'round';
+    pen(C.line, 1.5);
+    ctx.beginPath();
+    for (const b of Hand.BONES) {
+      ctx.moveTo(x0 + OPEN_HAND[b[0]][0] * z, y0 + OPEN_HAND[b[0]][1] * z);
+      ctx.lineTo(x0 + OPEN_HAND[b[1]][0] * z, y0 + OPEN_HAND[b[1]][1] * z);
+    }
+    ctx.stroke();
+    ctx.fillStyle = C.line;
+    for (const p of OPEN_HAND) { circ(x0 + p[0] * z, y0 + p[1] * z, 2.5); ctx.fill(); }
+  }
+};
+
+/* ---------- gesto 1: arrastar a caixa ---------- */
+const box = {
+  slot: 0,
+  name: 'Arraste a caixa',
+  get sub() {
+    return Hand.on()
+      ? 'Junte o polegar e o indicador sobre a caixa e leve até a área marcada.'
+      : 'Leve a caixa até a área marcada.';
+  },
+  b: null,
+  enter() { this.b = null; this.layout(); },
+  layout() {
+    const s = this.s = Math.round(88 * U);
+    this.floor = S.y + S.h * 0.9;
+    this.shelfW = s * 1.9;
+    this.shelfX = Math.min(S.x + S.w * 0.78, S.x + S.w - this.shelfW / 2);
+    this.shelfY = this.floor - Math.min(S.h * 0.38, s * 2.2);
+    const startX = S.x + Math.max(s * 0.9, S.w * 0.2);
+    const b = this.b;
+    if (!b) this.b = { x: startX, y: this.floor - s / 2, vx: 0, vy: 0, rot: 0, held: false, ox: 0, oy: 0, support: 'floor' };
+    else {
+      b.x = clamp(b.x, s / 2, W - s / 2);
+      if (b.support === 'floor') b.y = this.floor - s / 2;
+      if (b.support === 'shelf') { b.x = this.shelfX; b.y = this.shelfY - s / 2; }
+    }
+  },
+  land(yLine, kind) {
+    const b = this.b;
+    b.y = yLine - this.s / 2;
+    if (b.vy > 260) b.vy = -b.vy * 0.28;
+    else { b.vy = 0; b.support = kind; }
+  },
+  update(dt) {
+    const b = this.b, s = this.s, h = s / 2, G = 2800 * U;
+    const reach = h + (P.kind === 'hand' ? 30 : 12);
+    let rotT = 0;
+    if (phase === 'play' && P.pressed && Math.abs(P.x - b.x) < reach && Math.abs(P.y - b.y) < reach) {
+      b.held = true; b.ox = b.x - P.x; b.oy = b.y - P.y; b.support = null;
+    }
+    if (b.held && !P.down) {
+      b.held = false;
+      b.vx = clamp(P.vx, -2400 * U, 2400 * U);
+      b.vy = clamp(P.vy, -2400 * U, 2400 * U);
+    }
+    if (b.held) {
+      const tx = clamp(P.x + b.ox, h, W - h), ty = Math.min(P.y + b.oy, this.floor - h);
+      const k = 1 - Math.exp(-dt * 26);
+      const nx = b.x + (tx - b.x) * k, ny = b.y + (ty - b.y) * k;
+      b.vx = (nx - b.x) / dt; b.vy = (ny - b.y) / dt;
+      b.x = nx; b.y = ny;
+      rotT = clamp(b.vx * 0.00028, -0.32, 0.32);
+    } else if (b.support) {
+      b.vy = 0;
+      b.vx *= Math.exp(-dt * 9);
+      b.x = clamp(b.x + b.vx * dt, h, W - h);
+      if (b.support === 'shelf') {
+        if (Math.abs(b.x - this.shelfX) > this.shelfW / 2) b.support = null;
+        else {
+          b.x += (this.shelfX - b.x) * (1 - Math.exp(-dt * 10));
+          if (Math.abs(b.x - this.shelfX) < 1 && Math.abs(b.vx) < 30) { b.x = this.shelfX; b.vx = 0; complete('No lugar.'); }
+        }
+      }
+    } else {
+      const prevBottom = b.y + h;
+      b.vy += G * dt;
+      b.x += b.vx * dt; b.y += b.vy * dt;
+      if (b.x < h) { b.x = h; b.vx = -b.vx * 0.35; }
+      if (b.x > W - h) { b.x = W - h; b.vx = -b.vx * 0.35; }
+      const bottom = b.y + h;
+      if (b.vy > 0 && prevBottom <= this.shelfY + 1 && bottom >= this.shelfY && Math.abs(b.x - this.shelfX) <= this.shelfW / 2) this.land(this.shelfY, 'shelf');
+      else if (bottom >= this.floor) this.land(this.floor, 'floor');
+      rotT = clamp(b.vx * 0.00028, -0.32, 0.32);
+    }
+    b.rot += (rotT - b.rot) * (1 - Math.exp(-dt * 12));
+  },
+  draw() {
+    const b = this.b, s = this.s, h = s / 2, won = completed[0];
+    Hand.draw(C.line);
+    ctx.lineCap = 'round';
+    pen(C.line, 1.5);
+    seg(S.x, this.floor, S.x + S.w, this.floor);
+    seg(this.shelfX, this.shelfY, this.shelfX, this.floor);
+    pen(C.ink, 1.5);
+    seg(this.shelfX - this.shelfW / 2, this.shelfY, this.shelfX + this.shelfW / 2, this.shelfY);
+    if (!won) {
+      const near = b.held && Math.abs(b.x - this.shelfX) < s * 0.7 && b.y < this.shelfY;
+      ctx.setLineDash([5, 6]);
+      pen(near ? C.accent : C.muted, 1.5);
+      rrect(this.shelfX - h - 5, this.shelfY - s - 5, s + 10, s + 5, 6 * U);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.rotate(b.rot);
+    if (b.held) ctx.scale(1.03, 1.03);
+    ctx.fillStyle = C.surface;
+    pen(won ? C.accent : C.ink, 1.5);
+    rrect(-h, -h, s, s, 5 * U);
+    ctx.fill(); ctx.stroke();
+    ctx.restore();
+  },
+  hint(p) {
+    const b = this.b;
+    if (b.held || b.support === 'shelf') return null;
+    return { x: lerp(b.x, this.shelfX, p), y: lerp(b.y, this.shelfY - this.s / 2, p) - Math.sin(Math.PI * p) * this.s * 0.9 };
+  }
+};
+
+/* ---------- gesto 2: aumentar o volume ----------
+   Com a câmera, o volume segue a altura da mão. Sem ela, deslizar para cima. */
+const vol = {
+  slot: 1,
+  get name() { return Hand.on() ? 'Aumente o volume da música com a mão' : 'Aumente o volume da música com o dedo'; },
+  get sub() { return Hand.on() ? 'Levante a mão.' : 'Deslize para cima.'; },
+  v: 0.12, shown: 0.12, sent: -1, drag: false, py: 0, v0: 0, pk: 0.3, armed: false, highAt: 0, said: '',
+  enter() {
+    this.v = 0.12; this.shown = 0.12; this.sent = -1; this.drag = false; this.pk = 0.3;
+    this.armed = false; this.highAt = 0; this.said = '';
+    this.layout();
+  },
+  layout() {
+    this.tx = S.x + S.w - Math.max(26 * U, S.w * 0.1);
+    this.top = S.y + S.h * 0.1;
+    this.bot = S.y + S.h * 0.92;
+  },
+  update(dt) {
+    const span = this.bot - this.top;
+    if (phase === 'play') {
+      if (P.kind === 'hand' && P.present && Hand.on()) {
+        // altura da mão = volume. Só vale subir depois de ter passado pela parte de baixo.
+        this.drag = false;
+        this.v = clamp((this.bot - P.y) / span, 0, 1);
+        if (this.v <= 0.6) this.armed = true;
+        const want = (!this.armed && this.v > 0.6) ? 'Abaixe a mão e levante de novo.' : this.sub;
+        if (want !== this.said) { this.said = want; setStatus(want, false); }
+        if (this.armed && this.v >= 0.95) {
+          if (!this.highAt) this.highAt = now;
+          if (now - this.highAt > 500) { this.v = 1; complete('Volume no máximo.', 2200); }
+        } else this.highAt = 0;
+      } else {
+        if (P.pressed) { this.drag = true; this.py = P.y; this.v0 = this.v; }
+        if (this.drag) {
+          if (P.down) this.v = clamp(this.v0 + (this.py - P.y) / span, 0, 1);
+          else this.drag = false;
+        }
+        if (this.v >= 0.97) { this.v = 1; this.drag = false; complete('Volume no máximo.', 2200); }
+      }
+    } else this.drag = false;
+    this.shown += (this.v - this.shown) * (1 - Math.exp(-dt * 20));
+    if (this.v !== this.sent) { this.sent = this.v; Music.setLevel(this.v); }
+  },
+  draw() {
+    const won = completed[1], span = this.bot - this.top;
+    const hy = this.bot - span * this.shown;
+    Hand.draw(C.line);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+    // onda: o som real quando há áudio, uma onda desenhada quando não há
+    const x0 = S.x, x1 = this.tx - 64 * U, cy = (this.top + this.bot) / 2;
+    const A = Math.min(S.h * 0.3, 130 * U) * (0.04 + 0.96 * this.shown);
+    const N = 160, data = Music.wave();
+    let st = 0;
+    if (data) {
+      for (let i = 1; i < 400; i++) { if (data[i - 1] < 128 && data[i] >= 128) { st = i; break; } }
+      let pk = 0.05;
+      for (let i = 0; i < N; i++) pk = Math.max(pk, Math.abs((data[st + i * 3] - 128) / 128));
+      this.pk = Math.max(pk, this.pk * 0.96);
+    }
+    pen(C.ink, 1.5);
+    ctx.beginPath();
+    for (let i = 0; i < N; i++) {
+      const f = i / (N - 1);
+      let v;
+      if (data) v = (data[st + i * 3] - 128) / 128 / this.pk;
+      else v = 0.6 * Math.sin(i * 0.12 + now * 0.004) * Math.sin(i * 0.031 + now * 0.0013) + 0.25 * Math.sin(i * 0.33 - now * 0.006);
+      v *= Math.sqrt(Math.sin(Math.PI * f));
+      const x = lerp(x0, x1, f), y = cy + v * A;
+      if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+    }
+    ctx.stroke();
+
+    // trilho
+    pen(C.line, 1.5);
+    seg(this.tx, this.top, this.tx, this.bot);
+    for (let i = 0; i <= 4; i++) { const y = this.bot - span * i / 4; seg(this.tx + 10 * U, y, this.tx + 18 * U, y); }
+    pen(won ? C.accent : C.ink, 2.5);
+    seg(this.tx, hy, this.tx, this.bot);
+
+    // puxador e leitura
+    const r = 11 * U;
+    circ(this.tx, hy, r);
+    ctx.fillStyle = won ? C.accent : (this.drag ? C.ink : C.surface);
+    ctx.fill();
+    pen(won ? C.accent : C.ink, 1.5);
+    ctx.stroke();
+    ctx.fillStyle = C.muted;
+    ctx.font = '500 ' + Math.round(11 + 3 * U) + 'px Inter, system-ui, sans-serif';
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    ctx.fillText(String(Math.round(this.shown * 100)), this.tx - r - 10 * U, hy);
+  },
+  hint(p) {
+    if (completed[1]) return null;
+    const span = this.bot - this.top;
+    return { x: this.tx, y: this.bot - span * this.shown - p * span * 0.35 };
+  }
+};
+
+/* ---------- gesto 3: guiar a cobrinha ----------
+   A cabeça segue o cursor (mouse, dedo ou mão); ela anda sozinha na direção dele. */
+const snake = {
+  slot: 2,
+  name: 'Guie a cobrinha',
+  get sub() {
+    return Hand.on()
+      ? 'Leve a cobrinha até as bolinhas com a mão.'
+      : 'Leve a cobrinha até as bolinhas.';
+  },
+  GOAL: 5, n: 0, h: null, ang: 0, trail: [], food: null,
+  enter() { this.n = 0; this.h = null; this.trail = []; this.food = null; this.layout(); },
+  layout() {
+    const r = this.r = 9 * U;
+    if (!this.h) { this.h = { x: S.x + S.w * 0.18, y: S.y + S.h * 0.5 }; this.ang = 0; this.trail = [{ x: this.h.x, y: this.h.y }]; }
+    this.h.x = clamp(this.h.x, S.x + r, S.x + S.w - r);
+    this.h.y = clamp(this.h.y, S.y + r, S.y + S.h - r);
+    if (!this.food) this.spawn();
+    else { this.food.x = clamp(this.food.x, S.x + r * 2, S.x + S.w - r * 2); this.food.y = clamp(this.food.y, S.y + r * 2, S.y + S.h - r * 2); }
+  },
+  spawn() {
+    const m = this.r * 2.5;
+    for (let k = 0; k < 30; k++) {
+      const x = S.x + m + Math.random() * Math.max(1, S.w - 2 * m), y = S.y + m + Math.random() * Math.max(1, S.h - 2 * m);
+      if (!this.h || Math.hypot(x - this.h.x, y - this.h.y) > Math.min(S.w, S.h) * 0.3) { this.food = { x, y, born: now }; return; }
+    }
+    this.food = { x: S.x + S.w * 0.7, y: S.y + S.h * 0.4, born: now };
+  },
+  update(dt) {
+    const h = this.h, r = this.r;
+    if (phase === 'play' && P.present) {
+      const dx = P.x - h.x, dy = P.y - h.y, d = Math.hypot(dx, dy);
+      if (d > 14 * U) {
+        this.ang += angDiff(Math.atan2(dy, dx), this.ang) * (1 - Math.exp(-dt * 7));
+        const sp = 230 * U * clamp(d / (90 * U), 0.35, 1);
+        h.x = clamp(h.x + Math.cos(this.ang) * sp * dt, S.x + r, S.x + S.w - r);
+        h.y = clamp(h.y + Math.sin(this.ang) * sp * dt, S.y + r, S.y + S.h - r);
+      }
+    }
+    const t = this.trail, last = t[t.length - 1];
+    if (!last || Math.hypot(h.x - last.x, h.y - last.y) > 3 * U) t.push({ x: h.x, y: h.y });
+    const len = (80 + this.n * 36) * U;
+    let tot = 0;
+    for (let i = t.length - 1; i > 0; i--) {
+      tot += Math.hypot(t[i].x - t[i - 1].x, t[i].y - t[i - 1].y);
+      if (tot > len) { t.splice(0, i); break; }
+    }
+    if (phase === 'play' && this.food && Math.hypot(this.food.x - h.x, this.food.y - h.y) < r + 12 * U) {
+      this.n++;
+      if (this.n >= this.GOAL) { this.food = null; complete('', 1400); }
+      else this.spawn();
+    }
+  },
+  draw() {
+    const h = this.h, r = this.r, won = completed[2], f = this.food;
+    Hand.draw(C.line);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    if (f) {
+      const k = ease((now - f.born) / 250);
+      circ(f.x, f.y, 6 * U * (0.5 + 0.5 * k)); ctx.fillStyle = C.accent; ctx.fill();
+      circ(f.x, f.y, 14 * U); pen(C.accent, 1.5);
+      ctx.globalAlpha = 0.45 * k; ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    const t = this.trail;
+    pen(won ? C.accent : C.ink, Math.max(3, r * 0.7));
+    ctx.beginPath();
+    ctx.moveTo(t[0].x, t[0].y);
+    for (let i = 1; i < t.length; i++) ctx.lineTo(t[i].x, t[i].y);
+    ctx.lineTo(h.x, h.y);
+    ctx.stroke();
+    circ(h.x, h.y, r); ctx.fillStyle = won ? C.accent : C.ink; ctx.fill();
+  },
+  hint(p) {
+    if (completed[2] || !this.food) return null;
+    return { x: lerp(this.h.x, this.food.x, ease(p)), y: lerp(this.h.y, this.food.y, ease(p)) };
+  }
+};
+
+/* ---------- fim ---------- */
+const end = {
+  name: 'Pronto.',
+  sub: '',
+  enter() {},
+  update() {},
+  draw() {
+    const r = 20 * U, g = Math.min(96 * U, (S.w - r * 2) / 2.2);
+    const x = S.x + r, cy = S.y + S.h * 0.5;
+    const col = i => completed[i] ? C.ink : C.line;
+    Hand.draw(C.line);
+    ctx.lineCap = 'round';
+    pen(col(0), 1.5); rrect(x - r, cy - r, r * 2, r * 2, 4 * U); ctx.stroke();
+    pen(col(1), 1.5); seg(x + g, cy - r, x + g, cy + r);
+    ctx.fillStyle = col(1); circ(x + g, cy - r, 4 * U); ctx.fill();
+    const sx = x + g * 2;
+    pen(col(2), 1.5);
+    ctx.beginPath(); ctx.moveTo(sx - r, cy); ctx.bezierCurveTo(sx - r * 0.4, cy - r * 1.3, sx + r * 0.1, cy + r * 1.3, sx + r, cy - r * 0.2); ctx.stroke();
+    ctx.fillStyle = col(2); circ(sx + r, cy - r * 0.2, 3.5 * U); ctx.fill();
+  }
+};
+
+const SCENES = [intro, box, vol, snake, end];
+
+/* ---------- telas empilhadas ---------- */
+SCENES.forEach((sc, i) => {
+  sc._i = i; sc._sec = $('s' + i); sc._cv = $('c' + i); sc._g2 = sc._cv.getContext('2d');
+  sc.T = $('t' + i); sc.St = $('u' + i); sc._copyEl = sc.T.parentElement;
+  sc.isDone = false; sc.adv = false; sc.doneAt = 0; sc.hold = 1500;
+  sc._S = { x: 0, y: 0, w: 0, h: 0 }; sc._w = 0; sc._h = 0; sc._u = 1; sc._top = 0; sc._vis = false;
+  attach(sc._cv);
+});
+function env(sc) { scene = sc; ctx = sc._g2; S = sc._S; W = sc._w; H = sc._h; U = sc._u; }
+/* rolagem até a próxima tela: animação própria, lenta e com aceleração e freio suaves.
+   O encaixe automático (scroll-snap) fica desligado só enquanto ela acontece. */
+const scroller = document.scrollingElement || document.documentElement;
+let glide = null;
+function endGlide() {
+  if (!glide) return;
+  glide = null;
+  scroller.style.scrollSnapType = '';
+  scroller.style.scrollBehavior = '';
+}
+function goTo(i) {
+  const sc = SCENES[clamp(i, 0, SCENES.length - 1)];
+  const from = scroller.scrollTop;
+  const max = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+  const to = clamp(from + sc._sec.getBoundingClientRect().top, 0, max);
+  scroller.style.scrollSnapType = 'none';
+  scroller.style.scrollBehavior = 'auto';
+  if (reduce.matches || Math.abs(to - from) < 2) {
+    glide = { from: to, to, t0: now, dur: 1 };
+    scroller.scrollTop = to;
+    endGlide();
+    return;
+  }
+  glide = { from, to, t0: now, dur: clamp(Math.abs(to - from) * 1.3, 1100, 1700) };
+}
+function stepGlide(t) {
+  if (!glide) return;
+  const p = clamp((t - glide.t0) / glide.dur, 0, 1);
+  const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+  scroller.scrollTop = lerp(glide.from, glide.to, e);
+  if (p >= 1) endGlide();
+}
+addEventListener('wheel', endGlide, { passive: true });       // quem rola por conta própria assume o controle
+addEventListener('touchstart', endGlide, { passive: true });
+function setActive(sc) {
+  if (activeSc === vol) Music.stop();
+  activeSc = sc; lastAction = now;
+  if (sc === vol) { vol.sent = -1; Music.start(); }
+  elCam.hidden = sc === intro;
+}
+elAgain.addEventListener('click', () => {
+  completed.fill(false);
+  for (const sc of [box, vol, snake]) { sc.isDone = false; sc.adv = false; env(sc); sc.enter(); }
+  goTo(1);
+});
+elNoCam.addEventListener('click', () => { Music.unlock(); goTo(1); });
+
+/* ---------- câmera ---------- */
+elCamStart.addEventListener('click', () => { Music.unlock(); Hand.start(); });
+elCam.addEventListener('click', () => {
+  Music.unlock();
+  if (Hand.on()) Hand.stop(); else Hand.start();
+});
+function onHandChange() {
+  const s = Hand.state();
+  elCam.textContent = s === 'on' ? 'Câmera ligada' : (s === 'asking' || s === 'loading') ? 'Câmera carregando' : 'Câmera desligada';
+  elCam.setAttribute('aria-pressed', String(s === 'on'));
+  intro.sync();
+  if (s === 'on' || s === 'off') {
+    for (const sc of [box, vol, snake]) { sc.T.textContent = sc.name; setStatus(sc.sub, false, sc); }
+    vol.said = '';
+    resize();
+  } else if (s === 'error' && activeSc && activeSc !== intro) setStatus(Hand.error(), false, activeSc);
+}
+/* ---------- som ---------- */
+let soundOn = true;
+try { soundOn = localStorage.getItem('humantouch:som') !== '0'; } catch (_) {}
+function paintSound() {
+  elSound.textContent = soundOn ? 'Som ligado' : 'Som desligado';
+  elSound.setAttribute('aria-pressed', String(soundOn));
+  Music.mute(!soundOn);
+}
+elSound.addEventListener('click', () => {
+  soundOn = !soundOn;
+  try { localStorage.setItem('humantouch:som', soundOn ? '1' : '0'); } catch (_) {}
+  Music.unlock();
+  paintSound();
+});
+
+/* ---------- tema: segue o sistema até a pessoa escolher claro ou escuro ---------- */
+const elTheme = $('theme');
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+function currentTheme() {
+  const a = document.documentElement.getAttribute('data-theme');
+  if (a === 'dark' || a === 'light') return a;
+  return darkQuery.matches ? 'dark' : 'light';
+}
+function paintTheme() {
+  const t = currentTheme();
+  elTheme.textContent = t === 'dark' ? 'Tema escuro' : 'Tema claro';
+  elTheme.setAttribute('aria-label', t === 'dark' ? 'Tema escuro. Mudar para o tema claro' : 'Tema claro. Mudar para o tema escuro');
+}
+try {
+  const saved = localStorage.getItem('humantouch:tema');
+  if (saved === 'dark' || saved === 'light') document.documentElement.setAttribute('data-theme', saved);
+} catch (_) {}
+elTheme.addEventListener('click', () => {
+  const t = currentTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('humantouch:tema', t); } catch (_) {}
+  readTokens();
+  paintTheme();
+});
+darkQuery.addEventListener('change', paintTheme);
+new MutationObserver(paintTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+paintTheme();
+
+addEventListener('keydown', e => {
+  Music.unlock();
+  if (activeSc === vol && !vol.isDone && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+    vol.v = clamp(vol.v + (e.key === 'ArrowUp' ? 0.06 : -0.06), 0, 1);
+    lastAction = now;
+    e.preventDefault();
+  }
+});
+
+/* ---------- dica: um ponteiro fantasma mostra o gesto depois de um tempo parado ---------- */
+function drawHint() {
+  if (phase !== 'play' || P.down || !scene.hint) return;
+  const idle = now - lastAction - 3000;
+  if (idle < 0) return;
+  const a = scene.hint(0);
+  if (!a) return;
+  ctx.save();
+  ctx.setLineDash([]);
+  pen(C.muted, 1.5);
+  if (reduce.matches) {
+    ctx.globalAlpha *= 0.5;
+    ctx.fillStyle = C.muted;
+    for (let i = 1; i < 8; i++) { const q = scene.hint(i / 8); circ(q.x, q.y, 1.3); ctx.fill(); }
+    const b = scene.hint(1);
+    circ(b.x, b.y, 11); ctx.stroke();
+  } else {
+    const tt = (idle % 2000) / 2000;
+    const p = ease(tt / 0.62);
+    const al = tt < 0.1 ? tt / 0.1 : tt > 0.62 ? clamp(1 - (tt - 0.62) / 0.2, 0, 1) : 1;
+    const q = scene.hint(p);
+    ctx.globalAlpha *= al * 0.6;
+    circ(q.x, q.y, 11); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* ---------- cursor: um anel que encolhe ao pressionar ou ao fechar a pinça ---------- */
+let cr = 13;
+const curCanvas = $('cur'), cctx = curCanvas.getContext('2d');
+function drawCursor(dt) {
+  cctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  cctx.clearRect(0, 0, VW(), innerHeight);
+  if (!P.present) return;
+  cr += ((P.down ? 8 : 13) - cr) * (1 - Math.exp(-dt * 24));
+  cctx.beginPath();
+  cctx.arc(P.x, P.y, Math.max(0.1, cr), 0, Math.PI * 2);
+  const col = (hot && hot.classList.contains('pill')) ? C.bg : C.ink;   // sobre o botão preenchido o anel inverte
+  if (P.down) { cctx.globalAlpha = 0.18; cctx.fillStyle = col; cctx.fill(); cctx.globalAlpha = 1; }
+  cctx.strokeStyle = col;
+  cctx.lineWidth = 1.5;
+  cctx.stroke();
+}
+
+/* ---------- menu e botões clicáveis com a mão ----------
+   Com a câmera, a pinça age como um clique do mouse: o anel destaca o botão sob
+   ele e fechar a pinça em cima dele aciona o botão (o mesmo clique do mouse/teclado). */
+const UI = ['camToggle', 'sound', 'theme', 'camStart', 'noCam', 'again'].map($).filter(Boolean);
+let hot = null;
+function uiAt(x, y) {
+  const o = { left: 0, top: 0 };
+  let best = null, bd = 1e9;
+  for (const el of UI) {
+    if (el.hidden || el.closest('[hidden]')) continue;
+    const r = el.getBoundingClientRect();
+    if (!r.width || !r.height) continue;
+    const m = P.kind === 'hand' ? 14 : 4;                        // a mão é menos precisa que o mouse
+    const l = r.left - o.left - m, t = r.top - o.top - m;
+    if (x < l || x > l + r.width + 2 * m || y < t || y > t + r.height + 2 * m) continue;
+    const d = Math.hypot(x - (r.left - o.left + r.width / 2), y - (r.top - o.top + r.height / 2));
+    if (d < bd) { bd = d; best = el; }
+  }
+  return best;
+}
+function handUI() {
+  const el = (P.kind === 'hand' && P.present) ? uiAt(P.x, P.y) : null;
+  if (el !== hot) {
+    if (hot) hot.classList.remove('hot');
+    hot = el;
+    if (hot) hot.classList.add('hot');
+  }
+  if (hot && P.pressed) {
+    P.pressed = false;                                           // o clique é do botão, não da cena
+    lastAction = now;
+    if (!hot.disabled) hot.click();
+  }
+}
+
+/* ---------- medidas: cada gesto tem a sua tela ---------- */
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  const cw0 = Math.round(VW() * DPR), ch0 = Math.round(innerHeight * DPR);
+  if (curCanvas.width !== cw0 || curCanvas.height !== ch0) { curCanvas.width = cw0; curCanvas.height = ch0; }
+  for (const sc of SCENES) {
+    const r = sc._sec.getBoundingClientRect();
+    sc._w = r.width; sc._h = r.height;
+    const cw = Math.round(r.width * DPR), ch = Math.round(r.height * DPR);
+    if (sc._cv.width !== cw || sc._cv.height !== ch) { sc._cv.width = cw; sc._cv.height = ch; }
+    const cs = getComputedStyle(sc._sec);
+    const gl = parseFloat(cs.paddingLeft) || 16, gr = parseFloat(cs.paddingRight) || 16, gb = parseFloat(cs.paddingBottom) || 16;
+    const cb = sc._copyEl.getBoundingClientRect();
+    const A = sc._S;
+    A.x = gl;
+    A.w = Math.max(120, sc._w - gl - gr);
+    A.y = cb.bottom - r.top + 10;
+    const bottom = sc._h - gb;
+    A.h = bottom - A.y;
+    if (A.h < 170) { A.y = Math.max(40, bottom - 170); A.h = bottom - A.y; }
+    sc._u = clamp(Math.min(sc._w, sc._h) / 640, 0.62, 1.25);
+    if (sc.layout) { env(sc); sc.layout(); }
+  }
+}
+
+/* ---------- laço principal ---------- */
+const viewP = {};
+function frame(t) {
+  now = t;
+  const dt = clamp((t - last) / 1000, 0.001, 0.034);
+  last = t;
+  Hand.tick(t);
+  stepGlide(t);
+
+  const vh = innerHeight;
+  let best = null, bo = -1;
+  for (const sc of SCENES) {
+    const r = sc._sec.getBoundingClientRect();
+    sc._top = r.top;
+    sc._vis = r.bottom > 0 && r.top < vh;
+    const ov = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    if (ov > bo) { bo = ov; best = sc; }
+  }
+  if (best !== activeSc) setActive(best);
+  handUI();
+
+  for (const sc of SCENES) {
+    if (!sc._vis) continue;
+    env(sc);
+    const act = sc === activeSc && Math.abs(sc._top) < vh * 0.2;
+    Object.assign(viewP, PR);
+    viewP.y = PR.y - sc._top;
+    if (!act) { viewP.down = false; viewP.pressed = false; viewP.released = false; viewP.present = false; }
+    P = viewP;
+    phase = sc.isDone ? 'done' : act ? 'play' : 'in';
+    sc.update(dt);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+    ctx.setLineDash([]);
+    sc.draw();
+    if (act) drawHint();
+    ctx.globalAlpha = 1;
+    ctx.setLineDash([]);
+    P = PR;
+  }
+
+  if (activeSc && activeSc.isDone && !activeSc.adv && t - activeSc.doneAt > activeSc.hold) {
+    activeSc.adv = true;
+    goTo(activeSc._i + 1);
+  }
+  drawCursor(dt);
+
+  PR.pressed = false; PR.released = false;
+  requestAnimationFrame(frame);
+}
+
+try { history.scrollRestoration = 'manual'; } catch (_) {}
+readTokens();
+resize();
+for (const sc of SCENES) { env(sc); sc.enter(); }
+paintSound();
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(resize);
+  ro.observe(document.body);
+  for (const sc of SCENES) ro.observe(sc._copyEl);
+} else addEventListener('resize', resize);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+requestAnimationFrame(t => { last = t; now = t; lastAction = t; requestAnimationFrame(frame); });
+})();
+</script>
+</body>
+</html>
