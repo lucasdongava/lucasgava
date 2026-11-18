@@ -318,13 +318,6 @@
   var lockCard = document.getElementById('lockCard');
   var lockwrap = document.getElementById('lockwrap');
   var shield = document.getElementById('shield');
-  var lstatus = document.getElementById('lstatus');
-  var msgs = [
-    'Nothing to upload. 0 bytes sent.',
-    'There is no server to send it to.',
-    'No account, no cloud. It stays here.'
-  ];
-  var mi = 0;
 
   function sendPackets() {
     [-58, 0, 58].forEach(function (dx, i) {
@@ -355,7 +348,6 @@
       lockwrap.classList.add('hit');
       await sleep(520);
       lockwrap.classList.remove('hit');
-      swapIn(lstatus, msgs[mi++ % msgs.length]);
       await sleep(2400);
     });
   }
