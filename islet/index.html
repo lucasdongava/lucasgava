@@ -6,7 +6,7 @@
 <title>Islet - A stopwatch in your Mac's notch</title>
 <meta name="description" content="A stopwatch with quick notes that lives in your MacBook's notch. Private, local, one shortcut away.">
 <link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -121,7 +121,21 @@
     <div class="visual lock" id="lockCard">
       <div class="lockwrap" id="lockwrap">
         <span class="shield" id="shield"></span>
-        <svg id="lockSvg" viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="shackle" d="M22 28v-7a10 10 0 0 1 20 0v7"/><rect x="14" y="28" width="36" height="26" rx="7"/><circle cx="32" cy="41" r="2.5" fill="currentColor"/></svg>
+        <svg id="lockSvg" viewBox="0 0 100 100" width="150" height="150" aria-hidden="true">
+          <defs>
+            <linearGradient id="lkBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#62b6ff"/><stop offset="1" stop-color="#0a74f0"/></linearGradient>
+            <linearGradient id="lkMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f5f8"/><stop offset=".5" stop-color="#b9bec9"/><stop offset="1" stop-color="#8a91a0"/></linearGradient>
+            <linearGradient id="lkShine" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+            <filter id="lkShadow" x="-30%" y="-30%" width="160%" height="175%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0a4fb0" flood-opacity=".35"/></filter>
+          </defs>
+          <path class="shackle" d="M34 48V34a16 16 0 0 1 32 0v14" fill="none" stroke="url(#lkMetal)" stroke-width="9" stroke-linecap="round"/>
+          <g filter="url(#lkShadow)">
+            <rect x="20" y="44" width="60" height="42" rx="14" fill="url(#lkBody)"/>
+            <rect x="20" y="44" width="60" height="22" rx="14" fill="url(#lkShine)"/>
+            <rect x="20.5" y="44.5" width="59" height="41" rx="13.5" fill="none" stroke="#fff" stroke-opacity=".38"/>
+          </g>
+          <g class="kh"><circle cx="50" cy="61" r="5.5" fill="#fff"/><path d="M47.6 64h4.8l1.2 10h-7.2z" fill="#fff"/></g>
+        </svg>
       </div>
     </div>
   </section>
@@ -142,7 +156,7 @@
   </nav>
 </footer>
 
-<script src="js/lenis.min.js?v=7"></script>
-<script src="js/main.js?v=7"></script>
+<script src="js/lenis.min.js?v=8"></script>
+<script src="js/main.js?v=8"></script>
 </body>
 </html>
