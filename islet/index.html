@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Islet - A stopwatch in your Mac's notch</title>
+<meta name="description" content="A stopwatch with quick notes that lives in your MacBook's notch. Private, local, one shortcut away.">
+<link rel="preload" href="fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<div class="notice" role="note">Fictional project. This app is a concept and is not available for download.</div>
+
+<header class="nav">
+  <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span>Islet</a>
+  <a class="btn" href="#download">Download</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1>A stopwatch that lives<br>in your notch.</h1>
+    <p class="sub">Start the clock, jot a note, keep working.</p>
+    <a class="btn big" href="#download">Download on the Mac App Store</a>
+
+    <div class="stage" inert aria-hidden="true">
+      <div class="screen">
+        <div class="menubar" aria-hidden="true">
+          <span class="mb-left"><b>&#63743;</b><b>Finder</b><span>File</span><span>Edit</span><span>View</span><span>Go</span></span>
+          <span class="mb-right"><span>Wi-Fi</span><span>100%</span><span>Tue 9:41</span></span>
+        </div>
+
+        <div class="island" id="island" data-open="false">
+          <i class="flare l"></i><i class="flare r"></i>
+          <div class="body">
+            <button class="pill" id="pill" aria-expanded="false" aria-controls="panel" aria-label="Open stopwatch">
+              <span class="dot"></span>
+              <span class="time" id="timePill">00:00.0</span>
+            </button>
+            <div class="panel" id="panel">
+              <div class="clock" id="time">00:00.0</div>
+              <div class="controls">
+                <button id="reset" class="ctl">Reset</button>
+                <button id="toggle" class="ctl primary">Start</button>
+              </div>
+              <label class="sr" for="note">Note</label>
+              <textarea id="note" rows="2" placeholder="Write a quick note..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature">
+    <div class="copy">
+      <h2>One shortcut.</h2>
+      <p>Start and pause from anywhere. No window to find, no app to switch to.</p>
+    </div>
+    <div class="visual keys" id="keysCard" aria-hidden="true">
+      <div class="kbds kbd-a"><span class="ping" id="ping"></span><kbd id="kOpt">&#8997;</kbd><kbd class="wide" id="kSpace">Space</kbd></div>
+      <div class="kpill" id="kpill"><i class="kdot"></i><span id="klabel">00:00.0</span></div>
+    </div>
+  </section>
+
+  <section class="feature flip">
+    <div class="copy">
+      <h2>Notes that stay.</h2>
+      <p>Every session keeps its own notes, so you can look back later.</p>
+    </div>
+    <div class="visual sessions" id="sessions" aria-hidden="true">
+      <span class="sel" id="sel" aria-hidden="true"></span>
+      <div class="row" style="--i:0" data-base="2530"><div><strong>Design review</strong><span contenteditable="false" spellcheck="false">Fix spacing on the pricing page</span></div><time>00:42:10</time></div>
+      <div class="row" style="--i:1" data-base="4532"><div><strong>Deep work</strong><span contenteditable="false" spellcheck="false">Draft the intro, cut the rest</span></div><time>01:15:32</time></div>
+      <div class="row" style="--i:2" data-base="1084"><div><strong>Email</strong><span contenteditable="false" spellcheck="false">Reply to Ana about the invoice</span></div><time>00:18:04</time></div>    </div>
+  </section>
+
+  <section class="feature">
+    <div class="copy">
+      <h2>One folder per project.</h2>
+      <p>Sort sessions and notes by client or project, so you stop retyping the context every time.</p>
+    </div>
+    <div class="visual projects" id="projects" aria-hidden="true">
+      <ul class="folders">
+        <li class="folder active"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Acme Studio</span></li>
+        <li class="folder"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Nova Legal</span></li>
+        <li class="folder"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Personal</span></li>
+      </ul>
+      <div class="pbody" id="pbody">
+        <h4 id="ptitle">Acme Studio</h4>
+        <ul id="plist"></ul>
+        <div class="ptotal"><span>Total</span><b id="ptot"></b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature flip">
+    <div class="copy">
+      <h2>Say it once.<br>It remembers.</h2>
+      <p>Write &ldquo;Meeting at 3pm&rdquo; and the app offers to add it to your calendar with an alert. Works with Google Calendar and more.</p>
+    </div>
+    <div class="visual cal" aria-hidden="true">
+      <div class="calnote"><small>Note</small><span id="ctext"></span><mark id="cmark"></mark><i class="caret"></i></div>
+      <div class="calask" id="calask">
+        <div class="cstate ask">
+          <div class="q"><span class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span><span>Add this to your calendar and set an alert?</span></div>
+          <div class="cbtns"><span class="cb">Not now</span><span class="cb pri" id="cbAdd">Add + alert</span></div>
+        </div>
+        <div class="cstate ok">
+          <span class="check"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <div><strong>Added to Google Calendar</strong><small>Today, 3:00 PM &middot; Alert 10 min before</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature">
+    <div class="copy">
+      <h2>Fully local.</h2>
+      <p>No account, no cloud. Your time and notes never leave your Mac.</p>
+    </div>
+    <div class="visual lock" id="lockCard">
+      <div class="lockwrap" id="lockwrap">
+        <span class="shield" id="shield"></span>
+        <svg id="lockSvg" viewBox="0 0 64 64" width="96" height="96" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="shackle" d="M22 28v-7a10 10 0 0 1 20 0v7"/><rect x="14" y="28" width="36" height="26" rx="7"/><circle cx="32" cy="41" r="2.5" fill="currentColor"/></svg>
+      </div>
+      <p class="lstatus" id="lstatus">0 bytes sent. Ever.</p>
+    </div>
+  </section>
+
+  <section class="cta" id="download">
+    <h2>Less setup.<br>More focus.</h2>
+    <a class="btn big" href="#">Download on the Mac App Store</a>
+    <p class="req">Requires macOS 13 or later.</p>
+  </section>
+</main>
+
+<footer>
+  <span>Islet</span>
+  <nav>
+    <a href="#">Privacy</a>
+    <a href="#">Contact support</a>
+    <a href="#">Request feature</a>
+  </nav>
+</footer>
+
+<script src="js/lenis.min.js?v=1"></script>
+<script src="js/main.js?v=1"></script>
+</body>
+</html>
