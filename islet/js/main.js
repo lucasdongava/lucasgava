@@ -19,18 +19,6 @@
     });
   }
 
-  /* ---------- Mac do hero: reduz no celular mantendo as proporcoes ---------- */
-  var stageEl = document.querySelector('.stage');
-  var mq = window.matchMedia('(max-width:760px)');
-  function fitMac() {
-    if (!stageEl) return;
-    if (!mq.matches) { stageEl.style.zoom = ''; return; }
-    var avail = stageEl.parentNode.clientWidth - 48;
-    stageEl.style.zoom = Math.min(1, avail / 640);
-  }
-  fitMac();
-  window.addEventListener('resize', fitMac);
-
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function fmt(ms) {
     var t = Math.floor(ms / 100);

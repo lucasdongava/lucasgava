@@ -37,7 +37,7 @@ h1{font-size:clamp(40px,7.4vw,84px);line-height:1.02;letter-spacing:-.035em;marg
 .stage{margin-top:64px}
 
 /* tela do mac */
-.screen{position:relative;height:440px;max-width:880px;margin:0 auto;overflow:hidden;border:12px solid #0b0b0c;border-bottom:0;border-radius:26px 26px 0 0;
+.screen{position:relative;height:520px;max-width:960px;margin:0 auto;overflow:hidden;border:12px solid #0b0b0c;border-bottom:0;border-radius:26px 26px 0 0;
   background:
     radial-gradient(90% 70% at 15% 110%,#ffb199 0%,transparent 60%),
     radial-gradient(80% 70% at 95% 100%,#8f6bff 0%,transparent 62%),
@@ -52,14 +52,14 @@ h1{font-size:clamp(40px,7.4vw,84px);line-height:1.02;letter-spacing:-.035em;marg
 
 /* ilha / notch */
 .island{position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:206px;height:32px;
+  width:176px;height:32px;
   background:var(--notch);color:var(--notch-ink);
   border-radius:0 0 16px 16px;
   transition:width .38s var(--close),height .38s var(--close),border-radius .38s var(--close);
   will-change:width,height}
-.island:not([data-open="true"]):hover{width:222px}
+.island:not([data-open="true"]):hover{width:188px}
 .island[data-open="true"]{
-  width:min(400px,calc(100% - 32px));height:258px;border-radius:0 0 34px 34px;
+  width:340px;height:226px;border-radius:0 0 28px 28px;
   transition:width .5s var(--open),height .5s var(--open),border-radius .5s var(--open)}
 /* curvas laterais que ligam o notch a barra de menu */
 .flare{position:absolute;top:0;width:14px;height:14px;pointer-events:none}
@@ -74,7 +74,7 @@ h1{font-size:clamp(40px,7.4vw,84px);line-height:1.02;letter-spacing:-.035em;marg
 .island.running .dot{background:var(--rec);box-shadow:0 0 8px var(--rec)}
 .island[data-open="true"] .pill{opacity:0;pointer-events:none;transition-delay:0s}
 
-.panel{position:absolute;top:0;left:50%;width:min(400px,calc(100vw - 80px));transform:translateX(-50%);padding:34px 22px 22px;pointer-events:none}
+.panel{position:absolute;top:0;left:0;width:100%;padding:32px 20px 18px;pointer-events:none}
 .island[data-open="true"] .panel{pointer-events:auto}
 .panel>*{opacity:0;transform:translateY(-8px) scale(.96);filter:blur(6px);transition:opacity .15s ease,transform .15s ease,filter .15s ease}
 .island[data-open="true"] .panel>*{opacity:1;transform:none;filter:none;transition:opacity .35s ease,transform .45s var(--open),filter .35s ease}
@@ -83,15 +83,15 @@ h1{font-size:clamp(40px,7.4vw,84px);line-height:1.02;letter-spacing:-.035em;marg
 .island[data-open="true"] .panel>:nth-child(3){transition-delay:.17s}
 .island[data-open="true"] .panel>:nth-child(4){transition-delay:.21s}
 
-.clock{font-size:50px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:center;line-height:1.1;margin:0 0 12px}
-.controls{display:flex;gap:10px;justify-content:center;margin-bottom:14px}
+.clock{font-size:42px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:center;line-height:1.1;margin:0 0 10px}
+.controls{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
 .ctl{all:unset;box-sizing:border-box;min-width:84px;text-align:center;padding:8px 18px;border-radius:999px;background:#2c2c2e;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s,transform .1s}
 .ctl:hover{background:#3a3a3c}
 .ctl:active{transform:scale(.96)}
 .ctl.primary{background:var(--accent)}
 .ctl.primary:hover{background:#1a85f0}
 .ctl:focus-visible{outline:2px solid #fff;outline-offset:2px}
-textarea{width:100%;display:block;background:#1c1c1e;border:0;border-radius:14px;color:var(--notch-ink);font-family:var(--hand);font-size:21px;line-height:1.2;padding:9px 14px;resize:none}
+textarea{width:100%;display:block;background:#1c1c1e;border:0;border-radius:14px;color:var(--notch-ink);font-family:var(--hand);font-size:19px;line-height:1.2;padding:8px 14px;resize:none}
 textarea::placeholder{color:var(--notch-muted)}
 textarea:focus{outline:2px solid var(--accent)}
 .hint{color:var(--muted);font-family:var(--hand);font-size:22px;margin:18px 0 0}
@@ -158,15 +158,13 @@ footer a:hover{color:var(--ink)}
   h1{font-size:clamp(34px,10vw,46px);text-wrap:balance}
   h1 br{display:none}
   .sub{margin-bottom:26px}
-  /* no celular o Mac e desenhado no tamanho de desktop (640px) e reduzido por JS (zoom),
-     assim mantem as proporcoes de um MacBook de verdade, com tampa e base */
-  .stage{width:640px;margin:44px auto 0}
-  .screen{width:640px;max-width:none;height:400px;border-width:10px;border-radius:22px 22px 6px 6px}
-  .screen::after{display:none}
-  .menubar .mb-left span:nth-child(n+5){display:none}
-  .stage::after{content:"";display:block;height:20px;width:calc(100% + 56px);margin:0 -28px;border-radius:0 0 28px 28px;
-    background:linear-gradient(#9d9da5,#9d9da5) center top / 130px 6px no-repeat,linear-gradient(#e4e4e8,#bdbdc4);
-    box-shadow:0 22px 34px rgba(0,0,0,.16)}
+  /* close do topo de uma tela grande (como a Apple mostra a Dynamic Island):
+     a tela e desenhada em tamanho de desktop e recortada, sem corpo de laptop;
+     o degrade da base dissolve tudo no fundo da pagina */
+  .stage{position:relative;height:338px;overflow:hidden;margin:36px -24px 0}
+  .screen{position:absolute;left:50%;top:0;width:960px;height:470px;max-width:none;margin:0;transform:translateX(-50%) scale(.72);transform-origin:top center}
+  .screen::after{height:55%}
+  .menubar .mb-left,.menubar .mb-right{visibility:hidden}
   .feature{grid-template-columns:1fr;gap:32px;padding:56px 24px}
   .feature.flip .copy{order:0}
   .visual{min-height:240px}
